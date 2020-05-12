@@ -1,6 +1,6 @@
 Spring = class Spring {
 
-  constructor(x,y,z){
+  constructor(wx, wy, x, y, z, obj) {
 
 		this.iso = game.add.isoSprite(x+11, y+9, z, 'spring', 0, groups.objects);
 

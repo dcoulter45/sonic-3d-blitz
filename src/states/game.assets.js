@@ -42,9 +42,11 @@ function preloadGameAssets() {
   //  Tiles 
   // ---------
   game.load.spritesheet('tiles', 'assets/tiles/tiles.png',80,70);
+  game.load.spritesheet('walls', 'assets/tiles/walls.png',80,220);
+  game.load.spritesheet('waterfall', 'assets/tiles/waterfall.png',41,199);
   game.load.image("tree", "assets/tiles/tree.png")
 
   //  Maps
   // -----------
-  game.load.json("map", "assets/maps/level.json")
+  game.load.json("map", "assets/maps/test.json")
 }

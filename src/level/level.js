@@ -8,23 +8,21 @@ function loadLevel(level) {
   game.world.setBounds(0, 0, levelWidth, levelHeight)
 
   level.layers.forEach((layer) => {
-    if (layer.name.indexOf("Tile Layer") >= 0) {
+    if (layer.type === "tilelayer") {
       renderTiles(layer)
     }
 
-    if (layer.name.indexOf("Object Layer") >= 0) {
+    if (layer.type === "objectgroup") {
       renderObjects(layer)
     }
-
-    if (layer.name.indexOf("Collision Layer") >= 0) {
-      renderCollision(layer)
-    }
   })
+
+  // groups.walls.cacheAsBitmap = true;
 }
 
 function renderTiles(layer) {
   var index = 0;
-  var zz = layer.offsety ? (layer.offsety*-1)-5 : -5;
+  var zz = layer.offsety ? (layer.offsety*-1) - 5 : -5;
 
   for(var y = 0; y < layer.height; y++) {
     for(var x = 0; x < layer.width; x++) {
@@ -48,48 +46,17 @@ function renderTiles(layer) {
 }
 
 function renderObjects(layer) {
-  var z = 0;
+  var z = (layer.offsety) ? (layer.offsety * -1) -5 : -5;
 
   layer.objects.forEach((obj) => {
     if (obj.name) {
       // Fix iso vs tiled rendering issue
-      var x = ((obj.x/40)*44);
-      var y = ((obj.y/40)*44);
-
-      new window[obj.name](x, y, z, obj);
+      var x = (obj.x / 40) * 44;
+      var y = (obj.y / 40) * 44;
+      var wx = (obj.width / 40) * 44;
+      var wy = (obj.height / 40) * 44;
+  
+      new window[obj.name](wx, wy, x, y, z, obj);
     }
   });
-}
-
-function renderCollision(layer) {
-  var zz = (layer.offsety) ? (layer.offsety*-1) - 31 : -31;
-
-  layer.objects.forEach((obj) => {
-    var x = (obj.x / 40) * 44;
-    var y = (obj.y / 40) * 44;
-    var wx = (obj.width / 40) * 44;
-    var wy = (obj.height / 40) * 44;
-    var height = 31;
-
-    if (obj.name === "Water") {
-      new WaterLayer(wx, wy, x, y);
-    } 
-    else if (obj.name === "Slope") {
-      new Slope(wx, wy, x, y, zz, obj)
-    }
-    else {
-      var wall = game.add.isoSprite(x, y, zz, null, 0, groups.walls);
-
-      game.physics.isoArcade.enable(wall);
-  
-      wall.key = "wall";
-      wall.anchor.set(0.5);
-      wall.body.widthY = wy;
-      wall.body.widthX = wx;
-      wall.body.height = height;
-  
-      wall.body.immovable = true;
-      wall.body.allowGravity = false;
-    }
-  })
 }

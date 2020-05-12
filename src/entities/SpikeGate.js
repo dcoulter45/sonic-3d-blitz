@@ -1,34 +1,30 @@
 SpikeGate = class SpikeGate {
 
+  state = "moving"
   topZ = 100
   bottomZ = 30  
   velocity = 40
 
-  constructor(x, y, z, object) {
+  constructor(wx, wy, x, y, z, object) {
     this.topZ + z
     this.bottomZ + z
 
     const startZ = object.properties && object.properties.start === "top" ? this.topZ : this.bottomZ
 
-    this.post1 = game.add.isoSprite(x + 12, y + 164, z + 15, 'spikeGate', 6, groups.objects)
-    this.post2 = game.add.isoSprite(x + 12, y + 164, z + 79, 'spikeGate', 0, groups.objects)
+    this.post1 = game.add.isoSprite(x + 12, y + 164, z + 22, 'spikeGate', 6, groups.objects)
+    this.post2 = game.add.isoSprite(x + 12, y + 164, z + 86, 'spikeGate', 0, groups.objects)
 
-    this.post3 = game.add.isoSprite(x + 12, y, z + 15, 'spikeGate', 11, groups.objects)
-    this.post4 = game.add.isoSprite(x + 12, y, z + 79, 'spikeGate', 5, groups.objects)
+    this.post3 = game.add.isoSprite(x + 12, y, z + 22, 'spikeGate', 11, groups.objects)
+    this.post4 = game.add.isoSprite(x + 12, y, z + 86, 'spikeGate', 5, groups.objects)
 
     this.bar1 = game.add.isoSprite(x + 20, y + 132, startZ, "spikeGate", 1, groups.objects)
     this.bar2 = game.add.isoSprite(x + 20, y + 88, startZ, "spikeGate", 2, groups.objects)
     this.bar3 = game.add.isoSprite(x + 20, y + 44, startZ, "spikeGate", 3, groups.objects)
     this.bar4 = game.add.isoSprite(x + 20, y + 20, startZ, "spikeGate", 4, groups.objects)
 
-    this.shadow = game.add.isoSprite(x + 18, y + 82, z - 5, "spikeGateShadow", 0, groups.objects)
+    this.shadow = game.add.isoSprite(x + 18, y + 82, z - 4, "spikeGateShadow", 0, groups.objects)
     this.shadow.anchor.set(0.5)
-
-    if (object.properties && object.properties.moving) {
-      this.bar1.update = this.update.bind(this)
-    } else {
-      this.velocity = 0
-    }
+    this.shadow.pivot.y = 8
 
     this.initPost(this.post1, "left", "bottom")
     this.initPost(this.post2, "left", "top")
@@ -39,17 +35,21 @@ SpikeGate = class SpikeGate {
     this.initBar(this.bar2, 2)
     this.initBar(this.bar3, 3)
     this.initBar(this.bar4, 4)
+
+    var delay = object.properties && object.properties.delay ? object.properties.delay : 0
+
+    game.time.events.add(delay, () => {
+      this.resetBars()
+    })
   }
 
   initBar(bar, order) {
     game.physics.isoArcade.enable(bar);
 
     bar.anchor.set(0.5);
-    bar.body.immovable = true;
-    bar.body.allowGravity = false;
+    bar.body.moves = false;
     bar.harmful = true;
 
-    bar.body.velocity.z = this.velocity;
     bar.body.widthX = 18;
     bar.body.widthY = 44;
     bar.body.height = 30;
@@ -78,19 +78,25 @@ SpikeGate = class SpikeGate {
     post.pivot.y = position2 === "bottom" ? 8 : 6
   }
 
-  update() {
-    if (this.bar1.body.velocity.z > 0 && this.bar1.body.position.z > (this.topZ - 20)) {
-      this.bar1.body.velocity.z = this.velocity * -1;
-      this.bar2.body.velocity.z = this.velocity * -1;
-      this.bar3.body.velocity.z = this.velocity * -1;
-      this.bar4.body.velocity.z = this.velocity * -1;
-    }
+  resetBars() {
+    game.add.tween(this.bar1).to({ isoZ: this.topZ }, 1500, Phaser.Easing.Linear.None, true)
+    game.add.tween(this.bar2).to({ isoZ: this.topZ }, 1500, Phaser.Easing.Linear.None, true)
+    game.add.tween(this.bar3).to({ isoZ: this.topZ }, 1500, Phaser.Easing.Linear.None, true)
+    game.add.tween(this.bar4).to({ isoZ: this.topZ }, 1500, Phaser.Easing.Linear.None, true)
 
-    if (this.bar1.body.velocity.z < 0 && this.bar1.body.position.z < (this.bottomZ - 20)) {
-      this.bar1.body.velocity.z = this.velocity;
-      this.bar2.body.velocity.z = this.velocity;
-      this.bar3.body.velocity.z = this.velocity;
-      this.bar4.body.velocity.z = this.velocity;
-    }
+    game.time.events.add(1500, () => {
+      this.lowerBars()
+    })
+  }
+
+  lowerBars() {
+    game.add.tween(this.bar1).to({ isoZ: this.bottomZ }, 500, Phaser.Easing.Linear.None, true)
+    game.add.tween(this.bar2).to({ isoZ: this.bottomZ }, 500, Phaser.Easing.Linear.None, true)
+    game.add.tween(this.bar3).to({ isoZ: this.bottomZ }, 500, Phaser.Easing.Linear.None, true)
+    game.add.tween(this.bar4).to({ isoZ: this.bottomZ }, 500, Phaser.Easing.Linear.None, true)
+
+    game.time.events.add(1000, () => {
+      this.resetBars()
+    })
   }
 }

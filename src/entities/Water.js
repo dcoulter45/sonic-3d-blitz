@@ -1,4 +1,4 @@
-class Water{
+Water = class Water{
   constructor(x,y,z,tileId){
 		this.iso = game.add.isoSprite(x, y, z, 'tiles', tileId, groups.objects);
 
@@ -9,17 +9,17 @@ class Water{
   }
 }
 
-class WaterLayer{
+WaterBorder = class WaterBorder{
 
-  constructor(widthX,widthY,x,y){
-    this.iso = game.add.isoSprite(x, y, 1, null, 0, groups.objects);
+  constructor(wx, wy, x, y, z){
+    this.iso = game.add.isoSprite(x, y, z + 5, null, 0, groups.objects);
 
     this.iso.anchor.set(0.5);
     game.physics.isoArcade.enable(this.iso);
 
     this.iso.key = 'water';
-    this.iso.body.widthX = widthX;
-    this.iso.body.widthY = widthY;
+    this.iso.body.widthX = wx;
+    this.iso.body.widthY = wy;
     this.iso.body.height = 1;
 
     this.iso.body.immovable = true;

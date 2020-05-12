@@ -1,6 +1,6 @@
 Ring = class Ring {
 
-	constructor(x, y, z=0) {
+	constructor(wx, wy, x, y, z, obj) {
 
 		this.shadow = game.add.isoSprite(x + 18, y + 18, z, 'ring', 0, groups.objects);
 		this.shadow.animations.add('default', [16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31], 20, true);
@@ -22,9 +22,7 @@ Ring = class Ring {
 	}
 
 	collide(obj) {
-		console.log(obj)
 		if(obj.key == 'player'){
-
 			ringCounter.increment();
 
 			this.iso.body.enable = false;

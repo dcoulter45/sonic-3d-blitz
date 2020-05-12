@@ -1,30 +1,27 @@
 
-class Player {
+Player = class Player {
 
-	constructor(x,y,z) {
-
+	constructor(wx, wy, x, y, z, obj) {
 		// Create another cube as our 'player', and set it up just like the cubes above.
 		this.iso = game.add.isoSprite(x, y, z, "sonic", 0, groups.objects);
-		this.shadow = game.add.isoSprite(x, y, z, "playerShadow", 0, groups.objects);
 
 		this.iso.key = "player";
 		this.iso.anchor.set(0.5);
-		this.shadow.anchor.set(0.5);
-		this.shadow.pivot.y = -5;
 		this.crosshair = new Crosshair(0,0,0);
+		this.shadow = new PlayerShadow(x, y, z)
 
 		game.physics.isoArcade.enable(this.iso);
-		game.physics.isoArcade.enable(this.shadow);
-
-		this.shadow.body.widthX = 18;
-		this.shadow.body.widthY = 18;
+		game.player = this
+    game.camera.follow(this.iso)
 
 		this.iso.body.widthX = 18;
 		this.iso.body.widthY = 18;
 		this.iso.body.height = 24;
 		this.iso.pivot.y = 8;
+		this.iso.body.collideWorldBounds = true;
 
-		createAnimations(this.iso)
+		this.iso.body.maxVelocity.x = 225;
+		this.iso.body.maxVelocity.y = 225;
 
 		this.iso.movement = "normal";
 		this.iso.direction = "d";
@@ -35,39 +32,11 @@ class Player {
 		this.iso.cursor1 = "";
 		this.iso.cursor2 = "";
 
-		this.iso.body.maxVelocity.x = 225;
-		this.iso.body.maxVelocity.y = 225;
-
-		//  Controllers
-		// -------------
-
-		this.space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-		this.a = game.input.keyboard.addKey(Phaser.Keyboard.A);
-		this.s = game.input.keyboard.addKey(Phaser.Keyboard.S);
-		this.cursors = game.input.keyboard.createCursorKeys();
-
-		game.input.keyboard.addKeyCapture([
-			Phaser.Keyboard.LEFT,
-			Phaser.Keyboard.RIGHT,
-			Phaser.Keyboard.UP,
-			Phaser.Keyboard.DOWN,
-			Phaser.Keyboard.SPACEBAR
-		]);
-
-		this.iso.body.collideWorldBounds = true;
-		this.shadow.body.collideWorldBounds = false;
-		this.shadow.body.allowGravity = false;
-
 		this.iso.collide = this.collide.bind(this);
 		this.iso.update = this.update.bind(this);
 
-		this.space.onDown.add(()=> this.btn1Pressed = true );
-		this.space.onUp.add(()=> this.btn1Pressed = false );
-		this.a.onDown.add(()=> this.btn1Pressed = true );
-		this.a.onUp.add(()=> this.btn1Pressed = false );
-		this.s.onDown.add(()=> this.btn2Pressed = true );
-		this.s.onUp.add(()=> this.btn2Pressed = false );
-
+		createAnimations(this.iso)
+		createCursors(this)
 	}
 
 	update(){
@@ -382,80 +351,11 @@ class Player {
 		playAnimation(this.iso)
 
 		this.detectHomingTargets();
-		this.updateShadow();
+		this.shadow.update(this.iso)
 
 		this.onSlope = false;
 
 		// level.update(this.iso.body.position.x);
-	}
-
-	updateShadow(){
-
-		var zz = 0;
-		this.shadow.body.position.x = this.iso.body.position.x;
-		this.shadow.body.position.y = this.iso.body.position.y;
-
-		groups.water.forEach((obj)=>{
-
-			if(
-				this.shadow.body.position.x < obj.isoX + obj.body.widthX &&
-				this.shadow.body.position.x-2 > obj.isoX - 22 &&
-				this.shadow.body.position.y < obj.isoY + obj.body.widthY &&
-				this.shadow.body.position.y-2 > obj.isoY - 22 &&
-				this.iso.body.position.z > obj.isoZ
-			){
-				if(obj.isoZ + 4 > zz){
-					zz = obj.isoZ + 4;
-				}
-			}
-		});
-
-		groups.walls.forEach((obj)=>{
-
-			if(
-				this.shadow.body.position.x < obj.isoX + obj.body.widthX &&
-				this.shadow.body.position.x-2 > obj.isoX - 22 &&
-				this.shadow.body.position.y < obj.isoY + obj.body.widthY &&
-				this.shadow.body.position.y-2 > obj.isoY - 22 &&
-				this.iso.body.position.z > obj.isoZ
-			){
-
-				if(obj.key == 'slope'){
-
-					if(obj.direction == 'down'){
-						var x = (obj.isoX - this.iso.body.position.x);
-						var z = Math.floor(obj.isoZ + 37 + Math.min(0,(x / 44) * 31));
-					}
-					if(obj.direction == 'up'){
-						var x = (obj.isoX - (this.iso.body.position.x+20)) * -1;
-						var z = Math.floor(obj.isoZ + 10 + Math.min(28,(x / 44) * 31));
-					}
-					if(obj.direction == 'left'){
-						var x = (obj.isoY - this.iso.body.position.y);
-						var z = Math.floor(obj.isoZ + 37 + Math.min(0,(x / 44) * 31));
-					}
-					if(obj.direction == 'right'){
-						var x = (obj.isoY - (this.iso.body.position.y+20)) * -1;
-						var z = Math.floor(obj.isoZ + 10 + Math.min(28,(x / 44) * 31));
-					}
-
-					if(z > zz){
-						zz = z;
-					}
-				}
-				else if(obj.key == 'wall' && obj.isoZ + 31 > zz){
-					zz = obj.isoZ + 31;
-				}
-			}
-		})
-
-		if(zz <= this.iso.body.position.z){
-			this.shadow.body.position.z = zz;
-		}
-		else{
-			this.shadow.body.position.z = this.iso.body.position.z;
-		}
-
 	}
 
 	onFloor(){

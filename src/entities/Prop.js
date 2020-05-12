@@ -1,6 +1,6 @@
 Prop = class Prop {
 
-  constructor(x,y,z,obj) {
+  constructor(wx, wy, x, y, z, obj) {
     if (obj.type === "Fence") {
       var isRotated = obj.width > obj.height
 

@@ -1,6 +1,6 @@
-class Slope {
+Slope = class Slope {
   constructor(wx, wy, x, y, z, obj) {
-    var slope = game.add.isoSprite(x, y, z, null, 0, groups.walls);
+    var slope = game.add.isoSprite(x, y, z - 24, null, 0, groups.walls);
 
     game.physics.isoArcade.enable(slope);
 
@@ -9,7 +9,7 @@ class Slope {
     slope.direction = obj.properties.direction;
     slope.body.widthY = wy;
     slope.body.widthX = wx;
-    slope.body.height = 31;
+    slope.body.height = 30;
 
     slope.body.immovable = true;
     slope.body.allowGravity = false;

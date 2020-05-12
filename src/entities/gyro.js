@@ -1,6 +1,6 @@
 Gyro = class Gyro {
 
-	constructor(x,y,z){
+	constructor(wx, wy, x, y, z, obj) {
 
 		this.iso = game.add.isoSprite(x+13, y+13, z+10, 'gyro', 0, groups.objects);
 

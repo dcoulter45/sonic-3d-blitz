@@ -1,6 +1,6 @@
 Crab = class Crab {
 
-	constructor(x,y,z){
+	constructor(wx, wy, x, y, z) {
 
 		this.startX = x;
 		this.startY = y;

@@ -114,6 +114,17 @@
                  "width":40,
                  "x":160,
                  "y":40
+                }, 
+                {
+                 "height":40,
+                 "id":56,
+                 "name":"Spring",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":40,
+                 "x":240,
+                 "y":240
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -154,11 +165,13 @@
                  "name":"Bridge",
                  "properties":
                     {
-                     "axis":"x"
+                     "axis":"x",
+                     "falling":true
                     },
                  "propertytypes":
                     {
-                     "axis":"string"
+                     "axis":"string",
+                     "falling":"bool"
                     },
                  "rotation":0,
                  "type":"",
@@ -281,7 +294,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":56,
+ "nextobjectid":57,
  "orientation":"isometric",
  "renderorder":"right-down",
  "tiledversion":"1.1.3",

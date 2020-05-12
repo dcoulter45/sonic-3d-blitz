@@ -1,6 +1,6 @@
 Bee = class Bee {
 
-	constructor(x,y,z) {
+	constructor(wx, wy, x, y, z) {
 
 		this.iso = game.add.isoSprite(x+13, y+13, z+10, 'bee', 0, groups.objects)
 

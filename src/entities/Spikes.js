@@ -1,6 +1,6 @@
 Spikes = class Spikes{
 
-  constructor(x,y,z,obj){
+  constructor(wx, wy, x, y, z, obj) {
 
     this.spike = game.add.isoSprite(x + 10, y , z, "spikes", 0, groups.objects);
     this.base = game.add.isoSprite(x, y, z - 4, "spikesBase", 0, groups.objects);
@@ -22,7 +22,7 @@ Spikes = class Spikes{
     this.tick = 0;
     this.iso.update = this.update.bind(this)
 
-    if (obj.properties) {
+    if (obj.properties && obj.properties.initialState ) {
 
       if (obj.properties.initialState == 'up') {
         this.goUp();

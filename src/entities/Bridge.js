@@ -4,7 +4,7 @@ Bridge = class Bridge {
 
   planks = []
 
-  constructor(x, y, z, obj) {
+  constructor(wx, wy, x, y, z, obj) {
     var planks = obj.width / 20
     var fences = obj.width / 40
 
@@ -18,10 +18,10 @@ Bridge = class Bridge {
 
     var xx = x + ((obj.width / 40) * 44)
 
-    this.createPost(x - 10, y, z)
-    this.createPost(x - 10, y + 78, z)
-    this.createPost(xx, y, z)
-    this.createPost(xx, y + 78, z)
+    this.createPost(x - 10, y - 4, z)
+    this.createPost(x - 10, y + 82, z)
+    this.createPost(xx, y - 4, z)
+    this.createPost(xx, y + 82, z)
   }
 
   createPost(x, y, z) {
@@ -33,23 +33,35 @@ Bridge = class Bridge {
   createPlank(i, x, y, z, obj) {
     var xx = x + (i * 22)
     var plank = game.add.isoSprite(xx, y, z + 2, "bridge", 0, groups.objects)
+    collidables.push(plank)
+
     plank.anchor.set(0.5)
-    game.physics.isoArcade.enable(plank);
+    game.physics.isoArcade.enable(plank)
 
     plank.body.allowGravity = false
     plank.body.widthX = 22
     plank.body.widthY = 88
     plank.pivot.x = 32
-    plank.collidable = true;
-    plank.body.immovable = true;
+    plank.collidable = true
+    plank.body.immovable = true
+    plank.falling = false
 
     this.planks.push(plank)
 
-    plank.collide = (obj) => {
-      console.log(obj)
-      game.time.events.add(300, () => {
-        plank.body.allowGravity = false
-      })
+    if (obj.properties.falling) {
+      plank.collide = function(obj) {
+        if (obj.key === "player" && !plank.falling) {
+          plank.falling = true
+          
+          game.time.events.add(200, () => {
+            plank.body.allowGravity = true
+          })
+
+          // game.time.events.add(600, () => {
+          //   plank.destroy()
+          // })
+        }
+      }
     }
   }
 

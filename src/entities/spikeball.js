@@ -1,6 +1,6 @@
 Spikeball = class Spikeball{
 
-  constructor(x,y,z,obj){
+  constructor(wx, wy, x, y, z) {
 
     this.startX = x+11;
     this.startY = y+9;
