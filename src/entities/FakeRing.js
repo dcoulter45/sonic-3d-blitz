@@ -2,6 +2,8 @@ class FakeRings{
 
 	constructor(position) {
 
+		Sounds.LoseRings.play()
+
 		var total = Math.min(15, ringCounter.rings);
 		var rings = new Array(total);
 

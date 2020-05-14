@@ -9,32 +9,6 @@ Wall = class Wall {
   }
 
   createWallTexture(wx, wy, x, y, z, obj) {
-    // var tiles = 0;
-    // var direction = wx < wy ? "y" : "x"
-    // var tiles = direction === "x" ? wx / 44 : wy / 44;
-
-    // function createWall(x, y) {
-    //   var wall = game.add.isoSprite(x, y, -5, "walls", obj.properties.tileId, groups.objects);
-    //   wall.anchor.set(0.5);
-    //   wall.pivot.y = 62  
-    // }
-    
-    // for (var i = 0; i < tiles; i ++) {
-    //   if (direction === "x") {
-    //     var xx = (i * 44) + x
-  
-    //     createWall(xx, y)
-    //     createWall(xx, y - 44)
-    //     createWall(xx, y - 88)
-    //   } else {
-    //     var yy = (i * 44) + y
-  
-    //     createWall(x, yy)
-    //     createWall(x - 44, yy)
-    //     createWall(x - 88, yy)
-    //   }
-    // }
-
     var xCount = wx / TILE_WIDTH
     var yCount = wy / TILE_WIDTH
 
@@ -45,14 +19,14 @@ Wall = class Wall {
 
         var wall = game.add.isoSprite(xxx, yyy, -5, "walls", obj.properties.tileId, groups.objects)       
         wall.anchor.set(0.5)
-        wall.pivot.y = 62
+        wall.pivot.y = 75
       }
     }
   }
 
   createInvisibleWall(wx, wy, x, y, z, obj) {
     var wall = game.add.isoSprite(x, y, 0, null, 0, groups.walls);
-    console.log(wx, wy)
+
     game.physics.isoArcade.enable(wall);
 
     wall.key = "wall";
@@ -61,6 +35,7 @@ Wall = class Wall {
     wall.body.widthX = wx;
     wall.body.height = 124;
 
-    wall.body.moves = false;
+    wall.body.allowGravity = false
+    wall.body.immovable = true
   }
 }

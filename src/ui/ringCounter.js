@@ -5,7 +5,7 @@ var no3 = document.getElementById('no3');
 
 var ringCounter = {
 
-  rings: 20,
+  rings: 0,
 
   init(rings){
     if(rings) this.rings = rings;

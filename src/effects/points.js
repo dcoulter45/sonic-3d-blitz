@@ -1,12 +1,12 @@
 class Points{
 
   constructor(i,x,y,z){
-
     var xx = x - 10;
+    var numbers = String(i).split("")
 
-    i.forEach((number)=>{
-
-      var point = game.add.isoSprite(xx, y, z, 'points', number, groups.objects);
+    numbers.forEach((number)=>{
+      var tileId = parseInt(number)
+      var point = game.add.isoSprite(xx, y, z, 'points', tileId, groups.objects);
       point.anchor.set(0.5);
 
       game.physics.isoArcade.enable(point);

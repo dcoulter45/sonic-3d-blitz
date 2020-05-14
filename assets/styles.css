@@ -1,0 +1,67 @@
+*{
+  image-rendering: pixelated;					/* Awesome future-browsers */
+  image-rendering: optimizeSpeed;             /* Older versions of FF*/
+  image-rendering: -moz-crisp-edges;          /* FF 6.0+*/
+  image-rendering: -o-crisp-edges;            /* OS X & Windows Opera (12.02+)*/
+  -ms-interpolation-mode: nearest-neighbor;   /* IE*/
+}
+
+body {
+  background: #111;
+  margin: 0;
+}
+
+#content{
+  position: absolute;
+  margin: 20px auto;
+  height: 600px;
+  width: 800px;
+}
+
+#hud{
+  position: absolute;
+  right: 10px;
+  top: 16px;
+  z-index: 10;
+  transform: scale(2);
+}
+
+#score{
+
+  background: url(score.png);
+  width: 48px;
+  height: 12px;
+  float: left;
+}
+
+#no1{
+
+  background: url(numbers.png);
+  width: 8px;
+  height: 12px;
+  opacity: 0;
+  float: left;
+}
+
+#no2{
+
+  background: url(numbers.png);
+  width: 8px;
+  height: 12px;
+  opacity: 0;
+  float: left;
+}
+#no3{
+
+  background: url(numbers.png);
+  width: 8px;
+  height: 12px;
+  float: left;
+}
+
+canvas{
+  background-image: linear-gradient(#aed9e8, #fafafa);
+  margin: 0 auto;
+  transform-origin: 50% 0%;
+  transform: scale(2);
+}

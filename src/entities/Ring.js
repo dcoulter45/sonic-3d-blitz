@@ -25,6 +25,8 @@ Ring = class Ring {
 		if(obj.key == 'player'){
 			ringCounter.increment();
 
+			Sounds.Ring.play()
+
 			this.iso.body.enable = false;
 			this.iso.animations.play('collect');
 			this.shadow.visible = false;

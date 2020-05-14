@@ -1,8 +1,12 @@
 const TILE_WIDTH = 44
 const TILE_HEIGHT = 44
 
-function loadLevel(level) {
+function loadLevel() {
+  var level = game.cache.getJSON(activeLevel)
   console.log(level)
+
+  playLevelTrack(level)
+
   var levelWidth = level.width * TILE_WIDTH * 2
   var levelHeight = level.height * TILE_WIDTH * 2
   game.world.setBounds(0, 0, levelWidth, levelHeight)

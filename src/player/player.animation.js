@@ -4,10 +4,10 @@ function playAnimation(iso) {
   if (["jump", "sprung", "skid", "bounced", "drowning"].includes(iso.action)) {
     animationName = iso.action + "-" + iso.direction
   }
-  else if (iso.action == 'hurt') {
+  else if (iso.action == "hurt") {
     animationName = iso.action + "-" + iso.hurtDIR
   }
-  else if (iso.action == 'dead') {
+  else if (iso.action == "dead") {
     iso.alpha = 0.75;
     animationName = "dead"
   }

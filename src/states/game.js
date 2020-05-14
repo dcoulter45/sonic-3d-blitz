@@ -1,8 +1,7 @@
 class GameState extends Phaser.State {
-
   preload() {
     game.tick = 0
-
+    preloadGameSounds()
     preloadGameAssets()
     gamePhysics()
   }
@@ -10,11 +9,9 @@ class GameState extends Phaser.State {
   create() {
     collidables = []
 
-    var level = game.cache.getJSON("map")
-
+    loadGameSounds()
     createGameGroups()
-
-    loadLevel(level);
+    loadLevel()
   }
 
   update() {
@@ -22,7 +19,7 @@ class GameState extends Phaser.State {
     
     game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
 
-    game.physics.isoArcade.collide(game.player.iso, groups.walls, function(obj1, obj2){
+    game.physics.isoArcade.collide(player.iso, groups.walls, function(obj1, obj2){
 
 			if(obj1.movement == 'bounced' || obj2.key == 'water'){
 				return false;
@@ -38,13 +35,13 @@ class GameState extends Phaser.State {
 			} 
     });
 
-    game.physics.isoArcade.collide(game.player.iso, collidables, function(obj1, obj2) {
+    game.physics.isoArcade.collide(player.iso, collidables, function(obj1, obj2) {
       if (obj2.collide) obj2.collide(obj1)
     })
 
-		game.physics.isoArcade.overlap(game.player.iso, groups.walls, function(obj1, obj2){
+		game.physics.isoArcade.overlap(player.iso, groups.walls, function(obj1, obj2){
 			if (obj2.key == 'slope') {
-				game.player.handleSlope(obj2)
+				player.handleSlope(obj2)
 			}
 		});
 
@@ -53,9 +50,9 @@ class GameState extends Phaser.State {
     // game.iso.simpleSort(groups.walls)
     // game.iso.topologicalSort(groups.objects);
 
-    groups.walls.forEach(function (tile) {
-      game.debug.body(tile, 'rgba(40, 221, 0, 0.8)', false);
-    });
+    // groups.walls.forEach(function (tile) {
+    //   game.debug.body(tile, 'rgba(40, 221, 0, 0.8)', false);
+    // });
 
     // groups.objects.forEach(function(tile) {
     //   game.debug.body(tile, 'rgba(255, 0, 0, 0.8)', false);

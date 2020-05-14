@@ -9,5 +9,3 @@ class Game extends Phaser.Game {
 		this.state.start('GameState');
 	}
 }
-
-var game = new Game()

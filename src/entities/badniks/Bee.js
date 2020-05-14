@@ -1,8 +1,11 @@
-Bee = class Bee {
+Bee = class Bee extends Badnik {
+
+	points = 140
 
 	constructor(wx, wy, x, y, z) {
+		super()
 
-		this.iso = game.add.isoSprite(x+13, y+13, z+10, 'bee', 0, groups.objects)
+		this.iso = game.add.isoSprite(x+13, y+13, z+30, 'bee', 0, groups.objects)
 
 		this.iso.animations.add('default',[0,1,2],10,true)
 		this.iso.animations.play('default')
@@ -19,7 +22,7 @@ Bee = class Bee {
 		this.iso.destructible = "hard";
 		this.iso.direction = "up";
 
-		this.iso.die = this.die.bind(this);
+		this.iso.remove = this.remove.bind(this);
 		this.iso.update = this.update.bind(this);
 
 		game.time.events.loop(Phaser.Timer.SECOND, this.toggleFloat, this);
@@ -33,16 +36,6 @@ Bee = class Bee {
 		else{
 			this.iso.body.velocity.z = -15;
 		}
-	}
-
-
-	die() {
-		new Explosion(this.iso.body.position.x,this.iso.body.position.y,this.iso.body.position.z);
-		game.time.events.add(300, ()=>{
-			new Points([1,4,0],this.iso.body.position.x,this.iso.body.position.y,this.iso.body.position.z);
-		})
-		this.iso.destroy()
-		this.shadow.iso.destroy()
 	}
 
 	toggleFloat() {

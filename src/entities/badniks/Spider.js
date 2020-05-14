@@ -1,6 +1,10 @@
-Spider = class Spider {
+Spider = class Spider extends Badnik {
+
+	points = 300
 
 	constructor(wx, wy, x, y, z, obj) {
+		super()
+		
 		// Set direction
 		this.direction = (obj.properties && obj.properties.direction) ? obj.properties.direction : "left";
 		this.distance = (obj.properties && obj.properties.distance) ? (obj.properties.distance*44)-44 : 88;
@@ -35,7 +39,7 @@ Spider = class Spider {
 		this.iso.destructible = "hard";
 
 		this.iso.update = this.update.bind(this);
-		this.iso.die = this.die.bind(this);
+		this.iso.remove = this.remove.bind(this);
 	}
 
 	update() {
@@ -69,15 +73,5 @@ Spider = class Spider {
 		else if(this.direction == "up"){
 			this.iso.body.velocity.x = -50;
 		}
-	}
-
-	die() {
-		new Explosion(this.iso.body.position.x,this.iso.body.position.y,this.iso.body.position.z);
-		
-		game.time.events.add(300, ()=>{
-			new Points([3,0,0],this.iso.body.position.x,this.iso.body.position.y,this.iso.body.position.z);
-		})
-		
-		this.iso.destroy();
 	}
 }

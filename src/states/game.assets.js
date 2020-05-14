@@ -48,5 +48,7 @@ function preloadGameAssets() {
 
   //  Maps
   // -----------
-  game.load.json("map", "assets/maps/test.json")
+  game.load.json("test", "assets/maps/test.json")
+  game.load.json("test2", "assets/maps/test2.json")
+
 }

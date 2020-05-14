@@ -2,81 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Sample Project</title>
+    <title>Sonic ISO</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta http-equiv="cleartype" content="on">
 
-    <style type="text/css">
-
-      *{
-        image-rendering: pixelated;					/* Awesome future-browsers */
-        image-rendering: optimizeSpeed;             /* Older versions of FF*/
-        image-rendering: -moz-crisp-edges;          /* FF 6.0+*/
-        image-rendering: -o-crisp-edges;            /* OS X & Windows Opera (12.02+)*/
-        -ms-interpolation-mode: nearest-neighbor;   /* IE*/
-      }
-
-      body {
-        background: #000;
-        margin: 0;
-      }
-
-      #content{
-        position: absolute;
-        margin: 20px auto;
-        height: 600px;
-        width: 800px;
-      }
-
-      #hud{
-        position: absolute;
-        right: 10px;
-        top: 16px;
-        z-index: 10;
-        transform: scale(2);
-      }
-
-      #score{
-
-        background: url(assets/score.png);
-        width: 48px;
-        height: 12px;
-        float: left;
-      }
-
-      #no1{
-
-        background: url(assets/numbers.png);
-        width: 8px;
-        height: 12px;
-        opacity: 0;
-        float: left;
-      }
-
-      #no2{
-
-        background: url(assets/numbers.png);
-        width: 8px;
-        height: 12px;
-        opacity: 0;
-        float: left;
-      }
-      #no3{
-
-        background: url(assets/numbers.png);
-        width: 8px;
-        height: 12px;
-        float: left;
-      }
-
-      canvas{
-        margin: 0 auto;
-        transform-origin: 50% 0%;
-        transform: scale(2);
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="assets/styles.css">
   </head>
   <body>
     <div id="content">
@@ -91,5 +23,8 @@
     <script src="lib/phaser.js"></script>
     <script src="lib/phaser-plugin-isometric.js"></script>
     <script src="dist/game.js"></script>
+    <script>
+      var game = new Game()
+    </script>
   </body>
 </html>
