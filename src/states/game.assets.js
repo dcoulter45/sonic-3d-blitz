@@ -41,6 +41,7 @@ function preloadGameAssets() {
 
   //  Tiles 
   // ---------
+  game.load.spritesheet('rocks', 'assets/tiles/rocks.png',66,77);
   game.load.spritesheet('tiles', 'assets/tiles/tiles.png',80,70);
   game.load.spritesheet('walls', 'assets/tiles/walls.png',80,220);
   game.load.spritesheet('waterfall', 'assets/tiles/waterfall.png',41,199);
@@ -49,6 +50,6 @@ function preloadGameAssets() {
   //  Maps
   // -----------
   game.load.json("test", "assets/maps/test.json")
-  game.load.json("test2", "assets/maps/test2.json")
-
+  game.load.json("WildWoodland-Block1", "assets/maps/WildWoodland-Block1.json")
+  game.load.json("WildWoodland-Block2", "assets/maps/WildWoodland-Block2.json")
 }

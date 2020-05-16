@@ -50,7 +50,7 @@ Bridge = class Bridge {
       var yy = y + (i * TILE_WIDTH / 2)
     }
     
-    var plank = game.add.isoSprite(xx, yy, z - 21, "bridge", tileId, groups.objects)
+    var plank = game.add.isoSprite(xx, yy, z - 22, "bridge", tileId, groups.objects)
     collidables.push(plank)
 
     plank.anchor.set(0.5)
@@ -66,7 +66,7 @@ Bridge = class Bridge {
 
     this.planks.push(plank)
 
-    if (obj.properties.falling) {
+    if (obj.properties && obj.properties.falling) {
       plank.collide = function(obj) {
         if (obj.key === "player" && !plank.falling) {
           plank.falling = true

@@ -65,7 +65,7 @@ class PlayerShadow {
             zz = z;
           }
         }
-        else if (obj.key == 'wall' && obj.isoZ + 31 > zz) {
+        else if (obj.key == "floor" && obj.isoZ + 31 > zz) {
           zz = obj.isoZ + 31;
         }
       }

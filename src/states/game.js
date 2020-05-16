@@ -20,22 +20,11 @@ class GameState extends Phaser.State {
     game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
 
     game.physics.isoArcade.collide(player.iso, groups.walls, function(obj1, obj2){
-
-			if(obj1.movement == 'bounced' || obj2.key == 'water'){
-				return false;
-			}
-			else if( obj1.previousVelocity.z == 0 && (
-				(obj1.previousVelocity.x <= -220 && obj1.body.touching.backX) ||
-				(obj1.previousVelocity.x >= 220 && obj1.body.touching.frontX) ||
-				(obj1.previousVelocity.y >= 220 && obj1.body.touching.frontY) ||
-				(obj1.previousVelocity.y <= -220 && obj1.body.touching.backY) )
-			) {
-				obj1.collide(obj2);
-				return false;
-			} 
+      obj1.collide(obj2);
     });
 
     game.physics.isoArcade.collide(player.iso, collidables, function(obj1, obj2) {
+      obj1.collide(obj2)
       if (obj2.collide) obj2.collide(obj1)
     })
 
@@ -43,20 +32,26 @@ class GameState extends Phaser.State {
 			if (obj2.key == 'slope') {
 				player.handleSlope(obj2)
 			}
-		});
+    });
+    
+    game.sound.mute = muteGame
 
     groups.objects.sort('depth');
     // groups.walls.sort('depth');
     // game.iso.simpleSort(groups.walls)
     // game.iso.topologicalSort(groups.objects);
 
-    // groups.walls.forEach(function (tile) {
-    //   game.debug.body(tile, 'rgba(40, 221, 0, 0.8)', false);
-    // });
+    if (drawWallBoxes) {
+      groups.walls.forEach(function (tile) {
+        game.debug.body(tile, 'rgba(40, 221, 0, 0.8)', false);
+      });
+    }
 
-    // groups.objects.forEach(function(tile) {
-    //   game.debug.body(tile, 'rgba(255, 0, 0, 0.8)', false);
-    // });
+    if (drawObjectBoxes) {
+      groups.objects.forEach(function(tile) {
+        game.debug.body(tile, 'rgba(255, 0, 0, 0.8)', false);
+      });
+    }
 
     // collidables.forEach(function(obj) {
     //   game.debug.body(obj, "rgba(255, 255, 0)", false)

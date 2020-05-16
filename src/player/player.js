@@ -1,4 +1,5 @@
 const PLAYER_CONTROLLED_STATES = ["normal", "falling", "jump", "sprung", "roll", "slam"]
+const MAX_VELOCITY = 225
 
 Player = class Player {
 
@@ -20,10 +21,10 @@ Player = class Player {
 		this.iso.body.widthY = 18;
 		this.iso.body.height = 24;
 		this.iso.pivot.y = 8;
-		this.iso.body.collideWorldBounds = true;
+		this.iso.body.collideWorldBounds = false;
 
-		this.iso.body.maxVelocity.x = 225;
-		this.iso.body.maxVelocity.y = 225;
+		this.iso.body.maxVelocity.x = MAX_VELOCITY;
+		this.iso.body.maxVelocity.y = MAX_VELOCITY;
 
 		this.iso.movement = "normal";
 		this.iso.direction = "d";
@@ -133,8 +134,10 @@ Player = class Player {
 
 			// Roll
 			if (
-				this.btn2Pressed && this.onFloor() && this.iso.movement == 'normal' && ( this.iso.body.velocity.x > 50 ||
-				this.iso.body.velocity.x < -50 || this.iso.body.velocity.y > 50 || this.iso.body.velocity.y < -50)
+				this.btn2Pressed 
+				&& this.onFloor() 
+				&& this.iso.movement == 'normal'
+				&& isMovingFasterThan(this.iso.body.velocity, 50)
 			) {
 				this.iso.movement = 'roll';
 				this.btn2Pressed = false;
@@ -153,6 +156,27 @@ Player = class Player {
 				this.btn2Pressed = false;
 			}
 
+			// Drop Dash 
+			if (this.iso.previousMovement === "slam" && this.onFloor()) {
+				this.iso.movement = "roll"
+				
+				if (this.iso.direction === "u") {
+					this.iso.body.velocity.x = MAX_VELOCITY * -1
+				} else if (this.iso.direction === "d") {
+					this.iso.body.velocity.x = MAX_VELOCITY
+				} else if (this.iso.direction === "r") {
+					this.iso.body.velocity.y = MAX_VELOCITY * -1
+				} else if (this.iso.direction === "l") {
+					this.iso.body.velocity.y = MAX_VELOCITY 
+				}
+
+				game.time.events.add(600,()=>{
+					if(this.iso.movement == 'roll'){
+						this.iso.movement = 'normal';
+					}
+				});
+			}
+
 			// Jump
 			if(this.btn1Pressed && this.onFloor() && (this.iso.movement == 'normal' || this.iso.movement == 'roll')){
 
@@ -161,7 +185,7 @@ Player = class Player {
 				this.btn1Pressed = false;
 			}
 
-			if(this.iso.movement == 'spring'){
+			if (this.iso.movement == 'spring') {
 				this.iso.movement = 'sprung';
 				game.time.events.add(600,()=>{
 					if(this.iso.movement == 'sprung') this.iso.movement = 'jump';
@@ -246,15 +270,6 @@ Player = class Player {
 		return (this.iso.body.onFloor() || this.iso.body.touching.up || this.onSlope) ? true : false;
 	}
 
-	isMoving() {
-		return (
-			this.iso.body.velocity.x > 0 ||
-			this.iso.body.velocity.x < 0 ||
-			this.iso.body.velocity.y > 0 ||
-			this.iso.body.velocity.y < 0
-		)
-	}
-
 	// ================
 	//  COLLISIONS
 	// ================
@@ -278,10 +293,10 @@ Player = class Player {
 				this.hurt();
 			}
 		}
-		else if(obj.key == 'spring' && (this.iso.movement == 'normal' || this.iso.movement == 'jump' || this.iso.movement == 'sprung' || this.iso.movement == 'roll')){
+		else if (obj.key == 'spring' && ["normal", "jump", "sprung", "roll"].includes(this.iso.movement)) {
 			this.iso.movement = 'spring';
 		}
-		else if(obj.key == 'water' && this.iso.movement != "drowning" && isWithin(this.iso, obj, 5)){
+		else if (obj.key == 'water' && this.iso.movement != "drowning") {
 			this.iso.movement = "drowning";
 			this.iso.body.acceleration.x = 0;
 			this.iso.body.acceleration.y = 0;
@@ -297,9 +312,15 @@ Player = class Player {
 				game.state.restart();
 			})
 		}
-		else if (obj.key == 'wall'){
+		else if (
+			["wall", "prop"].includes(obj.key) 
+			&& isMovingFasterThan(this.iso.previousVelocity, 220)
+			&& this.iso.previousVelocity.z == 0
+			&& this.iso.movement !== "bounced"
+		) {
 
 			this.iso.movement = "bounced";
+			Sounds.Land.play()
 
 			this.iso.body.acceleration.x = 0;
 			this.iso.body.acceleration.y = 0;
@@ -355,7 +376,7 @@ Player = class Player {
 				var zz = Math.floor(slope.body.position.z + ((xx / 44) * 31));
 			}
 
-			if(zz >= this.iso.body.position.z - 5){
+			if (zz >= this.iso.body.position.z - 5 && zz < slope.body.position.z + 30) {
 				this.onSlope = true;
 				this.iso.body.position.z = zz;
 				this.iso.body.velocity.z = 0;

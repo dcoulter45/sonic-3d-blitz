@@ -12,12 +12,12 @@ Water = class Water{
 WaterBorder = class WaterBorder{
 
   constructor(wx, wy, x, y, z){
-    this.iso = game.add.isoSprite(x, y, z + 5, null, 0, groups.objects);
+    this.iso = game.add.isoSprite(x, y, z, null, 0, groups.walls);
 
     this.iso.anchor.set(0.5);
     game.physics.isoArcade.enable(this.iso);
 
-    this.iso.key = 'water';
+    this.iso.key = "water";
     this.iso.body.widthX = wx;
     this.iso.body.widthY = wy;
     this.iso.body.height = 1;

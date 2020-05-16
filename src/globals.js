@@ -1,3 +1,6 @@
 var player
-var activeLevel = "test2"
+var activeLevel = "WildWoodland-Block1"
 var currentTrack = ""
+var muteGame = true
+var drawObjectBoxes = false
+var drawWallBoxes = false

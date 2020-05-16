@@ -201,8 +201,8 @@
                  "type":"",
                  "visible":true,
                  "width":40,
-                 "x":120,
-                 "y":1200
+                 "x":1000,
+                 "y":1180
                 }, 
                 {
                  "height":40,
@@ -414,7 +414,7 @@
                  "properties":
                     {
                      "direction":"up",
-                     "nextArea":"test2"
+                     "nextArea":"WildWoodland-Block2"
                     },
                  "propertytypes":
                     {
@@ -704,26 +704,15 @@
          "offsety":-30,
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
         {
-         "color":"#fd8008",
+         "color":"#800080",
          "draworder":"topdown",
          "name":"Collision Layer 1",
          "objects":[
-                {
-                 "height":960,
-                 "id":145,
-                 "name":"WaterBorder",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":1080,
-                 "x":40,
-                 "y":160
-                }, 
                 {
                  "height":40,
                  "id":148,
@@ -782,50 +771,6 @@
                  "y":120
                 }, 
                 {
-                 "height":200,
-                 "id":174,
-                 "name":"WaterBorder",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":120,
-                 "x":880,
-                 "y":1080
-                }, 
-                {
-                 "height":160,
-                 "id":185,
-                 "name":"WaterBorder",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":200,
-                 "x":1080,
-                 "y":760
-                }, 
-                {
-                 "height":200,
-                 "id":215,
-                 "name":"WaterBorder",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":200,
-                 "x":560,
-                 "y":0
-                }, 
-                {
-                 "height":200,
-                 "id":218,
-                 "name":"WaterBorder",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":160,
-                 "x":920,
-                 "y":0
-                }, 
-                {
                  "height":40,
                  "id":219,
                  "name":"Wall",
@@ -843,6 +788,83 @@
                  "width":120,
                  "x":-40,
                  "y":0
+                }, 
+                {
+                 "height":160,
+                 "id":244,
+                 "name":"Floor",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":800,
+                 "x":80,
+                 "y":1120
+                }, 
+                {
+                 "height":160,
+                 "id":245,
+                 "name":"Floor",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":280,
+                 "x":1000,
+                 "y":1120
+                }, 
+                {
+                 "height":80,
+                 "id":246,
+                 "name":"Floor",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":160,
+                 "x":1120,
+                 "y":1040
+                }, 
+                {
+                 "height":400,
+                 "id":247,
+                 "name":"Floor",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":160,
+                 "x":1120,
+                 "y":160
+                }, 
+                {
+                 "height":160,
+                 "id":248,
+                 "name":"Floor",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":200,
+                 "x":1080,
+                 "y":0
+                }, 
+                {
+                 "height":160,
+                 "id":249,
+                 "name":"Floor",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":160,
+                 "x":760,
+                 "y":0
+                }, 
+                {
+                 "height":160,
+                 "id":250,
+                 "name":"Floor",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":560,
+                 "x":0,
+                 "y":0
                 }],
          "opacity":1,
          "properties":
@@ -859,7 +881,7 @@
          "y":0
         }, 
         {
-         "color":"#fd8008",
+         "color":"#800080",
          "draworder":"topdown",
          "name":"Collision Layer 2",
          "objects":[
@@ -922,8 +944,32 @@
          "visible":false,
          "x":0,
          "y":0
+        }, 
+        {
+         "color":"#0000ff",
+         "draworder":"topdown",
+         "name":"Water Layer",
+         "objects":[
+                {
+                 "height":1280,
+                 "id":243,
+                 "name":"WaterBorder",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":1200,
+                 "x":80,
+                 "y":0
+                }],
+         "offsetx":0,
+         "offsety":16,
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":false,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":242,
+ "nextobjectid":251,
  "orientation":"isometric",
  "properties":
     {

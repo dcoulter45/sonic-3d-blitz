@@ -2,6 +2,14 @@ Spikes = class Spikes{
 
   constructor(wx, wy, x, y, z, obj) {
 
+    if (obj.type === "Flat") {
+      this.createFlatSpike(wx, wy, x, y, z, obj)
+    } else {
+      this.createTallSpike(wx, wy, x, y, z, obj)
+    }
+  }
+
+  createTallSpike(wx, wy, x, y, z, obj) {
     this.spike = game.add.isoSprite(x + 10, y , z, "spikes", 0, groups.objects);
     this.base = game.add.isoSprite(x, y, z - 4, "spikesBase", 0, groups.objects);
     this.iso = game.add.isoSprite(x + 10, y, z, null, 0, groups.objects);
@@ -19,54 +27,49 @@ Spikes = class Spikes{
     this.iso.body.widthY = 14
     this.iso.body.height = 80
 
-    this.tick = 0;
-    this.iso.update = this.update.bind(this)
-
-    if (obj.properties && obj.properties.initialState ) {
-
-      if (obj.properties.initialState == 'up') {
-        this.goUp();
-      }
-      else if (obj.properties.initialState == 'down') {
-        this.goDown();
-      }
-    }
-    else {
+    if (obj.properties && obj.properties.initialState && obj.properties.initialState == "up") {
+      this.goUp();
+    } else {
       this.goDown();
     }
   }
 
-  update(){
+  createFlatSpike(wx, wy, x, y, z, obj) {
+    this.iso = game.add.isoSprite(x, y , z, "tiles", 36, groups.objects)
+    game.physics.isoArcade.enable(this.iso);
 
-    this.tick += 1;
-
-    if(this.tick > 50 && this.state == 'down'){
-      this.goReady();
-    }
-    else if(this.tick > 100 && this.state == 'ready'){
-      this.tick = 0;
-      this.goUp();
-    }
-    else if(this.tick > 100 && this.state == 'up'){
-      this.tick = 0;
-      this.goDown();
-    }
+    this.iso.anchor.set(0.5)
+    this.iso.body.allowGravity = false
+    this.iso.harmful = true
+    this.iso.body.height = 16
   }
 
   goDown(){
     this.state = 'down';
     this.spike.animations.play('down')
     this.iso.harmful = false;
+
+    game.time.events.add(1000, () => {
+      this.goReady()
+    })
   }
 
   goReady(){
     this.state = 'ready';
     this.spike.animations.play('ready')
+
+    game.time.events.add(1000, () => {
+      this.goUp()
+    })
   }
 
   goUp(){
     this.state = 'up';
     this.spike.animations.play('up')
     this.iso.harmful = true;
+
+    game.time.events.add(1000, () => {
+      this.goDown()
+    })
   }
 }

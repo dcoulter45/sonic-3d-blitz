@@ -61,17 +61,6 @@ Spider = class Spider extends Badnik {
 		}
 
 		// Set velocity
-		if(this.direction == "left"){
-			this.iso.body.velocity.y = 50;
-		}
-		else if(this.direction == "right"){
-			this.iso.body.velocity.y = -50;
-		}
-		else if(this.direction == "down"){
-			this.iso.body.velocity.x = 50;
-		}
-		else if(this.direction == "up"){
-			this.iso.body.velocity.x = -50;
-		}
+		setVelocity(this.iso, this.direction, 50)
 	}
 }

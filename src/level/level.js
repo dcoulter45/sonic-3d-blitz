@@ -26,7 +26,7 @@ function loadLevel() {
 
 function renderTiles(layer) {
   var index = 0;
-  var zz = layer.offsety ? (layer.offsety*-1) - 5 : -5;
+  var zz = layer.offsety ? layer.offsety*-1 : 0
 
   for(var y = 0; y < layer.height; y++) {
     for(var x = 0; x < layer.width; x++) {
@@ -50,7 +50,7 @@ function renderTiles(layer) {
 }
 
 function renderObjects(layer) {
-  var z = (layer.offsety) ? (layer.offsety * -1) -5 : -5;
+  var z = layer.offsety ? layer.offsety*-1 : 0
 
   layer.objects.forEach((obj) => {
     if (obj.name) {
