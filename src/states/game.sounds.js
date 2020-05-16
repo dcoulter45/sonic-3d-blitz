@@ -2,13 +2,15 @@ var Sounds = {}
 
 var SoundKeys = [
   "Destroy", 
-  "DropDash", 
+  "DropDash",
+  "Hurt", 
   "Jump", 
   "Land",
   "LoseRings",
   "Ring", 
   "Roll", 
   "Skidding",
+  "Spike",
   "WaterGush",
 ]
 

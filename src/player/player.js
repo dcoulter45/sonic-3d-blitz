@@ -6,7 +6,7 @@ Player = class Player {
 	constructor(wx, wy, x, y, z, obj) {
 		player = this
 
-		// Create another cube as our 'player', and set it up just like the cubes above.
+		// Create another cube as our "player", and set it up just like the cubes above.
 		this.iso = game.add.isoSprite(x, y, z, "sonic", 0, groups.objects);
 
 		this.iso.key = "player";
@@ -67,20 +67,20 @@ Player = class Player {
 		// Objects Collision
 		game.physics.isoArcade.overlap(this.iso, groups.objects, function(obj1, obj2) {
 
-			if (obj2.key == 'player' || obj2.key == 'playerShadow') {
+			if (obj2.key == "player" || obj2.key == "playerShadow") {
 				return false;
 			}
 			else if (obj2.collidable) {
 				game.physics.isoArcade.collide(obj1,obj2);
 			}
-			else if (obj1.movement !== 'dead' && obj1.invulnerable == false) {
+			else if (obj1.movement !== "dead" && obj1.invulnerable == false) {
 				if(obj1.collide) obj1.collide(obj2);
 				if(obj2.collide) obj2.collide(obj1);
 			}
 		});
 
 		if( this.onFloor() && ["jump", "sprung", "slam", "falling"].includes(this.iso.movement)) {
-			this.iso.movement = 'normal';
+			this.iso.movement = "normal";
 		}
 
 		// =============================
@@ -93,166 +93,62 @@ Player = class Player {
 				playerDeceleration()
 			}
 
-			if(this.iso.movement == 'sink'){
-				this.iso.body.velocity.x = 0;
-				this.iso.body.velocity.y = 0;
-				this.iso.body.acceleration.x = 0;
-				this.iso.body.acceleration.y = 0;
+			playerMoves()
+
+			if(player.iso.movement == "homing attack" || player.iso.movement == "slam"){
+				if(game.tick % 2 == 0){
+					new HomingTrail(player.iso.body.position.x,player.iso.body.position.y,player.iso.body.position.z,player.iso.direction);
+				}
 			}
 
-			if(this.iso.movement == 'drowning' && this.iso.body.position.z < -60){
-				this.iso.body.acceleration = {x:0,y:0,z:0};
-				this.iso.body.velocity = {x:0,y:0,z:0};
-				this.iso.body.allowGravity = false;
-			}
-
-			if(this.iso.movement == 'dead'){
-				this.iso.body.velocity = { x:0,y:0,z:50 };
-				this.iso.body.acceleration = { x:0,y:0,z:0 };
-			}
-
-			if(this.iso.movement !== 'dead' && this.iso.body.position.z < -1000){
-				this.iso.movement = 'dead';
+			if(player.iso.movement !== "dead" && player.iso.body.position.z < -1000){
+				player.iso.movement = "dead";
 				game.state.restart();
 			}
-
-			if(this.iso.movement == 'homing attack'){
-				this.iso.body.position.x += this.homingTargetPosition.moveX;
-				this.iso.body.position.y += this.homingTargetPosition.moveY;
-				this.iso.body.position.z += this.homingTargetPosition.moveZ;
-
-				if(this.onFloor()){
-					this.iso.movement = 'normal';
-				}
-			}
-
-			if(this.iso.movement == 'homing attack' || this.iso.movement == 'slam'){
-				if(game.tick % 2 == 0){
-					new HomingTrail(this.iso.body.position.x,this.iso.body.position.y,this.iso.body.position.z,this.iso.direction);
-				}
-			}
-
-			// Roll
-			if (
-				this.btn2Pressed 
-				&& this.onFloor() 
-				&& this.iso.movement == 'normal'
-				&& isMovingFasterThan(this.iso.body.velocity, 50)
-			) {
-				this.iso.movement = 'roll';
-				this.btn2Pressed = false;
-
-				game.time.events.add(600,()=>{
-					if(this.iso.movement == 'roll'){
-						this.iso.movement = 'normal';
-					}
-				});
-			}
-
-			// Slam
-			if(this.btn2Pressed && this.iso.movement == 'jump'){
-				this.iso.movement = 'slam';
-				this.iso.body.velocity = { x:0, y:0, z: -350 };
-				this.btn2Pressed = false;
-			}
-
-			// Drop Dash 
-			if (this.iso.previousMovement === "slam" && this.onFloor()) {
-				this.iso.movement = "roll"
-				
-				if (this.iso.direction === "u") {
-					this.iso.body.velocity.x = MAX_VELOCITY * -1
-				} else if (this.iso.direction === "d") {
-					this.iso.body.velocity.x = MAX_VELOCITY
-				} else if (this.iso.direction === "r") {
-					this.iso.body.velocity.y = MAX_VELOCITY * -1
-				} else if (this.iso.direction === "l") {
-					this.iso.body.velocity.y = MAX_VELOCITY 
-				}
-
-				game.time.events.add(600,()=>{
-					if(this.iso.movement == 'roll'){
-						this.iso.movement = 'normal';
-					}
-				});
-			}
-
-			// Jump
-			if(this.btn1Pressed && this.onFloor() && (this.iso.movement == 'normal' || this.iso.movement == 'roll')){
-
-				this.iso.movement = 'jump';
-				this.iso.body.velocity.z = 250;
-				this.btn1Pressed = false;
-			}
-
-			if (this.iso.movement == 'spring') {
-				this.iso.movement = 'sprung';
-				game.time.events.add(600,()=>{
-					if(this.iso.movement == 'sprung') this.iso.movement = 'jump';
-				})
-				this.iso.body.velocity.z = 350;
-			}
-
-			// Homing attack
-			if (this.btn1Pressed && !this.onFloor() && this.iso.movement != 'homing attack' && this.homingTarget) {
-
-				this.iso.movement = 'homing attack';
-				this.iso.body.acceleration = { x:0, y:0, z:0 };
-				this.iso.body.velocity = { x:0, y:0, z:0 };
-				this.btn1Pressed = false;
-
-				this.homingTargetPosition = {
-					x: this.homingTarget.body.position.x,
-					y: this.homingTarget.body.position.y,
-					z: this.homingTarget.body.position.z + 10,
-					moveX: (this.homingTarget.body.position.x - this.iso.body.position.x) / 20,
-					moveY: (this.homingTarget.body.position.y - this.iso.body.position.y) / 20,
-					moveZ: ((this.homingTarget.body.position.z+20) - this.iso.body.position.z) / 20,
-				}
-			}
-
 		}
 
 		// ============
 		//  Animation
 		// ============
 
-		if(this.iso.movement == 'normal'){
+		if(this.iso.movement == "normal"){
 
 			if(this.iso.body.velocity.y == 0 && this.iso.body.velocity.x == 0){
-
-				this.iso.action = 'stand';
+				this.iso.action = "stand";
 			}
 			else if(
-				(this.iso.body.velocity.x > 10 && this.iso.direction == 'u') ||
-				(this.iso.body.velocity.x < -10 && this.iso.direction == 'd') ||
-				(this.iso.body.velocity.y > 10 && this.iso.direction == 'r') ||
-				(this.iso.body.velocity.y < -10 && this.iso.direction == 'l')
+				(this.iso.body.velocity.x > 10 && this.iso.direction == "u") ||
+				(this.iso.body.velocity.x < -10 && this.iso.direction == "d") ||
+				(this.iso.body.velocity.y > 10 && this.iso.direction == "r") ||
+				(this.iso.body.velocity.y < -10 && this.iso.direction == "l")
 			){
-				this.iso.action = 'skid';
-
-				if(game.tick % 4 == 0){
-					new Dust(this.iso.body.position.x,this.iso.body.position.y,this.iso.body.position.z);
-				}
+				this.iso.action = "skid";
 			}
-			else if(this.iso.body.velocity.x >= 200 || this.iso.body.velocity.x <= -200 ||
-							this.iso.body.velocity.y >= 200 || this.iso.body.velocity.y <= -200){
-
-				this.iso.action = 'run';
+			else if(isMovingFasterThan(this.iso.body.velocity, 200)){
+				this.iso.action = "run";
 			}
 			else{
-				this.iso.action = 'walk';
+				this.iso.action = "walk";
 			}
 		}
-		else if(this.iso.movement == 'sink'){
-			this.iso.action = 'sink';
+		else if (this.iso.movement === "skidding") {
+			this.iso.action = "skid"
+		}
+		else if(this.iso.movement == "sink"){
+			this.iso.action = "sink";
 			this.iso.direction = "";
 		}
-		else if(this.iso.movement == 'roll'){
-			this.iso.action = 'jump';
+		else if(this.iso.movement == "roll"){
+			this.iso.action = "jump";
 		}
 		else{
 			this.iso.action = this.iso.movement;
+		}
+
+		if (this.iso.action === "skid") {
+			if(game.tick % 4 == 0){
+				new Dust(this.iso.body.position.x,this.iso.body.position.y,this.iso.body.position.z);
+			}
 		}
 
 		playPlayerSounds()
@@ -280,37 +176,25 @@ Player = class Player {
 		}
 		else if(obj.destructible == "hard"){
 
-			if(this.iso.movement == 'jump' || this.iso.movement == 'homing attack' || this.iso.movement == 'roll' || this.iso.movement == 'slam'){
+			if(this.iso.movement == "jump" || this.iso.movement == "homing attack" || this.iso.movement == "roll" || this.iso.movement == "slam"){
 
 				obj.remove();
 
-				if(this.iso.movement == 'jump' || this.iso.movement == 'homing attack' || this.iso.movement == 'slam'){
+				if(this.iso.movement == "jump" || this.iso.movement == "homing attack" || this.iso.movement == "slam"){
 					this.iso.body.velocity.z = 250;
-					this.iso.movement = 'jump';
+					this.iso.movement = "jump";
 				}
 			}
 			else{
 				this.hurt();
 			}
 		}
-		else if (obj.key == 'spring' && ["normal", "jump", "sprung", "roll"].includes(this.iso.movement)) {
-			this.iso.movement = 'spring';
+		else if (obj.key == "spring" && ["normal", "jump", "sprung", "roll"].includes(this.iso.movement)) {
+			this.iso.movement = "spring";
 		}
-		else if (obj.key == 'water' && this.iso.movement != "drowning") {
+		else if (obj.key == "water" && this.iso.movement != "drowning") {
 			this.iso.movement = "drowning";
-			this.iso.body.acceleration.x = 0;
-			this.iso.body.acceleration.y = 0;
-			this.iso.body.velocity.x = 0 //this.iso.body.velocity.x/2;
-			this.iso.body.velocity.y = 0 //this.iso.body.velocity.y/2;
-			this.iso.body.velocity.z = 0;
-
-			game.time.events.add(800, () => {
-				Sounds.WaterGush.play()
-			})
-
-			game.time.events.add(2000, () => {
-				game.state.restart();
-			})
+			this.die("drowning")
 		}
 		else if (
 			["wall", "prop"].includes(obj.key) 
@@ -344,7 +228,7 @@ Player = class Player {
 			}
 
 			game.time.events.add(800, () => {
-				this.iso.movement = 'normal';
+				this.iso.movement = "normal";
 				this.iso.body.velocity.x = 0;
 				this.iso.body.velocity.y = 0;
 			});
@@ -356,22 +240,20 @@ Player = class Player {
 	// ================
 
 	handleSlope(slope){
-
-		if(this.iso.body.velocity.z <= 0){
-
-			if(slope.direction == 'down'){
+		if (this.iso.body.velocity.z <= 0) {
+			if (slope.direction == "down") {
 				var xx = (slope.body.position.x - this.iso.body.position.x);
 				var zz = Math.floor(slope.body.position.z + 30 + ((xx / 44) * 31));
 			}
-			else if(slope.direction == 'up'){
+			else if (slope.direction == "up") {
 				var xx = (slope.body.position.x - (this.iso.body.position.x+20)) * -1;
 				var zz = Math.floor(slope.body.position.z + ((xx / 44) * 31));
 			}
-			else if(slope.direction == 'left'){
+			else if (slope.direction == "left") {
 				var xx = (slope.body.position.y - this.iso.body.position.y);
 				var zz = Math.floor(slope.body.position.z + 30 + ((xx / 44) * 31));
 			}
-			else if(slope.direction == 'right'){
+			else if (slope.direction == "right") {
 				var xx = (slope.body.position.y - (this.iso.body.position.y+20) ) * -1;
 				var zz = Math.floor(slope.body.position.z + ((xx / 44) * 31));
 			}
@@ -389,23 +271,16 @@ Player = class Player {
 	// ================
 
 	hurt(){
-
 		if(this.iso.invulnerable === false){
-
 			// DEAD
-			if(ringCounter.rings == 0){
-
-				this.iso.movement = "dead";
-
-				game.time.events.add(1000,()=>{
-					game.state.restart();
-				})
+			if(game.rings.count === 0){
+				this.die()
 			}
 			// HURT
 			else{
 
 				new FakeRings(this.iso.body.position);
-				ringCounter.decrement();
+				game.rings.reset()
 
 				this.iso.movement = "hurt";
 				this.iso.invulnerable = true;
@@ -416,19 +291,19 @@ Player = class Player {
 
 				this.iso.hurtDIR = this.iso.direction.substring(0, 1);
 
-				if(this.iso.hurtDIR == 'd'){
+				if(this.iso.hurtDIR == "d"){
 					this.iso.body.velocity.x = Math.min(-120,this.iso.body.velocity.x * -0.75);
 					this.iso.body.velocity.y = this.iso.body.velocity.y * -0.75;
 				}
-				else if(this.iso.hurtDIR == 'u'){
+				else if(this.iso.hurtDIR == "u"){
 					this.iso.body.velocity.x = Math.max(120,this.iso.body.velocity.x * -0.75);
 					this.iso.body.velocity.y = this.iso.body.velocity.y * -0.75;
 				}
-				else if(this.iso.hurtDIR == 'l'){
+				else if(this.iso.hurtDIR == "l"){
 					this.iso.body.velocity.x = this.iso.body.velocity.x * -0.75;
 					this.iso.body.velocity.y = Math.min(-120,this.iso.body.velocity.y * -0.75);
 				}
-				else if(this.iso.hurtDIR == 'r'){
+				else if(this.iso.hurtDIR == "r"){
 					this.iso.body.velocity.x = this.iso.body.velocity.x * -0.75;
 					this.iso.body.velocity.y = Math.max(120,this.iso.body.velocity.y * -0.75);
 				}
@@ -441,11 +316,35 @@ Player = class Player {
 
 				game.time.events.add(900, () => {
 
-					this.iso.movement = 'normal';
+					this.iso.movement = "normal";
 					this.iso.invulnerable = false;
 					this.iso.hurtDIR = null;
 				});
 			}
+		}
+	}
+
+	die(causeOfDeath = "hurt") {
+		game.camera.follow(null)
+
+		if (causeOfDeath === "hurt") {
+			this.iso.movement = "dead";
+
+			Sounds.Hurt.play()
+
+			game.time.events.add(2000,()=>{
+				game.state.restart();
+			})
+		}
+
+		if (causeOfDeath === "drowning") {
+			game.time.events.add(800, () => {
+				Sounds.WaterGush.play()
+			})
+
+			game.time.events.add(2000, () => {
+				game.state.restart();
+			})
 		}
 	}
 }

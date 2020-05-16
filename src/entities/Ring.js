@@ -26,7 +26,7 @@ Ring = class Ring {
 
 	collide(obj) {
 		if(obj.key == 'player'){
-			ringCounter.increment();
+			game.rings.add(1)
 
 			Sounds.Ring.play()
 

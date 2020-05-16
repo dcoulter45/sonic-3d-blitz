@@ -11,6 +11,9 @@ function playAnimation(iso) {
     iso.alpha = 0.75;
     animationName = "dead"
   }
+  // else if (iso.action === "skidding") {
+  //   animationName = "skid" + iso.direction
+  // }
   else {
     animationName = iso.action + "-" + iso.direction + iso.direction2
   }

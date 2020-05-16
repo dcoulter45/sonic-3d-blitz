@@ -545,7 +545,7 @@
                  "properties":
                     {
                      "direction":"down",
-                     "rollingStart":false
+                     "rollingStart":true
                     },
                  "propertytypes":
                     {
@@ -556,8 +556,8 @@
                  "type":"",
                  "visible":true,
                  "width":40,
-                 "x":160,
-                 "y":1320
+                 "x":50,
+                 "y":1340
                 }, 
                 {
                  "height":20,

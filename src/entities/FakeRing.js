@@ -4,7 +4,7 @@ class FakeRings{
 
 		Sounds.LoseRings.play()
 
-		var total = Math.min(15, ringCounter.rings);
+		var total = Math.min(15, game.rings.count);
 		var rings = new Array(total);
 
 		for(var i = 0; i < total; i++) {

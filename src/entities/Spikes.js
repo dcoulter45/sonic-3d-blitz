@@ -38,6 +38,7 @@ Spikes = class Spikes{
     this.iso = game.add.isoSprite(x, y , z, "tiles", 36, groups.objects)
     game.physics.isoArcade.enable(this.iso);
 
+    this.iso.key = "spikes"
     this.iso.anchor.set(0.5)
     this.iso.body.allowGravity = false
     this.iso.harmful = true
