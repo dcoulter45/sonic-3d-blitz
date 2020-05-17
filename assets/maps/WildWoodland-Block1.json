@@ -39,7 +39,7 @@
          "y":0
         }, 
         {
-         "color":"#0000ff",
+         "color":"#fd8008",
          "draworder":"topdown",
          "name":"Object Layer 1",
          "objects":[
@@ -201,8 +201,8 @@
                  "type":"",
                  "visible":true,
                  "width":40,
-                 "x":140,
-                 "y":1200
+                 "x":1140,
+                 "y":60
                 }, 
                 {
                  "height":40,
@@ -611,7 +611,7 @@
          "y":0
         }, 
         {
-         "color":"#0000ff",
+         "color":"#fd8008",
          "draworder":"topdown",
          "name":"Object Layer 2",
          "objects":[

@@ -44,6 +44,6 @@ function playLevelTrack(level) {
   
     var track = game.add.audio(currentTrack)
     // track.loop = true
-    // track.play()    
+    track.play()    
   }
 }

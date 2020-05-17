@@ -332,9 +332,8 @@ Player = class Player {
 
 			Sounds.Hurt.play()
 
-			game.time.events.add(2000,()=>{
-				game.state.restart();
-			})
+			game.time.events.add(1000, () => game.camera.fade(0x000000, 1000))
+			game.time.events.add(2000, () => game.state.restart())
 		}
 
 		if (causeOfDeath === "drowning") {
@@ -342,9 +341,8 @@ Player = class Player {
 				Sounds.WaterGush.play()
 			})
 
-			game.time.events.add(2000, () => {
-				game.state.restart();
-			})
+			game.time.events.add(1000, () => game.camera.fade(0x000000, 1000))
+			game.time.events.add(2000, () => game.state.restart())
 		}
 	}
 }

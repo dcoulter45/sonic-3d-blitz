@@ -8,7 +8,7 @@ function playerRun() {
   if (player.iso.cursorDown === true) {
 
     if (player.iso.cursor1 == 'down') {
-      if (player.iso.body.velocity.y > 200 || player.iso.body.velocity.y < -200) {
+      if (player.iso.body.velocity.y > 200 || player.iso.body.velocity.y < -200 && player.onFloor()) {
         player.iso.movement = "skid"
       } else {
         player.iso.body.acceleration.x = player.iso.body.velocity.x > 0 ? PLAYER_ACCELERATION : PLAYER_BREAK_SPEED
@@ -18,7 +18,7 @@ function playerRun() {
       }
     }
     else if (player.iso.cursor1 == 'up') {
-      if (player.iso.body.velocity.y > 200 || player.iso.body.velocity.y < -200) {
+      if (player.iso.body.velocity.y > 200 || player.iso.body.velocity.y < -200 && player.onFloor()) {
         player.iso.movement = "skid"
       } else {
         player.iso.body.acceleration.x = player.iso.body.velocity.x < 0 ? PLAYER_ACCELERATION_N : PLAYER_BREAK_SPEED_N 
@@ -28,7 +28,7 @@ function playerRun() {
       }
     }
     else if (player.iso.cursor1 == 'left') {
-      if (player.iso.body.velocity.x > 200 || player.iso.body.velocity.x < -200) {
+      if (player.iso.body.velocity.x > 200 || player.iso.body.velocity.x < -200 && player.onFloor()) {
         player.iso.movement = "skid"
       } else {
         player.iso.body.acceleration.y = player.iso.body.velocity.y > 0 ? PLAYER_ACCELERATION : PLAYER_BREAK_SPEED
@@ -38,7 +38,7 @@ function playerRun() {
       }
     }
     else if (player.iso.cursor1 == 'right') {
-      if (player.iso.body.velocity.x > 200 || player.iso.body.velocity.x < -200) {
+      if (player.iso.body.velocity.x > 200 || player.iso.body.velocity.x < -200 && player.onFloor()) {
         player.iso.movement = "skid"
       } else {
         player.iso.body.acceleration.y = player.iso.body.velocity.y < 0 ? PLAYER_ACCELERATION_N : PLAYER_BREAK_SPEED_N

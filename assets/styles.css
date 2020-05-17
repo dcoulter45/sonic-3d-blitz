@@ -64,7 +64,7 @@ canvas{
   top: 20px;
   left: 0;
   right: 0;
-  background-image: linear-gradient(#aed9e8, #fafafa);
+  /* background-image: linear-gradient(#aed9e8, #fafafa); */
   margin: 0 auto;
   transform-origin: 50% 0%;
   transform: scale(2);

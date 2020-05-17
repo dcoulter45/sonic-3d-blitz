@@ -33,7 +33,7 @@ Wall = class Wall {
     wall.anchor.set(0.5);
     wall.body.widthY = wy;
     wall.body.widthX = wx;
-    wall.body.height = 124;
+    wall.body.height = 184;
 
     wall.body.allowGravity = false
     wall.body.immovable = true

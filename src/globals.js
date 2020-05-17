@@ -1,5 +1,5 @@
 var player
-var activeLevel = "WildWoodland-Block2"
+var activeLevel = "WildWoodland-Block1"
 var currentTrack = ""
 var muteGame = true
 var drawObjectBoxes = false

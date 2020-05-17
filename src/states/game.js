@@ -8,12 +8,13 @@ class GameState extends Phaser.State {
 
   create() {
     collidables = []
-
     game.rings = new RingCounter()
 
     loadGameSounds()
     createGameGroups()
     loadLevel()
+
+    new TitleCard()
   }
 
   update() {

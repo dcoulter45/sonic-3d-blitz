@@ -7,4 +7,5 @@ function createGameGroups() {
   groups.walls = game.add.group()
   groups.water = game.add.group()
   groups.border = game.add.group()
+  groups.ui = game.add.group()
 }

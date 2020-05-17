@@ -23,6 +23,7 @@ Prop = class Prop {
       this.iso.pivot.y = 14;
       this.iso.body.widthX = 48;
       this.iso.body.widthY = 48;
+      this.iso.body.height = 100;
     }
 
     if (obj.type === "Rock") {

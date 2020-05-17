@@ -42,7 +42,7 @@ class FakeRings{
 			});
 
 			ring.update = () => {
-				game.physics.isoArcade.collide(ring,groups.walls);
+				game.physics.isoArcade.collide(ring, groups.walls);
 
 				if (ring.flashing) {
 					if(game.tick % 2 == 0) ring.alpha = (ring.alpha==0.6) ? 0 : 0.6;
