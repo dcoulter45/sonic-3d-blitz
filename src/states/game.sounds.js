@@ -14,6 +14,12 @@ var SoundKeys = [
   "WaterGush",
 ]
 
+var MusicKeys = [
+  "GreenGroveAct1",
+  "ExtraLife",
+  "GameOver",
+]
+
 function preloadGameSounds() {
   SoundKeys.forEach((sound) => {
     game.load.audio(sound, [
@@ -22,10 +28,12 @@ function preloadGameSounds() {
     ])
   })
 
-  game.load.audio("GreenGroveAct1", [
-    `assets/music/GreenGroveAct1.ogg`,
-    `assets/music/GreenGroveAct1.m4a`,
-  ])
+  MusicKeys.forEach((track) => {
+    game.load.audio(track, [
+      `assets/music/${track}.ogg`,
+      `assets/music/${track}.m4a`,
+    ])
+  })  
 }
 
 function loadGameSounds() {
@@ -42,8 +50,8 @@ function playLevelTrack(level) {
   if (level.properties && level.properties.track && level.properties.track !== currentTrack) {
     currentTrack = level.properties.track
   
-    var track = game.add.audio(currentTrack)
+    game.track = game.add.audio(currentTrack)
     // track.loop = true
-    track.play()    
+    game.track.play()
   }
 }

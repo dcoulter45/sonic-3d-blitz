@@ -6,22 +6,22 @@ Spider = class Spider extends Badnik {
 		super()
 		
 		// Set direction
-		this.direction = (obj.properties && obj.properties.direction) ? obj.properties.direction : "left";
-		this.distance = (obj.properties && obj.properties.distance) ? (obj.properties.distance*44)-44 : 88;
+		this.direction = getProp("direction", obj, "down")
+		this.distance = getProp("distance", obj, 2) * TILE_WIDTH
 
 		// Set movement limits
 
 		if(this.direction == "left" || this.direction == "down"){
 			this.startX = x+10;
 			this.startY = y;
-			this.endX = this.startX+this.distance;
-			this.endY = this.startY+this.distance;
+			this.endX = this.startX + this.distance;
+			this.endY = this.startY + this.distance;
 		}
 		else{
 			this.endX = x+10;
 			this.endY = y;
-			this.startX = this.endX-this.distance;
-			this.startY = this.endY-this.distance;
+			this.startX = this.endX - this.distance;
+			this.startY = this.endY - this.distance;
 		}
 
 		// Add sprite and animations
@@ -38,6 +38,8 @@ Spider = class Spider extends Badnik {
 		this.iso.targetable = true;
 		this.iso.destructible = "hard";
 
+		groups.overlap.push(this.iso)
+		
 		this.iso.update = this.update.bind(this);
 		this.iso.remove = this.remove.bind(this);
 	}

@@ -8,7 +8,7 @@ Floor = class Floor {
     floor.anchor.set(0.5);
     floor.body.widthY = wy;
     floor.body.widthX = wx;
-    floor.body.height = 30;
+    floor.body.height = TILE_HEIGHT;
 
     floor.body.immovable = true;
     floor.body.allowGravity = false;

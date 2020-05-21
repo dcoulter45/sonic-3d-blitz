@@ -1,5 +1,8 @@
 var player
-var activeLevel = "WildWoodland-Block1"
+var stateParams = {
+  activeLevel: "WildWoodland-Block4",
+  displayTitle: true,
+}
 var currentTrack = ""
 var muteGame = true
 var drawObjectBoxes = false

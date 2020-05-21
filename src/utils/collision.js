@@ -22,3 +22,63 @@ function isWithin(obj1, obj2, tolerance = 0) {
 
   return touching
 }
+
+function isBeyondAxis(axis, obj1, obj2) {
+  var beyond = false 
+
+  if (axis === "xx") {
+    var xx_1 = obj1.body.position.x
+    var xx_2 = obj2.body.position.x
+
+    beyond = xx_1 < xx_2
+  } 
+  else if (axis === "xy") {
+    var xy_1 = obj1.body.position.x + obj1.body.widthX
+    var xy_2 = obj2.body.position.x + obj2.body.widthX
+
+    beyond = xy_1 > xy_2
+  }
+  else if (axis === "yy") {
+    var yy_1 = obj1.body.position.y 
+    var yy_2 = obj2.body.position.y
+
+    beyond = yy_1 < yy_2
+  } 
+  else if (axis === "yx") {
+    var yx_1 = obj1.body.position.y + obj1.body.widthY
+    var yx_2 = obj2.body.position.y + obj2.body.widthY
+
+    beyond = yx_1 > yx_2
+  }
+
+  return beyond
+}
+
+function isWithinAxis(axis, obj1, obj2) {
+  var touching = false
+
+  if (axis === "x") {
+    var xx_1 = obj1.body.position.x
+    var xy_1 = obj1.body.position.x + obj1.body.widthX
+
+    var xx_2 = obj2.body.position.x
+    var xy_2 = obj2.body.position.x + obj2.body.widthX
+    
+    if (xx_1 > xx_2 && xy_1 < xy_2) {
+      touching = true
+    }
+  }
+  else if (axis === "y") {
+    var yy_1 = obj1.body.position.y 
+    var yx_1 = obj1.body.position.y + obj1.body.widthY
+
+    var yy_2 = obj2.body.position.y
+    var yx_2 = obj2.body.position.y + obj2.body.widthY
+    
+    if (yy_1 > yy_2 && yx_1 < yx_2) {
+      touching = true
+    }
+  }
+
+  return touching
+}

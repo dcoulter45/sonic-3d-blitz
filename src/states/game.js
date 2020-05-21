@@ -7,42 +7,28 @@ class GameState extends Phaser.State {
   }
 
   create() {
-    collidables = []
-    game.rings = new RingCounter()
-
     loadGameSounds()
     createGameGroups()
     loadLevel()
 
-    new TitleCard()
+    game.rings = new RingCounter()
+    game.lives = new LivesCounter()
+
+    if (stateParams.displayTitle) { 
+      new TitleCard()
+    } else {
+      game.camera.flash("#000000", 1000)
+    }
   }
 
   update() {
     game.tick++
     
-    game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
-
-    game.physics.isoArcade.collide(player.iso, groups.walls, function(obj1, obj2){
-      obj1.collide(obj2);
-    });
-
-    game.physics.isoArcade.collide(player.iso, collidables, function(obj1, obj2) {
-      obj1.collide(obj2)
-      if (obj2.collide) obj2.collide(obj1)
-    })
-
-		game.physics.isoArcade.overlap(player.iso, groups.walls, function(obj1, obj2){
-			if (obj2.key == 'slope') {
-				player.handleSlope(obj2)
-			}
-    });
+    game.debug.text(game.time.fps || '--', 380, 230, "#a7aebe");
     
     game.sound.mute = muteGame
 
     groups.objects.sort('depth');
-    // groups.walls.sort('depth');
-    // game.iso.simpleSort(groups.walls)
-    // game.iso.topologicalSort(groups.objects);
 
     if (drawWallBoxes) {
       groups.walls.forEach(function (tile) {

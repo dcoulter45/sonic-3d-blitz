@@ -29,11 +29,13 @@ function playerMoves() {
     if (player.iso.body.velocity.x > 200 || player.iso.body.velocity.x < -200) {
       player.skidAxis = "x"
       player.iso.body.acceleration.x = player.iso.body.velocity.x * -2
-      player.iso.body.acceleration.y = player.iso.body.velocity.y * -2
+      player.iso.body.acceleration.y = 0
+      player.iso.body.velocity.y = 0
     } else if (player.iso.body.velocity.y > 200 || player.iso.body.velocity.y < -200) {
       player.skidAxis = "y"
       player.iso.body.acceleration.y = player.iso.body.velocity.y * -2
-      player.iso.body.acceleration.x = player.iso.body.velocity.x * -2
+      player.iso.body.acceleration.x = 0
+      player.iso.body.velocity.x = 0
     }
 
     game.time.events.add(500, () => {
@@ -152,4 +154,29 @@ function playerMoves() {
       }
     });
   }
+}
+
+function playerDismountLadder() {
+  player.iso.body.velocity = { x:0, y:0, z:0 };
+  player.iso.body.acceleration = { x:0, y:0, z:0 };
+
+  if (player.iso.direction === "r") {
+    game.add.tween(player.iso.body.position).to({ 
+      y: player.iso.body.position.y - 20,
+      z: player.iso.body.position.z + 18,
+    }, 300, Phaser.Easing.Linear.None, true)
+  }
+
+  if (player.iso.direction === "u") {
+    game.add.tween(player.iso.body.position).to({ 
+      x: player.iso.body.position.x - 20,
+      z: player.iso.body.position.z + 18,
+    }, 300, Phaser.Easing.Linear.None, true)
+  }
+
+  game.time.events.add(500, () => {
+    player.iso.movement = "normal"
+    player.iso.activeLadder = null
+    player.iso.body.allowGravity = true
+  })
 }

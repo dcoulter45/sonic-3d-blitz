@@ -22,6 +22,8 @@ Gyro = class Gyro {
 		this.iso.die = this.die.bind(this);
 		this.iso.update = this.update.bind(this);
 
+		groups.overlap.push(this.iso)
+
 		game.time.events.loop(Phaser.Timer.SECOND, this.toggleFloat, this);
 	}
 

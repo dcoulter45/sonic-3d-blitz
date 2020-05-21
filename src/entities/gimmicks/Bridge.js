@@ -51,7 +51,7 @@ Bridge = class Bridge {
     }
     
     var plank = game.add.isoSprite(xx, yy, z - 22, "bridge", tileId, groups.objects)
-    collidables.push(plank)
+    groups.collide.push(plank)
 
     plank.anchor.set(0.5)
     game.physics.isoArcade.enable(plank)
@@ -60,10 +60,10 @@ Bridge = class Bridge {
     plank.body.widthX = this.direction === "x" ? 22 : 88
     plank.body.widthY = this.direction === "x" ? 88 : 22
     plank.pivot.x = this.direction === "x" ? 32 : - 32
-    plank.collidable = true
     plank.body.immovable = true
     plank.falling = false
 
+    groups.collide.push(plank)
     this.planks.push(plank)
 
     if (obj.properties && obj.properties.falling) {

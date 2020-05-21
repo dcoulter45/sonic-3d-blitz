@@ -65,21 +65,41 @@ Player = class Player {
 		this.iso.previousAction = this.iso.action
 
 		// Objects Collision
-		game.physics.isoArcade.overlap(this.iso, groups.objects, function(obj1, obj2) {
+		// game.physics.isoArcade.overlap(this.iso, groups.objects, function(obj1, obj2) {
 
-			if (obj2.key == "player" || obj2.key == "playerShadow") {
-				return false;
-			}
-			else if (obj2.collidable) {
-				game.physics.isoArcade.collide(obj1,obj2);
-			}
-			else if (obj1.movement !== "dead" && obj1.invulnerable == false) {
-				if(obj1.collide) obj1.collide(obj2);
-				if(obj2.collide) obj2.collide(obj1);
+		// 	if (obj2.key == "player" || obj2.key == "playerShadow") {
+		// 		return false;
+		// 	}
+		// 	else if (obj2.collidable) {
+		// 		game.physics.isoArcade.collide(obj1,obj2);
+		// 	}
+		// 	else if (obj1.movement !== "dead" && obj1.invulnerable == false) {
+		// 		if(obj1.collide) obj1.collide(obj2);
+		// 		if(obj2.collide) obj2.collide(obj1);
+		// 	}
+		// });
+
+		game.physics.isoArcade.collide(player.iso, groups.walls, function(obj1, obj2){
+      obj1.collide(obj2);
+    });
+
+		game.physics.isoArcade.overlap(player.iso, groups.walls, function(obj1, obj2){
+			if (obj2.key == 'slope') {
+				player.handleSlope(obj2)
 			}
 		});
+		
+    game.physics.isoArcade.collide(player.iso, groups.collide, function(obj1, obj2) {
+      obj1.collide(obj2)
+      if (obj2.collide) obj2.collide(obj1)
+    })
 
-		if( this.onFloor() && ["jump", "sprung", "slam", "falling"].includes(this.iso.movement)) {
+    game.physics.isoArcade.overlap(player.iso, groups.overlap, function(obj1, obj2) {
+      obj1.collide(obj2)
+      if (obj2.collide) obj2.collide(obj1)
+    })
+
+		if( this.onFloor() && ["jump", "sprung", "slam", "falling", "normal"].includes(this.iso.movement)) {
 			this.iso.movement = "normal";
 		}
 
@@ -91,6 +111,10 @@ Player = class Player {
 				detectCursors()
 				playerRun()
 				playerDeceleration()
+			}
+
+			if (this.iso.movement === "climbing") {
+				playerClimb()
 			}
 
 			playerMoves()
@@ -331,18 +355,29 @@ Player = class Player {
 			this.iso.movement = "dead";
 
 			Sounds.Hurt.play()
-
-			game.time.events.add(1000, () => game.camera.fade(0x000000, 1000))
-			game.time.events.add(2000, () => game.state.restart())
 		}
 
 		if (causeOfDeath === "drowning") {
 			game.time.events.add(800, () => {
 				Sounds.WaterGush.play()
 			})
-
-			game.time.events.add(1000, () => game.camera.fade(0x000000, 1000))
-			game.time.events.add(2000, () => game.state.restart())
 		}
+
+		if (game.save.data.lives > 0) {
+			this.resetGame()
+		}
+		else {
+			game.time.events.add(1000, () => {
+				new GameOver()
+			})
+		}
+	}
+	resetGame() {
+		game.time.events.add(1000, () => game.camera.fade(0x000000, 1000))
+		game.time.events.add(2000, () => {
+			game.lives.removeLife()
+			stateParams.displayTitle = true
+			game.state.restart()
+		})
 	}
 }

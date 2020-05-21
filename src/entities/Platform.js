@@ -43,7 +43,7 @@ Platform = class Platform {
     this.shadow = game.add.isoSprite(x, y, z - 30, "tiles", 9, groups.objects)
     this.shadow.anchor.set(0.5)
     
-    collidables.push(this.iso)
+    groups.collide.push(this.iso)
   }
 
   update() {

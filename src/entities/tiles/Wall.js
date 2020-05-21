@@ -1,7 +1,10 @@
 Wall = class Wall {
 
   constructor(wx, wy, x, y, z, obj) {
-    if (obj.properties && obj.properties.tileId >= 0) {
+    this.height = getProp("height", obj, 10)
+    this.tileId = getProp("tileId", obj, null)
+
+    if (this.tileId) {
       this.createWallTexture(wx, wy, x, y, z, obj)
     }
 
@@ -33,7 +36,7 @@ Wall = class Wall {
     wall.anchor.set(0.5);
     wall.body.widthY = wy;
     wall.body.widthX = wx;
-    wall.body.height = 184;
+    wall.body.height = this.height * TILE_HEIGHT;
 
     wall.body.allowGravity = false
     wall.body.immovable = true

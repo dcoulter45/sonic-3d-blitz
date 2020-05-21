@@ -1,16 +1,29 @@
-var no1 = document.getElementById("no1");
-var no2 = document.getElementById("no2");
-var no3 = document.getElementById("no3");
-
 class RingCounter {
-  count = 0
+  count = 98
 
   constructor() {
+    this.text = game.add.sprite(5, 5, "ringsText", 0, groups.ui)
+    this.text.fixedToCamera = true
+
+    this.no1 = game.add.sprite(50, 5, "numbers", 0, groups.ui)
+    this.no1.fixedToCamera = true
+
+    this.no2 = game.add.sprite(58, 5, "numbers", 0, groups.ui)
+    this.no2.fixedToCamera = true
+    
+    this.no3 = game.add.sprite(66, 5, "numbers", 0, groups.ui)
+    this.no3.fixedToCamera = true
+
     this.updateUI()
   }
 
   add(number = 1) {
     this.count += number
+
+    if (this.count === 100) {
+      game.lives.addLife()
+    }
+
     this.updateUI()
   }
 
@@ -22,22 +35,20 @@ class RingCounter {
   updateUI() {
     var digits = String(this.count).split("");
 
-    no1.style.opacity = digits.length >= 3 ? "1" : "0";
-    no2.style.opacity = digits.length >= 2 ? "1" : "0";
-    no3.style.opacity = digits.length >= 1 ? "1" : "0";
+    this.no1.alpha = digits.length >= 3 ? 1 : 0;
+    this.no2.alpha = digits.length >= 2 ? 1 : 0;
 
     if (digits.length === 1) {
-      console.log()
-      no3.style.backgroundPosition = "-" + (digits[0] * 8) + "px";
+      this.no3.loadTexture("numbers", parseInt(digits[0]))
     }
     else if (digits.length === 2) {      
-      no2.style.backgroundPosition = "-" + (digits[0] * 8) + "px";
-      no3.style.backgroundPosition = "-" + (digits[1] * 8) + "px";
+      this.no3.loadTexture("numbers", parseInt(digits[1]))
+      this.no2.loadTexture("numbers", parseInt(digits[0]))
     }
     else if (digits.length === 3) {
-      no1.style.backgroundPosition = "-" + (digits[0] * 8) + "px";
-      no2.style.backgroundPosition = "-" + (digits[1] * 8) + "px";
-      no3.style.backgroundPosition = "-" + (digits[2] * 8) + "px";
+      this.no3.loadTexture("numbers", parseInt(digits[2]))
+      this.no2.loadTexture("numbers", parseInt(digits[1]))
+      this.no1.loadTexture("numbers", parseInt(digits[0]))
     }
   }
 }

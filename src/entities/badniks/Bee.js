@@ -25,6 +25,8 @@ Bee = class Bee extends Badnik {
 		this.iso.remove = this.remove.bind(this);
 		this.iso.update = this.update.bind(this);
 
+		groups.overlap.push(this.iso)
+
 		game.time.events.loop(Phaser.Timer.SECOND, this.toggleFloat, this);
 	}
 

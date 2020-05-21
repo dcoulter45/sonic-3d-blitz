@@ -4,6 +4,8 @@ class Game extends Phaser.Game {
 
 		super(400, 240, Phaser.AUTO, "game", null, true, false);
 
+		this.save = new SaveData()
+
 		this.state.add("GameState", GameState, false)
 		this.state.add("TitleState", TitleState, false)
 

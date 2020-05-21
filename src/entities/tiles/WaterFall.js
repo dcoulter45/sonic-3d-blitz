@@ -28,7 +28,7 @@ WaterFall = class WaterFall {
 
   renderTile(x, y, z, direction) {
     var frames = direction === "y" ? [5, 4, 3, 2, 1, 0] : [10, 9, 8, 7, 6]
-    var waterFall = game.add.isoSprite(x, y, z, "waterfall", frames[0])
+    var waterFall = game.add.isoSprite(x, y, z, "waterfall", frames[0], groups.objects)
 
     waterFall.animations.add('default', frames, 4, true);
     waterFall.animations.play('default');

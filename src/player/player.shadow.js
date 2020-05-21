@@ -35,7 +35,7 @@ class PlayerShadow {
       }
     });
 
-    collidables.forEach((obj) => {
+    groups.collide.forEach((obj) => {
       if (this.isAboveObj(obj, player.iso) && obj.isoZ + 4 > zz) {
         zz = obj.isoZ + 27;
       }

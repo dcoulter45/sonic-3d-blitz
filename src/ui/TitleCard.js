@@ -49,5 +49,13 @@ class TitleCard {
     game.add.tween(this.bg.cameraOffset).to({ y: 240 }, 500, "Linear", true)
     game.add.tween(this.levelTitle.cameraOffset).to({ y: 247 }, 500, "Linear", true)
     game.add.tween(this.act.cameraOffset).to({ x: 400 }, 500, "Linear", true)
+
+    game.time.events.add(500, () => {
+      this.rect.destroy()
+      this.border.destroy()
+      this.bg.destroy()
+      this.levelTitle.destroy()
+      this.act.destroy()
+    })
   }
 }

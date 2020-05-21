@@ -16,7 +16,7 @@ Prop = class Prop {
     }
 
     if (obj.type === "Tree") {
-      this.iso = game.add.isoSprite(x, y, z, "tree", null, groups.objects);
+      this.iso = game.add.isoSprite(x, y, z + 18, "tree", null, groups.objects);
 
       game.physics.isoArcade.enable(this.iso);
 
@@ -55,8 +55,7 @@ Prop = class Prop {
     this.iso.body.immovable = true;
     this.iso.body.allowGravity = false;
     this.iso.body.collideWorldBounds = true;
-    this.iso.collidable = true;
 
-    collidables.push(this.iso)
+    groups.collide.push(this.iso)
   }
 }

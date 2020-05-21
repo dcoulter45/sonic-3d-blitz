@@ -70,12 +70,13 @@ SpikeGate = class SpikeGate {
     post.anchor.set(0.5);
     post.body.immovable = true;
     post.body.allowGravity = false;
-    post.collidable = true;
     post.body.widthX = 18;
     post.body.widthY = 12;
     post.body.height = 64;
     post.pivot.x = -10;
     post.pivot.y = position2 === "bottom" ? 8 : 6
+
+    groups.collide.push(post)
   }
 
   resetBars() {

@@ -10,14 +10,17 @@ function preloadGameAssets() {
 
   //  UI
   // -----------
-
-  game.load.spritesheet("points", "assets/points.png",10,12);
-  game.load.image("score", "assets/score.png");
+  game.load.spritesheet("points", "assets/points.png", 10, 12)
   game.load.image("act1", "assets/title-card/act1.png")
   game.load.image("titleCardBg", "assets/title-card/title-card-bg.png")
   game.load.spritesheet("titleCardBorder", "assets/title-card/title-card-border.png", 106, 240)
   game.load.spritesheet("titleCardLevels", "assets/title-card/title-card-levels.png", 260, 64)
   game.load.image("blueSky", "assets/backgrounds/blue-sky.png")
+  game.load.image("gameOver", "assets/ui/game-over.png")
+  game.load.spritesheet("lives", "assets/ui/lives.png", 56, 20)
+  game.load.spritesheet("livesNumbers", "assets/ui/lives-numbers.png", 7, 7)
+  game.load.image("ringsText", "assets/ui/rings.png")
+  game.load.spritesheet("numbers", "assets/ui/numbers.png", 8, 12)
 
   //  Badniks
   // -----------
@@ -28,6 +31,7 @@ function preloadGameAssets() {
   //  Objects
   // -----------
   game.load.spritesheet("bridge", "assets/entities/objects/bridge.png",94,53);
+  game.load.spritesheet("raft", "assets/entities/objects/raft.png", 144, 78);
   game.load.spritesheet("ring", "assets/entities/ring.png",16,16);
   game.load.spritesheet("spikes", "assets/entities/objects/spikes.png",8,76);
   game.load.image("spikesBase", "assets/entities/objects/spikes-base.png");
@@ -57,4 +61,6 @@ function preloadGameAssets() {
   game.load.json("test", "assets/maps/test.json")
   game.load.json("WildWoodland-Block1", "assets/maps/WildWoodland-Block1.json")
   game.load.json("WildWoodland-Block2", "assets/maps/WildWoodland-Block2.json")
+  game.load.json("WildWoodland-Block3", "assets/maps/WildWoodland-Block3.json")
+  game.load.json("WildWoodland-Block4", "assets/maps/WildWoodland-Block4.json")
 }

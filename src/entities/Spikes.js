@@ -10,7 +10,7 @@ Spikes = class Spikes{
   }
 
   createTallSpike(wx, wy, x, y, z, obj) {
-    this.spike = game.add.isoSprite(x + 10, y , z, "spikes", 0, groups.objects);
+    this.spike = game.add.isoSprite(x + 10, y , z, "spikes", 4, groups.objects);
     this.base = game.add.isoSprite(x, y, z - 4, "spikesBase", 0, groups.objects);
     this.iso = game.add.isoSprite(x + 10, y, z, null, 0, groups.objects);
 
@@ -21,15 +21,21 @@ Spikes = class Spikes{
     this.spike.pivot.y = 34
 
     game.physics.isoArcade.enable(this.iso);
+    
     this.iso.anchor.set(0.5);
     this.iso.body.allowGravity = false;
     this.iso.body.widthX = 14
     this.iso.body.widthY = 14
     this.iso.body.height = 80
+    this.iso.harmful = true
 
-    if (obj.properties && obj.properties.initialState && obj.properties.initialState == "up") {
+    groups.overlap.push(this.iso)
+
+    var initialState = getProp("initialState", obj, null)
+
+    if (initialState === "up") {
       this.goUp();
-    } else {
+    } else if (initialState === "down") {
       this.goDown();
     }
   }
@@ -43,6 +49,8 @@ Spikes = class Spikes{
     this.iso.body.allowGravity = false
     this.iso.harmful = true
     this.iso.body.height = 16
+
+    groups.overlap.push(this.iso)
   }
 
   goDown(){

@@ -19,7 +19,9 @@ Ring = class Ring {
 		this.iso.body.allowGravity = false;
 
 		this.iso.body.widthX = 18;
-    this.iso.body.widthY = 18;
+		this.iso.body.widthY = 18;
+		
+		groups.overlap.push(this.iso)
 
 		this.iso.collide = this.collide.bind(this)
 	}
