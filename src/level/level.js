@@ -10,8 +10,7 @@ function loadLevel() {
   var levelHeight = level.height * TILE_WIDTH * 2
   game.world.setBounds(0, 0, levelWidth, levelHeight)
 
-  var background = game.add.sprite(0, 0, "blueSky", 0, groups.backdrop)
-  background.fixedToCamera = true
+  new Background(level)
 
   level.layers.forEach((layer) => {
     if (layer.type === "tilelayer") {

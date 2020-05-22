@@ -1,6 +1,6 @@
 function playerMoves() {
 
-  if (player.iso.movement === "drowning") {
+  if (player.iso.movement === "drowning" || player.iso.movement === "burning") {
     player.iso.body.acceleration = {x:0,y:0,z:0};
     player.iso.body.velocity = {x:0,y:0,z:0};
   }

@@ -80,7 +80,8 @@ Player = class Player {
 		// });
 
 		game.physics.isoArcade.collide(player.iso, groups.walls, function(obj1, obj2){
-      obj1.collide(obj2);
+			obj1.collide(obj2);
+			if (obj2.collide) obj2.collide(obj1)
     });
 
 		game.physics.isoArcade.overlap(player.iso, groups.walls, function(obj1, obj2){
@@ -355,6 +356,10 @@ Player = class Player {
 			this.iso.movement = "dead";
 
 			Sounds.Hurt.play()
+		}
+
+		if (causeOfDeath === "burning") {
+			this.iso.movement = "burning"
 		}
 
 		if (causeOfDeath === "drowning") {

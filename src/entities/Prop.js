@@ -50,6 +50,16 @@ Prop = class Prop {
       this.iso.pivot.y = 20;
     }
 
+    if (obj.type === "Crystal") {
+      this.iso = game.add.isoSprite(x, y, z, "crystal", 0, groups.objects);
+
+      game.physics.isoArcade.enable(this.iso);
+
+      this.iso.body.widthX = 40;
+      this.iso.body.widthY = 40;
+      this.iso.body.height = 80;
+    }
+
     this.iso.key = "prop"
     this.iso.anchor.set(0.5);
     this.iso.body.immovable = true;

@@ -1,8 +1,8 @@
 function playAnimation(iso) {
   var animationName = ""
 
-  if (["jump", "sprung", "skid", "bounced", "drowning", "climbing", "dismount"].includes(iso.action)) {
-    animationName = iso.action + "-" + iso.direction
+  if (["run", "walk"].includes(iso.action)) {
+    animationName = iso.action + "-" + iso.direction + iso.direction2
   }
   else if (iso.action == "hurt") {
     animationName = iso.action + "-" + iso.hurtDIR
@@ -12,7 +12,7 @@ function playAnimation(iso) {
     animationName = "dead"
   }
   else {
-    animationName = iso.action + "-" + iso.direction + iso.direction2
+    animationName = iso.action + "-" + iso.direction
   }
 
   if (animationName.includes("climbing")) {
@@ -101,6 +101,10 @@ function createAnimations(iso) {
   iso.animations.add("climbing-x",[580,581,582,583,584,585,586],16,true);
   iso.animations.add("dismount-u",[590,591,592,593,594,595,596,597,598,599],16,false);
   iso.animations.add("dismount-r",[609,608,607,606,605,604,603,602,601,600],16,false);
+  iso.animations.add("burning-l", range(610, 627), 12, false)
+  iso.animations.add("burning-d", range(649, 632), 12, false)
+  iso.animations.add("burning-u", range(650, 667), 12, false)
+  iso.animations.add("burning-r", range(689, 672), 12, false)
 
   iso.animations.add("sink-" , [168,169,170,171],10,true);
 }

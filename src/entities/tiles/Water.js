@@ -20,7 +20,7 @@ WaterBorder = class WaterBorder{
     this.iso.anchor.set(0.5);
     game.physics.isoArcade.enable(this.iso);
 
-    this.iso.key = "floor";
+    this.iso.key = "water";
     this.iso.body.widthX = wx;
     this.iso.body.widthY = wy;
     this.iso.body.height = 1;
