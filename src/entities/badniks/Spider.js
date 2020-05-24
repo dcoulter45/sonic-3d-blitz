@@ -38,6 +38,7 @@ Spider = class Spider extends Badnik {
 		this.iso.targetable = true;
 		this.iso.destructible = "hard";
 
+		groups.targets.push(this.iso)
 		groups.overlap.push(this.iso)
 		
 		this.iso.update = this.update.bind(this);

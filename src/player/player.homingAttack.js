@@ -1,7 +1,5 @@
 class HomingTrail {
-
   constructor(x,y,z,direction) {
-
     this.iso = game.add.isoSprite(x, y, z, 'sonic', 0, groups.objects);
 
     this.iso.animations.add('default', [80],10,true);
@@ -18,43 +16,36 @@ class HomingTrail {
   }
 }
 
+function getDistanceBetween(obj1, obj2) {
+  var distanceX = Math.abs(parseInt(obj1.body.position.x - obj2.body.position.x))
+  var distanceY = Math.abs(parseInt(obj1.body.position.y - obj2.body.position.y))
+  return distanceX + distanceY
+}
+
 function detectHomingTarget() {
-  if(!player.onFloor() && player.iso.movement !== 'homing attack' && player.iso.movement !== 'dead'){
-    var targets = [];
+  if (
+    !player.onFloor() 
+    && (player.iso.movement === "jump" || player.iso.movement === "sprung")
+  ) {
     player.homingTarget = null;
 
     // Find targets in range
-    groups.objects.forEach((object) => {
+    groups.targets.forEach((object) => {
+      if (object.visible) {
+        var objectDistance = getDistanceBetween(object, player.iso)
+        var isAboveObject = object.body.position.z <= player.iso.body.position.z
 
-      if(object.targetable && object.visible){
-
-        var distance = {
-          x: Math.abs(parseInt(object.body.position.x - player.iso.body.position.x)),
-          y: Math.abs(parseInt(object.body.position.y - player.iso.body.position.y)),
-          z: parseInt(object.body.position.z - player.iso.body.position.z)
-        }
-
-        if(distance.x + distance.y < 100 && distance.z < -10){
-          targets.push({
-            object: object,
-            distance: distance
-          })
-        }
-      }
-    });
-
-    // Find closet target
-    targets.forEach((obj) => {
-      if (!player.homingTarget) {
-        player.homingTarget = obj.object;
-      } 
-      else {
-        var distanceX = Math.abs(parseInt(player.homingTarget.body.position.x - player.iso.body.position.x))
-        var distanceY = Math.abs(parseInt(player.homingTarget.body.position.y - player.iso.body.position.y))
-        var currentTargetDistance = distanceX + distanceY;
-        
-        if (obj.distance.x + obj.distance.y < currentTargetDistance) {
-          player.homingTarget = obj.object;
+        if (objectDistance < 150 && isAboveObject) {
+          if (!player.homingTarget) {
+            player.homingTarget = object;
+          } 
+          else {
+            var currentTargetDistance = getDistanceBetween(player.homingTarget, player.iso)
+            
+            if (objectDistance < currentTargetDistance) {
+              player.homingTarget = object;
+            }
+          }
         }
       }
     });

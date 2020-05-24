@@ -10,43 +10,43 @@ var CLIMB_SPEED_N = -100
 function playerRun() {
   if (player.iso.cursorDown === true) {
 
-    if (player.iso.cursor1 == 'down') {
-      if (player.iso.body.velocity.y > 200 || player.iso.body.velocity.y < -200 && player.onFloor()) {
+    if (player.iso.cursor1 == "down") {
+      if ((player.iso.body.velocity.y > 200 || player.iso.body.velocity.y < -200) && player.onFloor()) {
         player.iso.movement = "skid"
       } else {
         player.iso.body.acceleration.x = player.iso.body.velocity.x > 0 ? PLAYER_ACCELERATION : PLAYER_BREAK_SPEED
-        if(player.iso.cursor2 == 'left') player.iso.body.velocity.y = player.iso.body.velocity.x * 0.75;
-        else if(player.iso.cursor2 == 'right') player.iso.body.velocity.y = player.iso.body.velocity.x * -0.75;
+        if(player.iso.cursor2 == "left") player.iso.body.velocity.y = player.iso.body.velocity.x * 0.75;
+        else if(player.iso.cursor2 == "right") player.iso.body.velocity.y = player.iso.body.velocity.x * -0.75;
         else player.iso.body.velocity.y = 0;
       }
     }
-    else if (player.iso.cursor1 == 'up') {
-      if (player.iso.body.velocity.y > 200 || player.iso.body.velocity.y < -200 && player.onFloor()) {
+    else if (player.iso.cursor1 == "up") {
+      if ((player.iso.body.velocity.y > 200 || player.iso.body.velocity.y < -200) && player.onFloor()) {
         player.iso.movement = "skid"
       } else {
         player.iso.body.acceleration.x = player.iso.body.velocity.x < 0 ? PLAYER_ACCELERATION_N : PLAYER_BREAK_SPEED_N 
-        if(player.iso.cursor2 == 'left') player.iso.body.velocity.y = player.iso.body.velocity.x * -0.75;
-        else if(player.iso.cursor2 == 'right') player.iso.body.velocity.y = player.iso.body.velocity.x * 0.75;
+        if(player.iso.cursor2 == "left") player.iso.body.velocity.y = player.iso.body.velocity.x * -0.75;
+        else if(player.iso.cursor2 == "right") player.iso.body.velocity.y = player.iso.body.velocity.x * 0.75;
         else player.iso.body.velocity.y = 0;
       }
     }
-    else if (player.iso.cursor1 == 'left') {
-      if (player.iso.body.velocity.x > 200 || player.iso.body.velocity.x < -200 && player.onFloor()) {
+    else if (player.iso.cursor1 == "left") {
+      if ((player.iso.body.velocity.x > 200 || player.iso.body.velocity.x < -200) && player.onFloor()) {
         player.iso.movement = "skid"
       } else {
         player.iso.body.acceleration.y = player.iso.body.velocity.y > 0 ? PLAYER_ACCELERATION : PLAYER_BREAK_SPEED
-        if(player.iso.cursor2 == 'up') player.iso.body.velocity.x = player.iso.body.velocity.y * -0.75;
-        else if(player.iso.cursor2 == 'down') player.iso.body.velocity.x = player.iso.body.velocity.y * 0.75;
+        if(player.iso.cursor2 == "up") player.iso.body.velocity.x = player.iso.body.velocity.y * -0.75;
+        else if(player.iso.cursor2 == "down") player.iso.body.velocity.x = player.iso.body.velocity.y * 0.75;
         else player.iso.body.velocity.x = 0;
       }
     }
-    else if (player.iso.cursor1 == 'right') {
-      if (player.iso.body.velocity.x > 200 || player.iso.body.velocity.x < -200 && player.onFloor()) {
+    else if (player.iso.cursor1 == "right") {
+      if ((player.iso.body.velocity.x > 200 || player.iso.body.velocity.x < -200) && player.onFloor()) {
         player.iso.movement = "skid"
       } else {
         player.iso.body.acceleration.y = player.iso.body.velocity.y < 0 ? PLAYER_ACCELERATION_N : PLAYER_BREAK_SPEED_N
-        if(player.iso.cursor2 == 'up') player.iso.body.velocity.x = player.iso.body.velocity.y * 0.75;
-        else if(player.iso.cursor2 == 'down') player.iso.body.velocity.x = player.iso.body.velocity.y * -0.75;
+        if(player.iso.cursor2 == "up") player.iso.body.velocity.x = player.iso.body.velocity.y * 0.75;
+        else if(player.iso.cursor2 == "down") player.iso.body.velocity.x = player.iso.body.velocity.y * -0.75;
         else player.iso.body.velocity.x = 0;
       }
     }

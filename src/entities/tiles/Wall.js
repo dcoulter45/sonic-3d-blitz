@@ -4,7 +4,7 @@ Wall = class Wall {
     this.height = getProp("height", obj, 10)
     this.tileId = getProp("tileId", obj, null)
 
-    if (this.tileId) {
+    if (this.tileId !== null) {
       this.createWallTexture(wx, wy, x, y, z, obj)
     }
 
@@ -20,7 +20,7 @@ Wall = class Wall {
         var xxx = (xx * TILE_WIDTH) + x
         var yyy = (yy * TILE_WIDTH) + y
 
-        var wall = game.add.isoSprite(xxx, yyy, 0, "walls", obj.properties.tileId, groups.objects)       
+        var wall = game.add.isoSprite(xxx, yyy, 0, "walls", this.tileId, groups.objects)       
         wall.anchor.set(0.5)
         wall.pivot.y = 75
       }

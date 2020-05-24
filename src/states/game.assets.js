@@ -24,6 +24,7 @@ function preloadGameAssets() {
 
   //  Badniks
   // -----------
+  game.load.spritesheet("bat", "assets/entities/badniks/bat.png",50,50);
   game.load.spritesheet("bee", "assets/entities/badniks/bee.png",36,40);
   game.load.spritesheet("gyro", "assets/entities/badniks/gyro.png",36,42);
   game.load.spritesheet("spider", "assets/entities/badniks/spider.png",56,48);
@@ -39,7 +40,8 @@ function preloadGameAssets() {
   game.load.spritesheet("spikeGateShadow", "assets/entities/objects/spike-gate-shadow.png", 170, 85);
   game.load.spritesheet("spikeGateBar", "assets/entities/objects/spike-gate-bar.png", 133, 100);
   game.load.spritesheet("spikeball", "assets/entities/spikeball.png",30,26);
-  game.load.spritesheet("spring", "assets/entities/spring.png",68,58);  
+  game.load.spritesheet("spring", "assets/entities/spring.png",68,58);
+  game.load.spritesheet("lavaPlume", "assets/entities/lava-plume.png",110,138);
 
   //  Effects
   // -----------

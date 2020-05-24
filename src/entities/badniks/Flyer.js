@@ -1,14 +1,16 @@
-Bee = class Bee extends Badnik {
+Flyer = class Flyer extends Badnik {
 
 	points = 140
 
-	constructor(wx, wy, x, y, z) {
+	constructor(wx, wy, x, y, z, obj) {
 		super()
 
-		this.iso = game.add.isoSprite(x+13, y+13, z+30, 'bee', 0, groups.objects)
+    if (obj.type === "Bat") {
+      this.iso = game.add.isoSprite(x, y, z + 30, "bat", 0, groups.objects)
 
-		this.iso.animations.add('default',[0,1,2],10,true)
-		this.iso.animations.play('default')
+      this.iso.animations.add("default", range(0, 9), 10, true)
+      this.iso.animations.play("default")
+    }
 
 		game.physics.isoArcade.enable(this.iso)
 
@@ -18,8 +20,8 @@ Bee = class Bee extends Badnik {
 		this.iso.body.immovable = true;
 		this.iso.body.allowGravity = false;
 		this.iso.body.collideWorldBounds = true;
+		this.iso.targetable = true;
 		this.iso.destructible = "hard";
-		this.iso.direction = "up";
 
 		this.iso.remove = this.remove.bind(this);
 		this.iso.update = this.update.bind(this);
@@ -31,7 +33,6 @@ Bee = class Bee extends Badnik {
 	}
 
 	update() {
-
 		if(this.iso.direction == "up"){
 			this.iso.body.velocity.z = 15;
 		}

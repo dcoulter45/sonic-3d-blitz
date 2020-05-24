@@ -15,20 +15,22 @@ Lava = class Lava{
 
     this.iso.collide = this.collide.bind(this)
 
-    this.createBubble(wx, wy, x, y, z)
-    this.createBubble(wx, wy, x, y, z)
-    this.createBubble(wx, wy, x, y, z)
-    this.createBubble(wx, wy, x, y, z)
-    this.createBubble(wx, wy, x, y, z)
-    this.createBubble(wx, wy, x, y, z)
+    var tiles = (wx / TILE_WIDTH) * (wy / TILE_WIDTH);
+    var bubbles = Math.ceil(tiles / 12)
+
+    for (var i = 0; i < bubbles; i++) {
+      this.createBubble(wx, wy, x, y, z)
+    }
   }
 
   createBubble(wx, wy, x, y, z) {
-    var x1 = randomInteger(x, (x + wx - 20))
-    var y1 = randomInteger(y, (y + wy - 20))
+    var x1 = randomInteger(x, (x + wx - 30))
+    var y1 = randomInteger(y, (y + wy - 30))
+    var delay = randomInteger(1000, 2000)
+
     new LavaBubble(x1, y1, z)
 
-    game.time.events.add(500, () => {
+    game.time.events.add(delay, () => {
       this.createBubble(wx, wy, x, y, z)
     })
   }

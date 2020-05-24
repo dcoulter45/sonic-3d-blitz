@@ -9,5 +9,5 @@ function getProp(param, obj, defaultValue) {
     })
   }
 
-  return value || defaultValue
+  return value !== null ? value : defaultValue
 }

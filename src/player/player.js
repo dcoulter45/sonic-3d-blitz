@@ -1,4 +1,4 @@
-const PLAYER_CONTROLLED_STATES = ["normal", "falling", "jump", "sprung", "roll", "slam"]
+const PLAYER_CONTROLLED_STATES = ["normal", "jump", "sprung", "roll", "slam"]
 const MAX_VELOCITY = 225
 
 Player = class Player {
@@ -13,9 +13,9 @@ Player = class Player {
 		this.iso.anchor.set(0.5);
 		this.crosshair = new Crosshair(0,0,0);
 		this.shadow = new PlayerShadow(x, y, z)
+		new PlayerCamera(x, y, z)
 
 		game.physics.isoArcade.enable(this.iso);
-    game.camera.follow(this.iso)
 
 		this.iso.body.widthX = 18;
 		this.iso.body.widthY = 18;
@@ -201,12 +201,19 @@ Player = class Player {
 		}
 		else if(obj.destructible == "hard"){
 
-			if(this.iso.movement == "jump" || this.iso.movement == "homing attack" || this.iso.movement == "roll" || this.iso.movement == "slam"){
-
+			if (["jump", "homing attack", "slam", "roll"].includes(this.iso.movement)) {
 				obj.remove();
 
 				if(this.iso.movement == "jump" || this.iso.movement == "homing attack" || this.iso.movement == "slam"){
 					this.iso.body.velocity.z = 250;
+
+					if (this.iso.movement === "homing attack") {
+						if (this.iso.direction === "r") this.iso.body.velocity.y = -75
+						else if (this.iso.direction === "l") this.iso.body.velocity.y = 75
+						else if (this.iso.direction === "d") this.iso.body.velocity.x = 75
+						else if (this.iso.direction === "u") this.iso.body.velocity.x = -75
+					}
+
 					this.iso.movement = "jump";
 				}
 			}
@@ -350,31 +357,33 @@ Player = class Player {
 	}
 
 	die(causeOfDeath = "hurt") {
-		game.camera.follow(null)
+		if (!["dead", "burning", "drowing"].includes(this.iso.movement)) {
+			game.camera.follow(null)
 
-		if (causeOfDeath === "hurt") {
-			this.iso.movement = "dead";
+			if (causeOfDeath === "hurt") {
+				this.iso.movement = "dead";
 
-			Sounds.Hurt.play()
-		}
+				Sounds.Hurt.play()
+			}
 
-		if (causeOfDeath === "burning") {
-			this.iso.movement = "burning"
-		}
+			if (causeOfDeath === "burning") {
+				this.iso.movement = "burning"
+			}
 
-		if (causeOfDeath === "drowning") {
-			game.time.events.add(800, () => {
-				Sounds.WaterGush.play()
-			})
-		}
+			if (causeOfDeath === "drowning") {
+				game.time.events.add(800, () => {
+					Sounds.WaterGush.play()
+				})
+			}
 
-		if (game.save.data.lives > 0) {
-			this.resetGame()
-		}
-		else {
-			game.time.events.add(1000, () => {
-				new GameOver()
-			})
+			if (game.save.data.lives > 0) {
+				this.resetGame()
+			}
+			else {
+				game.time.events.add(1000, () => {
+					new GameOver()
+				})
+			}
 		}
 	}
 	resetGame() {

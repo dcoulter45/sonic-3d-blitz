@@ -1,8 +1,9 @@
 function playerMoves() {
-
+  console.log(player.iso.movement)
   if (player.iso.movement === "drowning" || player.iso.movement === "burning") {
     player.iso.body.acceleration = {x:0,y:0,z:0};
     player.iso.body.velocity = {x:0,y:0,z:0};
+    player.iso.body.allowGravity = false
   }
 
   if (player.iso.movement === "dead") {
@@ -14,11 +15,11 @@ function playerMoves() {
   }
 
   if (player.iso.movement === "homing attack") {
-    player.iso.body.position.x += player.homingTargetPosition.moveX;
-    player.iso.body.position.y += player.homingTargetPosition.moveY;
-    player.iso.body.position.z += player.homingTargetPosition.moveZ;
+    // player.iso.body.position.x += player.homingTargetPosition.moveX;
+    // player.iso.body.position.y += player.homingTargetPosition.moveY;
+    // player.iso.body.position.z += player.homingTargetPosition.moveZ;
 
-    if(player.onFloor()){
+    if (player.onFloor()) {
       player.iso.movement = "normal";
     }
   }
@@ -113,14 +114,18 @@ function playerMoves() {
       player.iso.body.velocity = { x:0, y:0, z:0 };
       player.btn1Pressed = false;
 
-      player.homingTargetPosition = {
-        x: player.homingTarget.body.position.x,
-        y: player.homingTarget.body.position.y,
-        z: player.homingTarget.body.position.z + 10,
-        moveX: (player.homingTarget.body.position.x - player.iso.body.position.x) / 20,
-        moveY: (player.homingTarget.body.position.y - player.iso.body.position.y) / 20,
-        moveZ: ((player.homingTarget.body.position.z+20) - player.iso.body.position.z) / 20,
-      }
+      game.add
+        .tween(player.iso.body.position)
+        .to(player.homingTarget.body.position, 200, Phaser.Easing.Linear.None, true)
+
+      // player.homingTargetPosition = {
+      //   x: player.homingTarget.body.position.x,
+      //   y: player.homingTarget.body.position.y,
+      //   z: player.homingTarget.body.position.z + 10,
+      //   moveX: (player.homingTarget.body.position.x - player.iso.body.position.x) / 20,
+      //   moveY: (player.homingTarget.body.position.y - player.iso.body.position.y) / 20,
+      //   moveZ: ((player.homingTarget.body.position.z+20) - player.iso.body.position.z) / 20,
+      // }
     }
   }
 
@@ -135,7 +140,7 @@ function playerMoves() {
   }
 
   // Drop Dash 
-  if (player.iso.previousMovement === "slam" && player.onFloor()) {
+  if (player.iso.previousMovement === "slam" && player.iso.movement === "normal" && player.onFloor()) {
     player.iso.movement = "roll"
     
     if (player.iso.direction === "u") {

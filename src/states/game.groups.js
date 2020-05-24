@@ -9,6 +9,7 @@ function createGameGroups() {
   groups.border = game.add.group()
   groups.ui = game.add.group()
 
+  groups.targets = []
   groups.collide = []
   groups.overlap = []
 }

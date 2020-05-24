@@ -2,7 +2,7 @@ const TILE_WIDTH = 44
 const TILE_HEIGHT = 30
 
 function loadLevel() {
-  var level = game.cache.getJSON(stateParams.activeLevel)
+  level = game.cache.getJSON(stateParams.activeLevel)
 
   playLevelTrack(level)
 
