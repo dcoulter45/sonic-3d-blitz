@@ -1,3 +1,8 @@
+var mapNameKeys = {
+  WildWoodland: 0,
+  HotHollow: 1,
+}
+
 class TitleCard {
   constructor() {
     this.black = game.add.graphics(0, 0, groups.ui)
@@ -13,19 +18,25 @@ class TitleCard {
     this.rect.alpha = 0
     this.rect.fixedToCamera = true
 
+    var levelName = stateParams.activeLevel.split("-")[0]
+    var index = mapNameKeys[levelName]
+
     this.bg = game.add.sprite(0, 240, "titleCardBg", 0, groups.ui)
     this.bg.fixedToCamera = true
 
-    this.border = game.add.sprite(0, -240, "titleCardBorder", 0, groups.ui)
+    this.border = game.add.sprite(0, -240, "titleCardBorder", index, groups.ui)
     this.border.fixedToCamera = true
 
-    this.levelTitle = game.add.sprite(150, 247, "titleCardLevels", 0, groups.ui)
+    this.levelTitle = game.add.sprite(150, 247, "titleCardLevels", index, groups.ui)
     this.levelTitle.fixedToCamera = true
 
     this.act = game.add.sprite(400, 120, "act1", 0, groups.ui)
     this.act.fixedToCamera = true
 
-    this.border.animations.add("default", [0, 1, 2, 3, 4, 5, 6, 7], 20, true)
+    var startFrame = index * 8
+    var frames = range(startFrame, startFrame + 7)
+
+    this.border.animations.add("default", frames, 20, true)
     this.border.animations.play("default")
 
     this.showCard()

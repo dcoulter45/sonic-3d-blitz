@@ -6,6 +6,7 @@ var SoundKeys = [
   "Hurt", 
   "Jump", 
   "Land",
+  "LavaGeyser",
   "LoseRings",
   "Ring", 
   "Roll", 
@@ -51,7 +52,6 @@ function playLevelTrack(level) {
     currentTrack = level.properties.track
   
     game.track = game.add.audio(currentTrack)
-    // track.loop = true
-    game.track.play()
+    game.track.play(null, 0, 1, true)
   }
 }

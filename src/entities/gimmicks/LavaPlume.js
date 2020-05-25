@@ -2,6 +2,8 @@ LavaPlume = class LavaPlume {
   active = false
 
   constructor(wx, wy, x, y, z, obj) {
+    var instantPlume = getProp("instantPlume", obj, false)
+
     this.iso = game.add.isoSprite(x, y, z + 20, "lavaPlume", 0, groups.objects);
     
     game.physics.isoArcade.enable(this.iso);
@@ -28,9 +30,13 @@ LavaPlume = class LavaPlume {
 
     this.iso.collide = this.collide.bind(this)
 
-    this.iso.visible = false
-
-    this.bubble()
+    if (instantPlume) {
+      this.iso.visible = true
+      this.plume()
+    } else {
+      this.iso.visible = false
+      this.bubble()
+    }
   }
 
   bubble() {
@@ -53,6 +59,7 @@ LavaPlume = class LavaPlume {
   fall() {
     this.anim.fall.play()
     this.active = false
+
     game.time.events.add(1000, () => this.bubble())
   }
 

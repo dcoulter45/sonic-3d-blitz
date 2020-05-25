@@ -1,4 +1,5 @@
 const PLAYER_CONTROLLED_STATES = ["normal", "jump", "sprung", "roll", "slam"]
+const ATTACK_STATES = ["jump", "roll", "slam", "homing attack"]
 const MAX_VELOCITY = 225
 
 Player = class Player {

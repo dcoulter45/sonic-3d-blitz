@@ -68,5 +68,5 @@ function preloadGameAssets() {
   game.load.json("WildWoodland-Block3", "assets/maps/WildWoodland-Block3.json")
   game.load.json("WildWoodland-Block4", "assets/maps/WildWoodland-Block4.json")
 
-  game.load.json("CoolCavern-Block1", "assets/maps/CoolCavern-Block1.json")
+  game.load.json("HotHollow-Block1", "assets/maps/HotHollow-Block1.json")
 }
