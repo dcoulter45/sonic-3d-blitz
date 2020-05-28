@@ -95,6 +95,10 @@ function createAnimations(iso) {
   iso.animations.add("drowning-l",[520,521,522,523,524,520,521,522,523,524,530,531,532,533,534,535,536,5],12,false);
   iso.animations.add("drowning-u",[520,521,522,523,524,520,521,522,523,524,530,531,532,533,534,535,536,5],12,false);
   iso.animations.add("drowning-r",[525,526,527,528,529,525,526,527,528,529,537,538,539,533,534,535,536,5],12,false);
+  iso.animations.add("falling-d",[525,526,527,528,529,525,526,527,528,529,537],12,false);
+  iso.animations.add("falling-l",[520,521,522,523,524,520,521,522,523,524,530],12,false);
+  iso.animations.add("falling-u",[520,521,522,523,524,520,521,522,523,524,530],12,false);
+  iso.animations.add("falling-r",[525,526,527,528,529,525,526,527,528,529,537],12,false);
   iso.animations.add("climbing-u",[540,541,542,543,544,545,546,547,548,549,550,551],16,true);
   iso.animations.add("climbing-r",[569,568,567,566,565,564,563,562,561,560,559,558],16,true);
   iso.animations.add("climbing-y",[570,571,572,573,574,575,576],16,true);

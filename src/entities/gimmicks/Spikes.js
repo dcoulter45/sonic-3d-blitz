@@ -10,9 +10,11 @@ Spikes = class Spikes{
   }
 
   createTallSpike(wx, wy, x, y, z, obj) {
-    this.spike = game.add.isoSprite(x + 10, y , z, "spikes", 4, groups.objects);
-    this.base = game.add.isoSprite(x, y, z - 4, "spikesBase", 0, groups.objects);
-    this.iso = game.add.isoSprite(x + 10, y, z, null, 0, groups.objects);
+    this.base = game.add.isoSprite(x, y, z, "spikesBase", 0, groups.objects);
+    this.spike = game.add.isoSprite(x, y , z + 5, "spikes", 4, groups.objects);
+    this.iso = game.add.isoSprite(x, y, z + 5, null, 0, groups.objects);
+
+    this.base.anchor.set(0.5)
 
     this.spike.anchor.set(0.5)
     this.spike.animations.add("down", [3,2,1,0], 20, false);

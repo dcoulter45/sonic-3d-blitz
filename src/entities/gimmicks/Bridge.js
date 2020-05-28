@@ -7,7 +7,8 @@ Bridge = class Bridge {
 
   constructor(wx, wy, x, y, z, obj) {
     this.direction = wx > wy ? "x" : "y"
-    
+    this.falling = getProp("falling", obj, false)
+
     if (this.direction === "x") {
       var planks = obj.width / 20
       var fences = obj.width / 40
@@ -66,18 +67,19 @@ Bridge = class Bridge {
     groups.collide.push(plank)
     this.planks.push(plank)
 
-    if (obj.properties && obj.properties.falling) {
+
+    if (this.falling) {
       plank.collide = function(obj) {
         if (obj.key === "player" && !plank.falling) {
           plank.falling = true
           
           game.time.events.add(200, () => {
-            plank.body.allowGravity = true
+            this.body.allowGravity = true
           })
 
-          // game.time.events.add(600, () => {
-          //   plank.destroy()
-          // })
+          game.time.events.add(600, () => {
+            this.destroy()
+          })
         }
       }
     }

@@ -1,5 +1,5 @@
 class RingCounter {
-  count = 98
+  count = 0
 
   constructor() {
     this.text = game.add.sprite(5, 5, "ringsText", 0, groups.ui)

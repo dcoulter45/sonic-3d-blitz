@@ -82,3 +82,27 @@ function isWithinAxis(axis, obj1, obj2) {
 
   return touching
 }
+
+function getSlopePos(obj, slope) {
+  var objXX = obj.body.position.x + obj.body.widthX
+  var objYY = obj.body.position.y + obj.body.widthY
+
+  if (slope.direction == "down") {
+    var xx = slope.body.position.x - obj.body.position.x
+    var zz = slope.body.position.z + slope.body.height + ((xx / slope.body.widthX) * slope.body.height)
+  }
+  else if (slope.direction == "up") {
+    var xx = slope.body.position.x - objXX
+    var zz = slope.body.position.z - ((xx / slope.body.widthX) * slope.body.height)
+  }
+  else if (slope.direction == "left") {
+    var yy = slope.body.position.y - obj.body.position.y
+    var zz = slope.body.position.z + slope.body.height + ((yy / slope.body.widthY) * slope.body.height)
+  }
+  else if (slope.direction == "right") {
+    var yy = slope.body.position.y - objYY
+    var zz = slope.body.position.z - ((yy / slope.body.widthY) * slope.body.height)
+  }
+
+  return Math.min(zz, slope.body.position.z + slope.body.height)
+}

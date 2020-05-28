@@ -25,7 +25,7 @@ class PlayerShadow {
   }
 
   update() {
-    var zz = 0;
+    var zz = -300;
     this.iso.body.position.x = player.iso.body.position.x;
     this.iso.body.position.y = player.iso.body.position.y;
 
@@ -35,31 +35,33 @@ class PlayerShadow {
       }
     });
 
-    groups.collide.forEach((obj) => {
-      if (this.isAboveObj(obj, player.iso) && obj.isoZ + 4 > zz) {
-        zz = obj.isoZ + 27;
-      }
-    })
+    // groups.collide.forEach((obj) => {
+    //   if (this.isAboveObj(obj, player.iso) && obj.isoZ + 4 > zz) {
+    //     zz = obj.isoZ + 27;
+    //   }
+    // })
 
     groups.walls.forEach((obj) => {
       if (this.isAboveObj(obj, player.iso)) {
         if (obj.key == 'slope') {
-          if (obj.direction == 'down') {
-            var x = (obj.isoX - player.iso.body.position.x);
-            var z = Math.floor(obj.isoZ + 37 + Math.min(0,(x / 44) * 31));
-          }
-          if (obj.direction == 'up') {
-            var x = (obj.isoX - (player.iso.body.position.x+20)) * -1;
-            var z = Math.floor(obj.isoZ + 10 + Math.min(28,(x / 44) * 31));
-          }
-          if (obj.direction == 'left') {
-            var x = (obj.isoY - player.iso.body.position.y);
-            var z = Math.floor(obj.isoZ + 37 + Math.min(0,(x / 44) * 31));
-          }
-          if (obj.direction == 'right') {
-            var x = (obj.isoY - (player.iso.body.position.y+20)) * -1;
-            var z = Math.floor(obj.isoZ + 10 + Math.min(28,(x / 44) * 31));
-          }
+          var z = getSlopePos(player.iso, obj)
+
+          // if (obj.direction == 'down') {
+          //   var x = (obj.isoX - player.iso.body.position.x);
+          //   var z = Math.floor(obj.isoZ + 37 + Math.min(0,(x / 44) * 31));
+          // }
+          // if (obj.direction == 'up') {
+          //   var x = (obj.isoX - (player.iso.body.position.x+20)) * -1;
+          //   var z = Math.floor(obj.isoZ + 10 + Math.min(28,(x / 44) * 31));
+          // }
+          // if (obj.direction == 'left') {
+          //   var x = (obj.isoY - player.iso.body.position.y);
+          //   var z = Math.floor(obj.isoZ + 37 + Math.min(0,(x / 44) * 31));
+          // }
+          // if (obj.direction == 'right') {
+          //   var x = (obj.isoY - (player.iso.body.position.y+20)) * -1;
+          //   var z = Math.floor(obj.isoZ + 10 + Math.min(28,(x / 44) * 31));
+          // }
 
           if (z > zz) {
             zz = z;

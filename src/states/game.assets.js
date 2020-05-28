@@ -16,6 +16,7 @@ function preloadGameAssets() {
   game.load.spritesheet("titleCardBorder", "assets/title-card/title-card-border.png", 106, 240)
   game.load.spritesheet("titleCardLevels", "assets/title-card/title-card-levels.png", 260, 64)
   game.load.image("blueSky", "assets/backgrounds/blue-sky.png")
+  game.load.image("sandSky", "assets/backgrounds/sand-sky.png")
   game.load.image("gameOver", "assets/ui/game-over.png")
   game.load.spritesheet("lives", "assets/ui/lives.png", 56, 20)
   game.load.spritesheet("livesNumbers", "assets/ui/lives-numbers.png", 7, 7)
@@ -27,6 +28,7 @@ function preloadGameAssets() {
   game.load.spritesheet("bat", "assets/entities/badniks/bat.png",50,50);
   game.load.spritesheet("bee", "assets/entities/badniks/bee.png",36,40);
   game.load.spritesheet("gyro", "assets/entities/badniks/gyro.png",36,42);
+  game.load.spritesheet("snake", "assets/entities/badniks/snake.png",26,32);
   game.load.spritesheet("spider", "assets/entities/badniks/spider.png",56,48);
 
   //  Objects
@@ -39,7 +41,7 @@ function preloadGameAssets() {
   game.load.spritesheet("spikeGate", "assets/entities/objects/spike-gate.png", 40, 75);
   game.load.spritesheet("spikeGateShadow", "assets/entities/objects/spike-gate-shadow.png", 170, 85);
   game.load.spritesheet("spikeGateBar", "assets/entities/objects/spike-gate-bar.png", 133, 100);
-  game.load.spritesheet("spikeball", "assets/entities/spikeball.png",30,26);
+  game.load.spritesheet("spikeball", "assets/entities/objects/spikeball.png",40,46);
   game.load.spritesheet("spring", "assets/entities/spring.png",68,58);
   game.load.spritesheet("lavaPlume", "assets/entities/lava-plume.png",110,138);
 
@@ -48,11 +50,14 @@ function preloadGameAssets() {
   game.load.image("crosshair", "assets/effects/crosshair.png");
   game.load.spritesheet("dust", "assets/effects/dust.png",16,16);
   game.load.spritesheet("explosion", "assets/effects/explosion.png",50,50);
-  game.load.spritesheet("splash", "assets/effects/splash.png",33,32);
+  game.load.spritesheet("splash", "assets/effects/splash.png",33,65);
 
   //  Tiles 
   // ---------
+  game.load.spritesheet("cactus", "assets/tiles/cactus.png",54,76)
   game.load.spritesheet("rocks", "assets/tiles/rocks.png",66,77);
+  game.load.spritesheet("torch", "assets/tiles/torch.png",18,42);
+  game.load.image("palmTree", "assets/tiles/palm-tree.png");
   game.load.spritesheet("tiles", "assets/tiles/tiles.png",80,70);
   game.load.spritesheet("walls", "assets/tiles/walls.png",80,220);
   game.load.spritesheet("waterfall", "assets/tiles/waterfall.png",41,199);
@@ -69,4 +74,7 @@ function preloadGameAssets() {
   game.load.json("WildWoodland-Block4", "assets/maps/WildWoodland-Block4.json")
 
   game.load.json("HotHollow-Block1", "assets/maps/HotHollow-Block1.json")
+  game.load.json("HotHollow-Block2", "assets/maps/HotHollow-Block2.json")
+
+  game.load.json("SearingSands-Block1", "assets/maps/SearingSands-Block1.json")
 }

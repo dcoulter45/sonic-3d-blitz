@@ -3,7 +3,7 @@ const TILE_HEIGHT = 30
 
 function loadLevel() {
   level = game.cache.getJSON(stateParams.activeLevel)
-
+  console.log(level)
   playLevelTrack(level)
 
   var levelWidth = level.width * TILE_WIDTH * 2
@@ -12,18 +12,23 @@ function loadLevel() {
 
   new Background(level)
 
-  level.layers.forEach((layer) => {
-    if (layer.type === "tilelayer") {
-      renderTiles(layer)
-    }
-
-    if (layer.type === "objectgroup") {
-      renderObjects(layer)
-    }
-  })
+  level.layers.forEach(delegateLayer)
 
   groups.tiles.sort("depth")
   groups.tiles.cacheAsBitmap = true;
+}
+
+function delegateLayer(layer) {
+  if (layer.type === "group") {
+    layer.layers.forEach(delegateLayer)
+  }
+  if (layer.type === "tilelayer") {
+    renderTiles(layer)
+  }
+
+  if (layer.type === "objectgroup") {
+    renderObjects(layer)
+  }
 }
 
 function renderTiles(layer) {

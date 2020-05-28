@@ -39,18 +39,7 @@ Door = class Door {
       obj.body.acceleration.x = 0
       obj.body.acceleration.y = 0
 
-      if (this.direction === "up") {
-        obj.body.velocity = { x: -50, y: 0 }
-      }
-      else if (this.direction === "right") {
-        obj.body.velocity = { x: 0, y: -50 }
-      }
-      else if (this.direction === "down") {
-        obj.body.velocity = { x: 50, y: 0 }
-      }
-      else if (this.direction === "left") {
-        obj.body.velocity = { x: 0, y: 50 }
-      }
+      setVelocity(player.iso, this.direction, 100)
 
       game.camera.follow(null)
 

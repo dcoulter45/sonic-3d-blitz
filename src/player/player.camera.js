@@ -28,6 +28,8 @@ class PlayerCamera {
       this.iso.body.position.y = player.iso.body.position.y
     }
     
-    this.iso.body.position.z = player.iso.body.position.z
+    if (player.iso.body.position.z > WORLDS_END) { 
+      this.iso.body.position.z = player.iso.body.position.z
+    }
   }
 }

@@ -13,7 +13,7 @@ Crab = class Crab {
 		this.iso.animations.play('default');
 
 		game.physics.isoArcade.enable(this.iso);
-		this.shadow = new Shadow(this.iso,40);
+		// this.shadow = new Shadow(this.iso,40);
 
 		this.iso.anchor.set(0.5);
 		this.iso.targetable = true;

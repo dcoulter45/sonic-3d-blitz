@@ -20,10 +20,14 @@ RumbleFloor = class RumbleFloor {
   }
 
   checkPlayerPosition() {
-    var distance = getDistanceBetween(player.iso, this.iso)
+    if (player) {
+      var distance = getDistanceBetween(player.iso, this.iso)
 
-    if (distance < this.triggerDistance) {
-      this.start()
+      if (distance < this.triggerDistance) {
+        this.start()
+      } else {
+        game.time.events.add(200, this.checkPlayerPosition, this)
+      }
     } else {
       game.time.events.add(200, this.checkPlayerPosition, this)
     }

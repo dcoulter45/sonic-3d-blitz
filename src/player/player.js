@@ -1,11 +1,16 @@
 const PLAYER_CONTROLLED_STATES = ["normal", "jump", "sprung", "roll", "slam"]
 const ATTACK_STATES = ["jump", "roll", "slam", "homing attack"]
+const DEAD_STATES = ["dead", "burning", "drowing", "falling"]
+const WORLDS_END = -30
 const MAX_VELOCITY = 225
 
 Player = class Player {
 
 	constructor(wx, wy, x, y, z, obj) {
 		player = this
+
+		var rollingStart = getProp("rollingStart", obj, false)
+		var initialDirection = getProp("direction", obj, "down")
 
 		// Create another cube as our "player", and set it up just like the cubes above.
 		this.iso = game.add.isoSprite(x, y, z, "sonic", 0, groups.objects);
@@ -28,7 +33,7 @@ Player = class Player {
 		this.iso.body.maxVelocity.y = MAX_VELOCITY;
 
 		this.iso.movement = "normal";
-		this.iso.direction = "d";
+		this.iso.direction = initialDirection.substring(0, 1);
 		this.iso.direction2 = "";
 		this.iso.hurtDIR = null;
 		this.iso.cursorDown = false;
@@ -43,12 +48,12 @@ Player = class Player {
 		createAnimations(this.iso)
 		createCursors()
 
-		if (obj.properties && obj.properties.rollingStart) {
+		if (rollingStart) {
 			this.iso.disableControls = true
-			this.iso.body.velocity.x = 100
+			setVelocity(this.iso, initialDirection, 100)
 
 			game.time.events.add(1200, () => {
-				this.iso.body.velocity.x = 0
+				this.iso.body.velocity = { x: 0, y: 0, z: 0 }
 				this.iso.disableControls = false
 			})
 		}
@@ -101,8 +106,12 @@ Player = class Player {
       if (obj2.collide) obj2.collide(obj1)
     })
 
-		if( this.onFloor() && ["jump", "sprung", "slam", "falling", "normal"].includes(this.iso.movement)) {
-			this.iso.movement = "normal";
+		if (this.onFloor() && ["jump", "sprung", "slam", "falling", "normal"].includes(this.iso.movement)) {
+			this.iso.movement = "normal"
+		}
+
+		if (player.iso.movement !== "dead" && player.iso.body.position.z < WORLDS_END) {
+			this.die("falling")
 		}
 
 		// =============================
@@ -120,40 +129,29 @@ Player = class Player {
 			}
 
 			playerMoves()
-
-			if(player.iso.movement == "homing attack" || player.iso.movement == "slam"){
-				if(game.tick % 2 == 0){
-					new HomingTrail(player.iso.body.position.x,player.iso.body.position.y,player.iso.body.position.z,player.iso.direction);
-				}
-			}
-
-			if(player.iso.movement !== "dead" && player.iso.body.position.z < -1000){
-				player.iso.movement = "dead";
-				game.state.restart();
-			}
 		}
 
 		// ============
 		//  Animation
 		// ============
 
-		if(this.iso.movement == "normal"){
+		if (this.iso.movement == "normal") {
 
-			if(this.iso.body.velocity.y == 0 && this.iso.body.velocity.x == 0){
+			if (this.iso.body.velocity.y == 0 && this.iso.body.velocity.x == 0) {
 				this.iso.action = "stand";
 			}
-			else if(
+			else if (
 				(this.iso.body.velocity.x > 10 && this.iso.direction == "u") ||
 				(this.iso.body.velocity.x < -10 && this.iso.direction == "d") ||
 				(this.iso.body.velocity.y > 10 && this.iso.direction == "r") ||
 				(this.iso.body.velocity.y < -10 && this.iso.direction == "l")
-			){
+			) {
 				this.iso.action = "skid";
 			}
-			else if(isMovingFasterThan(this.iso.body.velocity, 200)){
+			else if (isMovingFasterThan(this.iso.body.velocity, 200)) {
 				this.iso.action = "run";
 			}
-			else{
+			else {
 				this.iso.action = "walk";
 			}
 		}
@@ -174,6 +172,12 @@ Player = class Player {
 		if (this.iso.action === "skid") {
 			if(game.tick % 4 == 0){
 				new Dust(this.iso.body.position.x,this.iso.body.position.y,this.iso.body.position.z);
+			}
+		}
+
+		if(player.iso.movement == "homing attack" || player.iso.movement == "slam"){
+			if(game.tick % 2 == 0){
+				new HomingTrail(player.iso.body.position.x,player.iso.body.position.y,player.iso.body.position.z,player.iso.direction);
 			}
 		}
 
@@ -274,24 +278,10 @@ Player = class Player {
 
 	handleSlope(slope){
 		if (this.iso.body.velocity.z <= 0) {
-			if (slope.direction == "down") {
-				var xx = (slope.body.position.x - this.iso.body.position.x);
-				var zz = Math.floor(slope.body.position.z + 30 + ((xx / 44) * 31));
-			}
-			else if (slope.direction == "up") {
-				var xx = (slope.body.position.x - (this.iso.body.position.x+20)) * -1;
-				var zz = Math.floor(slope.body.position.z + ((xx / 44) * 31));
-			}
-			else if (slope.direction == "left") {
-				var xx = (slope.body.position.y - this.iso.body.position.y);
-				var zz = Math.floor(slope.body.position.z + 30 + ((xx / 44) * 31));
-			}
-			else if (slope.direction == "right") {
-				var xx = (slope.body.position.y - (this.iso.body.position.y+20) ) * -1;
-				var zz = Math.floor(slope.body.position.z + ((xx / 44) * 31));
-			}
 
-			if (zz >= this.iso.body.position.z - 5 && zz < slope.body.position.z + 30) {
+			var zz = getSlopePos(this.iso, slope)
+
+			if (zz >= this.iso.body.position.z - 5) {
 				this.onSlope = true;
 				this.iso.body.position.z = zz;
 				this.iso.body.velocity.z = 0;
@@ -358,13 +348,22 @@ Player = class Player {
 	}
 
 	die(causeOfDeath = "hurt") {
-		if (!["dead", "burning", "drowing"].includes(this.iso.movement)) {
+		if (!DEAD_STATES.includes(this.iso.movement)) {
 			game.camera.follow(null)
 
 			if (causeOfDeath === "hurt") {
 				this.iso.movement = "dead";
 
 				Sounds.Hurt.play()
+			}
+
+			if (causeOfDeath === "falling") {
+				this.iso.movement = "falling"
+				this.iso.body.allowGravity = false
+				this.iso.body.acceleration = { x: 0, y: 0, z: 0 }
+				this.iso.body.velocity = { x: 0, y: 0, z: 0 }
+
+				game.time.events.add(800, () => this.iso.body.allowGravity = true)
 			}
 
 			if (causeOfDeath === "burning") {
@@ -387,6 +386,7 @@ Player = class Player {
 			}
 		}
 	}
+
 	resetGame() {
 		game.time.events.add(1000, () => game.camera.fade(0x000000, 1000))
 		game.time.events.add(2000, () => {

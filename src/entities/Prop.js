@@ -50,6 +50,16 @@ Prop = class Prop {
       this.iso.pivot.y = 20;
     }
 
+    if (obj.type === "PalmTree") {
+      this.iso = game.add.isoSprite(x, y, z + 30, "palmTree", 0, groups.objects)
+
+      game.physics.isoArcade.enable(this.iso)
+
+      this.iso.body.widthX = 28
+      this.iso.body.widthY = 28
+      this.iso.pivot.y = 30
+    }
+
     if (obj.type === "Crystal") {
       this.iso = game.add.isoSprite(x, y, z, "crystal", 0, groups.objects);
 
@@ -64,7 +74,6 @@ Prop = class Prop {
     this.iso.anchor.set(0.5);
     this.iso.body.immovable = true;
     this.iso.body.allowGravity = false;
-    this.iso.body.collideWorldBounds = true;
 
     groups.collide.push(this.iso)
   }

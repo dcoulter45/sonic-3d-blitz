@@ -17,6 +17,7 @@ var SoundKeys = [
 
 var MusicKeys = [
   "GreenGroveAct1",
+  "RustyRuinsAct1",
   "ExtraLife",
   "GameOver",
 ]
@@ -48,10 +49,10 @@ function loadGameSounds() {
 }
 
 function playLevelTrack(level) {
-  if (level.properties && level.properties.track && level.properties.track !== currentTrack) {
-    currentTrack = level.properties.track
-  
-    game.track = game.add.audio(currentTrack)
+  var track = getProp("track", level, null)
+
+  if (track) {
+    game.track = game.add.audio(track)
     game.track.play(null, 0, 1, true)
   }
 }

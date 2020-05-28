@@ -19,7 +19,7 @@ Lava = class Lava{
     var bubbles = Math.ceil(tiles / 12)
 
     for (var i = 0; i < bubbles; i++) {
-      this.createBubble(wx, wy, x, y, z)
+      // this.createBubble(wx, wy, x, y, z)
     }
   }
 

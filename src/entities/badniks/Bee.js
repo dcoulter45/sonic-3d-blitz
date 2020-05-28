@@ -12,7 +12,7 @@ Bee = class Bee extends Badnik {
 
 		game.physics.isoArcade.enable(this.iso)
 
-		this.shadow = new Shadow(this.iso, 26)
+		// this.shadow = new Shadow(this.iso, 26)
 
 		this.iso.anchor.set(0.5);
 		this.iso.body.immovable = true;

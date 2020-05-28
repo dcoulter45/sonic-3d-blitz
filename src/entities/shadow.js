@@ -1,30 +1,40 @@
 class Shadow{
 
-  constructor(obj,width){
+  constructor(sprite, follow) {
 
-    var x = obj.body.position.x
-    var y = obj.body.position.y
-    var z = obj.body.position.z - 10
+    this.iso = sprite
 
-    this.iso = game.add.isoSprite(x, y, z, 'shadow-w'+width, 0, groups.objects);
+    game.physics.isoArcade.enable(sprite)
 
-    game.physics.isoArcade.enable(this.iso);
+    sprite.body.allowGravity = false
 
-    this.iso.anchor.set(0.5);
-    this.iso.body.collideWorldBounds = true;
-    this.iso.pivot.y = -4;
+    if (follow) {
+      sprite.update = () => this.update(sprite, follow)
+    }
 
-    this.iso.update = this.update.bind(this)
+    // var x = obj.body.position.x
+    // var y = obj.body.position.y
+    // var z = obj.body.position.z - 10
 
-    this.obj = obj
+    // this.iso = game.add.isoSprite(x, y, z, 'shadow-w'+width, 0, groups.objects);
+
+    // game.physics.isoArcade.enable(this.iso);
+
+    // this.iso.anchor.set(0.5);
+    // this.iso.body.collideWorldBounds = true;
+    // this.iso.pivot.y = -4;
+
+    // this.iso.update = this.update.bind(this)
+
+    // this.obj = obj
   }
 
-  update(){
+  update(sprite, follow){
 
-    game.physics.isoArcade.collide(this.iso,groups.walls);
-    game.physics.isoArcade.collide(this.iso,groups.water);
+    // game.physics.isoArcade.collide(this.iso,groups.walls);
+    // game.physics.isoArcade.collide(this.iso,groups.water);
 
-    this.iso.body.position.x = this.obj.body.position.x
-    this.iso.body.position.y = this.obj.body.position.y
+    sprite.body.position.x = follow.body.position.x
+    sprite.body.position.y = follow.body.position.y
   }
 }
