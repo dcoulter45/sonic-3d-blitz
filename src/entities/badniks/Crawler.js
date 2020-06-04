@@ -1,13 +1,12 @@
-Spider = class Spider extends Badnik {
-
-	points = 300
+Crawler = class Crawler extends Badnik {
 
 	constructor(wx, wy, x, y, z, obj) {
 		super()
 		
 		// Set direction
 		this.direction = getProp("direction", obj, "down")
-		this.distance = getProp("distance", obj, 2) * TILE_WIDTH
+    this.distance = getProp("distance", obj, 2) * TILE_WIDTH
+    this.type = obj.type ? obj.type : "spider"
 
 		// Set movement limits
 
@@ -24,10 +23,13 @@ Spider = class Spider extends Badnik {
 			this.startY = this.endY - this.distance;
 		}
 
-		// Add sprite and animations
-		this.iso = game.add.isoSprite(x, y, z, 'scorpion', 0, groups.objects);
+    // Add sprite and animations
 
-		this.iso.animations.add('default',[0,1,2,3,4,5,6,7],10,true);
+		this.iso = game.add.isoSprite(x, y, z, this.type, 0, groups.objects);
+
+		var frames = this.type === "spider" ? range(0,11) : range(0,7)
+
+		this.iso.animations.add('default',frames,10,true);
 		this.iso.animations.play('default');
 
 		game.physics.isoArcade.enable(this.iso);

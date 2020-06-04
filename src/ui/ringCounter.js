@@ -2,16 +2,16 @@ class RingCounter {
   count = 0
 
   constructor() {
-    this.text = game.add.sprite(5, 5, "ringsText", 0, groups.ui)
+    this.text = game.add.sprite(5, 5, "hudText", 0, groups.ui)
     this.text.fixedToCamera = true
 
-    this.no1 = game.add.sprite(50, 5, "numbers", 0, groups.ui)
+    this.no1 = game.add.sprite(58, 5, "numbers", 0, groups.ui)
     this.no1.fixedToCamera = true
 
-    this.no2 = game.add.sprite(58, 5, "numbers", 0, groups.ui)
+    this.no2 = game.add.sprite(66, 5, "numbers", 0, groups.ui)
     this.no2.fixedToCamera = true
     
-    this.no3 = game.add.sprite(66, 5, "numbers", 0, groups.ui)
+    this.no3 = game.add.sprite(74, 5, "numbers", 0, groups.ui)
     this.no3.fixedToCamera = true
 
     this.updateUI()

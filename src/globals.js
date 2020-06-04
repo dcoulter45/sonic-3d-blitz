@@ -1,7 +1,9 @@
 var player
 var stateParams = {
-  activeLevel: "SearingSands-Block1",
-  displayTitle: true,
+  activeLevel: "HotHollow-Block3",
+  displayTitle: false,
+  respawnPoint: null,
+  duration: null,
 }
 var level = null
 var currentTrack = ""

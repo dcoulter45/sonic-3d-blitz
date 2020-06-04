@@ -16,8 +16,10 @@ var SoundKeys = [
 ]
 
 var MusicKeys = [
+  "AmazingArea",
   "GreenGroveAct1",
   "RustyRuinsAct1",
+  "LevelComplete",
   "ExtraLife",
   "GameOver",
 ]
@@ -53,6 +55,6 @@ function playLevelTrack(level) {
 
   if (track) {
     game.track = game.add.audio(track)
-    game.track.play(null, 0, 1, true)
+    game.track.play(null, 0, 1, true, true)
   }
 }

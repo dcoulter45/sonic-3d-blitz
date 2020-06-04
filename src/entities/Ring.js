@@ -1,6 +1,7 @@
 Ring = class Ring {
 
 	constructor(wx, wy, x, y, z, obj) {
+		level.rings += 1
 
 		this.shadow = game.add.isoSprite(x + 2, y + 2, z, 'ring', 0, groups.objects);
 		this.shadow.animations.add('default', [16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31], 20, true);

@@ -12,7 +12,10 @@ Player = class Player {
 		var rollingStart = getProp("rollingStart", obj, false)
 		var initialDirection = getProp("direction", obj, "down")
 
-		// Create another cube as our "player", and set it up just like the cubes above.
+		if (stateParams.respawnPoint) {
+			var { x, y, z } = stateParams.respawnPoint	
+		}
+		
 		this.iso = game.add.isoSprite(x, y, z, "sonic", 0, groups.objects);
 
 		this.iso.key = "player";
@@ -70,48 +73,35 @@ Player = class Player {
 		this.iso.previousMovement = this.iso.movement
 		this.iso.previousAction = this.iso.action
 
-		// Objects Collision
-		// game.physics.isoArcade.overlap(this.iso, groups.objects, function(obj1, obj2) {
+		if (!DEAD_STATES.includes(this.iso.movement)) {
+			game.physics.isoArcade.collide(player.iso, groups.walls, function(obj1, obj2){
+				obj1.collide(obj2);
+				if (obj2.collide) obj2.collide(obj1)
+			});
 
-		// 	if (obj2.key == "player" || obj2.key == "playerShadow") {
-		// 		return false;
-		// 	}
-		// 	else if (obj2.collidable) {
-		// 		game.physics.isoArcade.collide(obj1,obj2);
-		// 	}
-		// 	else if (obj1.movement !== "dead" && obj1.invulnerable == false) {
-		// 		if(obj1.collide) obj1.collide(obj2);
-		// 		if(obj2.collide) obj2.collide(obj1);
-		// 	}
-		// });
+			game.physics.isoArcade.overlap(player.iso, groups.walls, function(obj1, obj2){
+				if (obj2.key == 'slope') {
+					player.handleSlope(obj2)
+				}
+			});
+			
+			game.physics.isoArcade.collide(player.iso, groups.collide, function(obj1, obj2) {
+				obj1.collide(obj2)
+				if (obj2.collide) obj2.collide(obj1)
+			})
 
-		game.physics.isoArcade.collide(player.iso, groups.walls, function(obj1, obj2){
-			obj1.collide(obj2);
-			if (obj2.collide) obj2.collide(obj1)
-    });
+			game.physics.isoArcade.overlap(player.iso, groups.overlap, function(obj1, obj2) {
+				obj1.collide(obj2)
+				if (obj2.collide) obj2.collide(obj1)
+			})
 
-		game.physics.isoArcade.overlap(player.iso, groups.walls, function(obj1, obj2){
-			if (obj2.key == 'slope') {
-				player.handleSlope(obj2)
+			if (this.onFloor() && ["jump", "sprung", "slam", "falling", "normal"].includes(this.iso.movement)) {
+				this.iso.movement = "normal"
 			}
-		});
-		
-    game.physics.isoArcade.collide(player.iso, groups.collide, function(obj1, obj2) {
-      obj1.collide(obj2)
-      if (obj2.collide) obj2.collide(obj1)
-    })
-
-    game.physics.isoArcade.overlap(player.iso, groups.overlap, function(obj1, obj2) {
-      obj1.collide(obj2)
-      if (obj2.collide) obj2.collide(obj1)
-    })
-
-		if (this.onFloor() && ["jump", "sprung", "slam", "falling", "normal"].includes(this.iso.movement)) {
-			this.iso.movement = "normal"
-		}
-
-		if (player.iso.movement !== "dead" && player.iso.body.position.z < WORLDS_END) {
-			this.die("falling")
+	
+			if (player.iso.body.position.z < WORLDS_END) {
+				this.die("falling")
+			}
 		}
 
 		// =============================
@@ -390,6 +380,7 @@ Player = class Player {
 	resetGame() {
 		game.time.events.add(1000, () => game.camera.fade(0x000000, 1000))
 		game.time.events.add(2000, () => {
+			if (game.track) game.track.stop()
 			game.lives.removeLife()
 			stateParams.displayTitle = true
 			game.state.restart()

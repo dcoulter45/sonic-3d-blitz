@@ -1,6 +1,8 @@
 var mapNameKeys = {
   WildWoodland: 0,
   HotHollow: 1,
+  SearingSands: 2,
+  PolarParadise: 3,
 }
 
 class TitleCard {

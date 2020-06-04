@@ -60,13 +60,23 @@ Prop = class Prop {
       this.iso.pivot.y = 30
     }
 
+    if (obj.type === "PineTree") {
+      this.iso = game.add.isoSprite(x, y, z + 48, "pineTree", 0, groups.objects)
+
+      game.physics.isoArcade.enable(this.iso)
+
+      this.iso.body.widthX = 66
+      this.iso.body.widthY = 66
+      this.iso.pivot.y = -6
+    }
+
     if (obj.type === "Crystal") {
-      this.iso = game.add.isoSprite(x, y, z, "crystal", 0, groups.objects);
+      this.iso = game.add.isoSprite(x, y, z + 18, "crystal", 0, groups.objects);
 
       game.physics.isoArcade.enable(this.iso);
 
-      this.iso.body.widthX = 40;
-      this.iso.body.widthY = 40;
+      this.iso.body.widthX = 44;
+      this.iso.body.widthY = 44;
       this.iso.body.height = 80;
     }
 

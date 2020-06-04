@@ -13,9 +13,10 @@ class GameState extends Phaser.State {
 
     game.rings = new RingCounter()
     game.lives = new LivesCounter()
-
+    game.timeCounter = new TimeCounter()
+    
     if (stateParams.displayTitle) { 
-      // new TitleCard()
+      new TitleCard()
     } else {
       game.camera.flash("#000000", 1000)
     }
@@ -23,6 +24,7 @@ class GameState extends Phaser.State {
 
   update() {
     game.tick++
+    game.timeCounter.update()
     
     game.debug.text(game.time.fps || '--', 5, 210, "#a7aebe");
     game.debug.text(groups.objects.children.length || '--', 5, 195, "#a7aebe");

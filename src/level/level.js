@@ -3,12 +3,17 @@ const TILE_HEIGHT = 30
 
 function loadLevel() {
   level = game.cache.getJSON(stateParams.activeLevel)
-  console.log(level)
+  level.rings = 0
+
   playLevelTrack(level)
 
   var levelWidth = level.width * TILE_WIDTH * 2
   var levelHeight = level.height * TILE_WIDTH * 2
   game.world.setBounds(0, 0, levelWidth, levelHeight)
+
+  if (stateParams.activeLevel.includes("Polar")) {
+    new Snow()
+  }
 
   new Background(level)
 
@@ -45,7 +50,10 @@ function renderTiles(layer) {
         var yy = y * TILE_WIDTH
 
         // Water tiles
-        if (tileIndex >= 40 && tileIndex <= 46) {
+        if (
+          (tileIndex >= 40 && tileIndex <= 46)
+          || (tileIndex >= 140 && tileIndex <= 146)  
+        ) {
           var tile = new Water(xx, yy, zz, tileIndex);
         } 
         // Static Tiles
