@@ -1,7 +1,13 @@
-Ring = class Ring {
+Ring = class Ring extends RenderInView {
 
 	constructor(wx, wy, x, y, z, obj) {
+		super(wx, wy, x, y, z, obj)
+
 		level.rings += 1
+	}
+
+	render() {
+		var { x, y, z } = this.props
 
 		this.shadow = game.add.isoSprite(x + 2, y + 2, z, 'ring', 0, groups.objects);
 		this.shadow.animations.add('default', [16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31], 20, true);
@@ -27,8 +33,16 @@ Ring = class Ring {
 		this.iso.collide = this.collide.bind(this)
 	}
 
+	hide() {
+		removeFromGroup(groups.overlap, this.iso)
+		
+		this.iso.destroy()
+		this.shadow.destroy()	
+	}
+
 	collide(obj) {
-		if(obj.key == 'player'){
+		if (obj.key == 'player') {
+			this.active = false
 			game.rings.add(1)
 
 			Sounds.Ring.play()

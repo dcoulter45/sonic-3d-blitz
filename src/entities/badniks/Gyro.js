@@ -14,7 +14,6 @@ Gyro = class Gyro {
 		this.iso.anchor.set(0.5);
 		this.iso.body.immovable = true;
 		this.iso.body.allowGravity = false;
-		this.iso.body.collideWorldBounds = true;
 		this.iso.targetable = true;
 		this.iso.destructible = "hard";
 		this.iso.direction = "up";

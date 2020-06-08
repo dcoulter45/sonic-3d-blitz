@@ -19,12 +19,10 @@ class FakeRings{
 			ring.shadow.animations.add('default', [16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31], 20, true);
 			ring.shadow.animations.play('default');
 			ring.shadow.anchor.set(0.5);
-			ring.shadow.body.collideWorldBounds = true;
 
 			ring.animations.add('default', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15], 20, true);
 			ring.animations.play('default');
 			ring.anchor.set(0.5);
-			ring.body.collideWorldBounds = true;
 
 			ring.alpha = 0.6;
 

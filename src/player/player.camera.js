@@ -17,19 +17,22 @@ class PlayerCamera {
   }
 
   update() {
-    var Y_UPPER_THRESHOLD = (level.height * TILE_WIDTH) - WORLD_THRESHOLD
-    var X_UPPER_THRESHOLD = (level.width * TILE_WIDTH) - WORLD_THRESHOLD
+    // var Y_UPPER_THRESHOLD = (level.height * TILE_WIDTH) - WORLD_THRESHOLD
+    // var X_UPPER_THRESHOLD = (level.width * TILE_WIDTH) - WORLD_THRESHOLD
 
-    if (player.iso.body.position.x < X_UPPER_THRESHOLD) {
-      this.iso.body.position.x = player.iso.body.position.x
-    }
+    // if (player.iso.body.position.x < X_UPPER_THRESHOLD) {
+    //   this.iso.body.position.x = player.iso.body.position.x
+    // }
 
-    if (player.iso.body.position.y < Y_UPPER_THRESHOLD) {
-      this.iso.body.position.y = player.iso.body.position.y
-    }
+    // if (player.iso.body.position.y < Y_UPPER_THRESHOLD) {
+    //   this.iso.body.position.y = player.iso.body.position.y
+    // }
     
     if (player.iso.body.position.z > WORLDS_END) { 
       this.iso.body.position.z = player.iso.body.position.z
     }
+
+    this.iso.body.position.x = player.iso.body.position.x
+    this.iso.body.position.y = player.iso.body.position.y
   }
 }

@@ -12,4 +12,10 @@ function createGameGroups() {
   groups.targets = []
   groups.collide = []
   groups.overlap = []
+  groups.renderInView = []
+}
+
+function removeFromGroup(group, obj) {
+  var index = group.indexOf(obj)
+  group.splice(index, 1)
 }

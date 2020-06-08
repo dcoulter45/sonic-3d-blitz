@@ -12,7 +12,7 @@ Spikes = class Spikes{
   createTallSpike(wx, wy, x, y, z, obj) {
     this.base = game.add.isoSprite(x, y, z, "spikesBase", 0, groups.objects);
     this.spike = game.add.isoSprite(x, y , z + 5, "spikes", 4, groups.objects);
-    this.iso = game.add.isoSprite(x, y, z + 5, null, 0, groups.objects);
+    this.iso = game.add.isoSprite(x, y, z + 5, null);
 
     this.base.anchor.set(0.5)
 
@@ -26,8 +26,8 @@ Spikes = class Spikes{
     
     this.iso.anchor.set(0.5);
     this.iso.body.allowGravity = false;
-    this.iso.body.widthX = 14
-    this.iso.body.widthY = 14
+    this.iso.body.widthX = 16
+    this.iso.body.widthY = 16
     this.iso.body.height = 80
     this.iso.harmful = true
 
@@ -60,7 +60,7 @@ Spikes = class Spikes{
     this.spike.animations.play('down')
     this.iso.harmful = false;
 
-    game.time.events.add(1000, () => {
+    game.time.events.add(2000, () => {
       this.goReady()
     })
   }
@@ -79,7 +79,7 @@ Spikes = class Spikes{
     this.spike.animations.play('up')
     this.iso.harmful = true;
 
-    game.time.events.add(1000, () => {
+    game.time.events.add(2000, () => {
       this.goDown()
     })
   }

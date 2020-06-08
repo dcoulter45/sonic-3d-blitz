@@ -103,12 +103,12 @@ Bridge = class Bridge {
     var fence1 = game.add.isoSprite(xx, yy, z, "tiles", tileId, groups.objects)
     fence1.anchor.set(0.5)
     fence1.pivot.y = 26
-    fence1.pivot.x = 20
+    fence1.pivot.x = this.direction === "x" ? -20 : 20
 
     var fence2 = game.add.isoSprite(xxx, yyy, z, "tiles", tileId, groups.objects)
     fence2.anchor.set(0.5)
     fence2.pivot.y = 26
-    fence2.pivot.x = this.direction === "x" ? -20 : 20
+    fence2.pivot.x = this.direction === "x" ? -16 : 16
   }
 }
 

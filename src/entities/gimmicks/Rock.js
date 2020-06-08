@@ -1,7 +1,8 @@
-Rock = class Rock {
-  active = true
+Rock = class Rock extends RenderInView {
 
-  constructor(wx, wy, x, y, z, obj) {
+  render() {
+    var { x, y, z } = this.props
+
     this.iso = game.add.isoSprite(x, y, z, "tiles", 110, groups.objects)
     this.iso.anchor.set(0.5)
 
@@ -15,6 +16,11 @@ Rock = class Rock {
     this.iso.body.immovable = true
   
     this.iso.collide = this.collide.bind(this)
+  }
+
+  hide() {
+    this.iso.destroy()
+    removeFromGroup(groups.overlap, this.iso)
   }
 
   collide(obj) {

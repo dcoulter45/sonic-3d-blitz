@@ -6,7 +6,7 @@ Slope = class Slope {
 
     slope.key = "slope";
     slope.anchor.set(0.5);
-    slope.direction = getProp("direction", obj, "down");
+    slope.direction = getProp("direction", obj, obj.type);
     slope.body.widthY = wy;
     slope.body.widthX = wx;
     slope.body.height = getProp("height", obj, 1) * TILE_HEIGHT;

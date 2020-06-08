@@ -41,6 +41,7 @@ function preloadGameAssets() {
   game.load.spritesheet("goalPost", "assets/entities/goal-post.png",54,68)
   game.load.spritesheet("raft", "assets/entities/objects/raft.png", 144, 78);
   game.load.spritesheet("ring", "assets/entities/ring.png",16,16);
+  game.load.spritesheet("monitors", "assets/entities/monitors.png",40,49)
   game.load.spritesheet("spikes", "assets/entities/objects/spikes.png",8,76);
   game.load.image("spikesBase", "assets/entities/objects/spikes-base.png");
   game.load.spritesheet("spikeGate", "assets/entities/objects/spike-gate.png", 40, 75);
@@ -76,6 +77,10 @@ function preloadGameAssets() {
   //  Maps
   // -----------
   game.load.json("test", "assets/maps/test.json")
+
+  game.load.json("WildWoodland-Act1", "assets/maps/WildWoodland-Act1.json")
+  game.load.json("WildWoodland-Act2", "assets/maps/WildWoodland-Act2.json")
+
   game.load.json("WildWoodland-Block1", "assets/maps/WildWoodland-Block1.json")
   game.load.json("WildWoodland-Block2", "assets/maps/WildWoodland-Block2.json")
   game.load.json("WildWoodland-Block3", "assets/maps/WildWoodland-Block3.json")
@@ -84,6 +89,7 @@ function preloadGameAssets() {
   game.load.json("HotHollow-Block1", "assets/maps/HotHollow-Block1.json")
   game.load.json("HotHollow-Block2", "assets/maps/HotHollow-Block2.json")
   game.load.json("HotHollow-Block3", "assets/maps/HotHollow-Block3.json")
+  game.load.json("HotHollow-Block4", "assets/maps/HotHollow-Block4.json")
 
   game.load.json("SearingSands-Block1", "assets/maps/SearingSands-Block1.json")
 

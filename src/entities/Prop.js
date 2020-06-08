@@ -1,6 +1,8 @@
-Prop = class Prop {
+Prop = class Prop extends RenderInView{
 
-  constructor(wx, wy, x, y, z, obj) {
+  render() {
+    var { wx, wy, x, y, z, obj } = this.props
+
     if (obj.type === "Fence") {
       var isRotated = obj.width > obj.height
 
@@ -86,5 +88,11 @@ Prop = class Prop {
     this.iso.body.allowGravity = false;
 
     groups.collide.push(this.iso)
+  }
+
+  hide() {
+    this.iso.destroy()
+
+    removeFromGroup(groups.collide, this.iso)
   }
 }

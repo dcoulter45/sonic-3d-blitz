@@ -1,55 +1,45 @@
 Platform = class Platform {
 
   tiles = []
-  distance = 4 * TILE_WIDTH
 
   constructor(wx, wy, x, y, z, obj) {
-    this.tileId = getProp("tileId", obj, 90)
-    this.axis = getProp("axis", obj, null)
-    this.distance = getProp("distance", obj, 2)
-    this.velocity = getProp("velocity", obj, 50)
-    this.type = obj.type
 
-    this.start = { x, y, z: z - 30 }
-
-    if (this.velocity < 0) {
-      this.inverted = true
-      this.end = {
-        x: x - this.distance * TILE_WIDTH,
-        y: y - this.distance * TILE_WIDTH,
-        z: z - this.distance * TILE_HEIGHT,
-      }
-    } else if (this.velocity > 0) {
-      this.inverted = false
-      this.end = {
-        x: x + this.distance * TILE_WIDTH,
-        y: y + this.distance * TILE_WIDTH,
-        z: z + this.distance * TILE_HEIGHT,
-      }
+    if (obj.type === "Moving") {
+      new PlatformMoving(wx, wy, x, y, z, obj)
     }
 
-    this.iso = game.add.isoSprite(x, y, z - 25, null, 0, groups.walls)
+    if (obj.type === "Wobble") {
+      new PlatformWobble(wx, wy, x, y, z, obj)
+    }
 
-    enablePhysics(this.iso)
+    // this.tileId = getProp("tileId", obj, 90)
+    // this.axis = getProp("axis", obj, null)
+    // this.distance = getProp("distance", obj, 2)
+    // this.velocity = getProp("velocity", obj, 50)
+    // this.type = obj.type
 
-    this.iso.key = "platform"
-    this.iso.body.height = 30
-    this.iso.body.widthX = wx
-    this.iso.body.widthY = wy
+    // this.iso = game.add.isoSprite(x, y, z - 25, null, 0, groups.walls)
 
-    this.iso.update = this.update.bind(this);
+    // enablePhysics(this.iso)
 
-    // this.shadow = game.add.isoSprite(x, y, z - 30, "tiles", this.tileId, groups.objects)
-    // this.shadow.anchor.set(0.5)
+    // this.iso.key = "platform"
+    // this.iso.body.height = 30
+    // this.iso.body.widthX = wx
+    // this.iso.body.widthY = wy
+
+    // this.iso.update = this.update.bind(this);
+
+    // // this.shadow = game.add.isoSprite(x, y, z - 30, "tiles", this.tileId, groups.objects)
+    // // this.shadow.anchor.set(0.5)
     
-    groups.collide.push(this.iso)
+    // // groups.collide.push(this.iso)
 
-    if (this.type === "Switch") {
-      this.createSwitchTile(wx, wy, x, y, z, obj)
-    } else {
-      this.createTiles(wx, wy, x, y, z)
-      this.createFrames(x, y, z)
-    }
+    // if (this.type === "Switch") {
+    //   this.createSwitchTile(wx, wy, x, y, z, obj)
+    // } else {
+    //   this.createTiles(wx, wy, x, y, z)
+    //   this.createFrames(x, y, z)
+    // }
   }
 
   createTiles(wx, wy, offsetX, offsetY, z) {
@@ -68,41 +58,41 @@ Platform = class Platform {
     }
   }
 
-  createFrames(offsetX, offsetY, z) {
-    var frameId = this.axis === "x" ? 108 : 109
-    var xx = offsetX + (this.distance * TILE_WIDTH) + TILE_WIDTH
+  // createFrames(offsetX, offsetY, z) {
+  //   var frameId = this.axis === "x" ? 108 : 109
+  //   var xx = offsetX + (this.distance * TILE_WIDTH) + TILE_WIDTH
 
-    // var yy = wy / TILE_WIDTH
+  //   // var yy = wy / TILE_WIDTH
 
-    if (this.axis === "x") {
-      for(var x = offsetX; x <= xx; x += TILE_WIDTH) {
-        var tileId = x === offsetX ? 98 : 
-                     x === xx ? 88 : 78
+  //   if (this.axis === "x") {
+  //     for(var x = offsetX; x <= xx; x += TILE_WIDTH) {
+  //       var tileId = x === offsetX ? 98 : 
+  //                    x === xx ? 88 : 78
 
-        var frame = game.add.isoSprite(x, offsetY, z, "tiles", tileId, groups.tiles)
-        frame.pivot.x = 34
-        frame.pivot.y = 14
-      }
-    }
-    else if (this.axis === "y") {
-      if (this.velocity > 0) {
-        var startY = offsetY 
-        var endY = offsetY + (this.distance * TILE_WIDTH) + TILE_WIDTH
-      } else {
-        var endY = offsetY
-        var startY = offsetY - (this.distance * TILE_WIDTH)
-      }
+  //       var frame = game.add.isoSprite(x, offsetY, z, "tiles", tileId, groups.tiles)
+  //       frame.pivot.x = 34
+  //       frame.pivot.y = 14
+  //     }
+  //   }
+  //   else if (this.axis === "y") {
+  //     if (this.velocity > 0) {
+  //       var startY = offsetY 
+  //       var endY = offsetY + (this.distance * TILE_WIDTH) + TILE_WIDTH
+  //     } else {
+  //       var endY = offsetY
+  //       var startY = offsetY - (this.distance * TILE_WIDTH)
+  //     }
 
-      for(var y = startY; y <= endY; y += TILE_WIDTH) {
-        var tileId = y === startY ? 99 : 
-                     y === endY ? 89 : 79
+  //     for(var y = startY; y <= endY; y += TILE_WIDTH) {
+  //       var tileId = y === startY ? 99 : 
+  //                    y === endY ? 89 : 79
 
-        var frame = game.add.isoSprite(offsetX, y, z, "tiles", tileId, groups.tiles)
-        frame.pivot.x = 46
-        frame.pivot.y = 14
-      }
-    }
-  }
+  //       var frame = game.add.isoSprite(offsetX, y, z, "tiles", tileId, groups.tiles)
+  //       frame.pivot.x = 46
+  //       frame.pivot.y = 14
+  //     }
+  //   }
+  // }
 
   createSwitchTile(wx, wy, x, y, z, obj) {
     var tileId = this.axis === "x" ? 91 : 90

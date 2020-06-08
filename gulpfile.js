@@ -2,7 +2,11 @@ var { dest, src, watch } = require('gulp');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 
-const files = ['src/**/*.js','src/index.js']
+const files = [
+  'src/classes/*.js',
+  'src/**/*.js',
+  'src/index.js'
+]
 
 function js() {
   return src(files)

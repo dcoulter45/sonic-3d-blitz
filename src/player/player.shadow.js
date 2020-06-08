@@ -29,11 +29,11 @@ class PlayerShadow {
     this.iso.body.position.x = player.iso.body.position.x;
     this.iso.body.position.y = player.iso.body.position.y;
 
-    groups.water.forEach((obj) => {
-      if (this.isAboveObj(obj, player.iso) && obj.isoZ + 4 > zz) {
-        zz = obj.isoZ + 4;
-      }
-    });
+    // groups.water.forEach((obj) => {
+    //   if (this.isAboveObj(obj, player.iso) && obj.isoZ + 4 > zz) {
+    //     zz = obj.isoZ + 4;
+    //   }
+    // });
 
     // groups.collide.forEach((obj) => {
     //   if (this.isAboveObj(obj, player.iso) && obj.isoZ + 4 > zz) {
