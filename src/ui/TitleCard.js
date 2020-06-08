@@ -47,6 +47,7 @@ class TitleCard {
   }
 
   showCard() {
+    player.iso.disableControls = true
     game.add.tween(this.rect).to({ alpha: 1 }, 500, "Linear", true)
     game.add.tween(this.border.cameraOffset).to({ y: 0 }, 500, "Linear", true)
     game.add.tween(this.bg.cameraOffset).to({ y: 168 }, 500, "Linear", true)
@@ -64,6 +65,8 @@ class TitleCard {
     game.add.tween(this.act.cameraOffset).to({ x: 400 }, 500, "Linear", true)
 
     game.time.events.add(500, () => {
+      player.iso.disableControls = false
+
       this.rect.destroy()
       this.border.destroy()
       this.bg.destroy()

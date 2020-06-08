@@ -15,7 +15,7 @@ class GameState extends Phaser.State {
     game.lives = new LivesCounter()
     game.timeCounter = new TimeCounter()
     
-    if (stateParams.displayTitle) { 
+    if (stateParams.displayTitle) {
       new TitleCard()
     } else {
       game.camera.flash("#000000", 1000)

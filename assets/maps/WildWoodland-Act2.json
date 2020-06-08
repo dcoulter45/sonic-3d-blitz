@@ -1155,17 +1155,17 @@
                 }, 
                 {
                  "chunks":[],
-                 "height":16,
+                 "height":0,
                  "id":21,
                  "name":"Background Layer 9",
                  "offsetx":0,
                  "offsety":-210,
                  "opacity":1,
-                 "startx":16,
-                 "starty":224,
+                 "startx":0,
+                 "starty":0,
                  "type":"tilelayer",
                  "visible":true,
-                 "width":16,
+                 "width":0,
                  "x":0,
                  "y":0
                 }, 
@@ -2023,7 +2023,7 @@
                                 {
                                  "name":"nextLevel",
                                  "type":"string",
-                                 "value":"WildWoodland-Act2"
+                                 "value":"WildWoodland-Act3"
                                 }],
                          "rotation":0,
                          "type":"",

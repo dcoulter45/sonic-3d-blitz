@@ -38,9 +38,11 @@ GoalPost = class GoalPost {
 
   collide(obj) {
     if (obj.key === "player" && !this.active) {
-      new LevelComplete()
+      new LevelComplete(this.nextLevel)
 
       this.active = true
+
+      Sounds.SignPost.play()
       
       this.eggman.play()
 
@@ -56,6 +58,8 @@ GoalPost = class GoalPost {
       setVelocity(player.iso, this.direction, 100)
 
       game.camera.follow(null)
+
+      
     }
   }
 }

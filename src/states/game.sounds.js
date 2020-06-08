@@ -1,7 +1,10 @@
 var Sounds = {}
 
 var SoundKeys = [
+  "BossHit",
+  "Explosion",
   "Destroy", 
+  "Drop",
   "DropDash",
   "Hurt", 
   "Jump", 
@@ -11,12 +14,15 @@ var SoundKeys = [
   "Ring", 
   "Roll", 
   "Skidding",
+  "SignPost",
   "Spike",
+  "StarPost",
   "WaterGush",
 ]
 
 var MusicKeys = [
   "AmazingArea",
+  "BattleTheme",
   "GreenGroveAct1",
   "RustyRuinsAct1",
   "LevelComplete",

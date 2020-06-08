@@ -2,6 +2,8 @@ function preloadGameAssets() {
 
   game.load.spritesheet("sonic", "assets/characters/sonic.png",48,42);
 
+  game.load.spritesheet("eggman", "assets/characters/eggman.png",100,70);
+
   game.load.image("playerShadow", "assets/entities/playerShadow.png");
   game.load.image("shadow-w18", "assets/entities/shadow-w18.png");
   game.load.image("shadow-w26", "assets/entities/shadow-w26.png");
@@ -37,6 +39,7 @@ function preloadGameAssets() {
   //  Objects
   // -----------
   game.load.spritesheet("bridge", "assets/entities/objects/bridge.png",94,53);
+  game.load.spritesheet("bomb", "assets/entities/objects/bomb.png",16,32)
   game.load.spritesheet("checkpoint", "assets/entities/checkpoint.png",25,70)
   game.load.spritesheet("goalPost", "assets/entities/goal-post.png",54,68)
   game.load.spritesheet("raft", "assets/entities/objects/raft.png", 144, 78);
@@ -57,6 +60,7 @@ function preloadGameAssets() {
   game.load.image("crosshair", "assets/effects/crosshair.png");
   game.load.spritesheet("dust", "assets/effects/dust.png",16,16);
   game.load.spritesheet("explosion", "assets/effects/explosion.png",50,50);
+  game.load.spritesheet("explosionLarge", "assets/effects/explosion-large.png",105,81);
   game.load.spritesheet("splash", "assets/effects/splash.png",33,65);
   game.load.image("snow", "assets/effects/snow.png")
 
@@ -80,11 +84,7 @@ function preloadGameAssets() {
 
   game.load.json("WildWoodland-Act1", "assets/maps/WildWoodland-Act1.json")
   game.load.json("WildWoodland-Act2", "assets/maps/WildWoodland-Act2.json")
-
-  game.load.json("WildWoodland-Block1", "assets/maps/WildWoodland-Block1.json")
-  game.load.json("WildWoodland-Block2", "assets/maps/WildWoodland-Block2.json")
-  game.load.json("WildWoodland-Block3", "assets/maps/WildWoodland-Block3.json")
-  game.load.json("WildWoodland-Block4", "assets/maps/WildWoodland-Block4.json")
+  game.load.json("WildWoodland-Act3", "assets/maps/WildWoodland-Act3.json")
 
   game.load.json("HotHollow-Block1", "assets/maps/HotHollow-Block1.json")
   game.load.json("HotHollow-Block2", "assets/maps/HotHollow-Block2.json")

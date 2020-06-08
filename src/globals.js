@@ -1,7 +1,7 @@
 var player
 var stateParams = {
-  activeLevel: "HotHollow-Block3",
-  displayTitle: false,
+  activeLevel: "WildWoodland-Act3",
+  displayTitle: true,
   respawnPoint: null,
   duration: null,
 }

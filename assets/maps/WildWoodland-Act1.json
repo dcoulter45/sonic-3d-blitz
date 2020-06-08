@@ -3234,13 +3234,13 @@
                         }, 
                         {
                          "height":40,
-                         "id":290,
+                         "id":310,
                          "name":"Player",
                          "rotation":0,
                          "type":"",
                          "visible":true,
                          "width":40,
-                         "x":260,
+                         "x":240,
                          "y":60
                         }],
                  "opacity":1,
@@ -4249,8 +4249,14 @@
          "y":0
         }],
  "nextlayerid":38,
- "nextobjectid":309,
+ "nextobjectid":311,
  "orientation":"isometric",
+ "properties":[
+        {
+         "name":"track",
+         "type":"string",
+         "value":"GreenGroveAct1"
+        }],
  "renderorder":"right-down",
  "tiledversion":"1.3.4",
  "tileheight":40,

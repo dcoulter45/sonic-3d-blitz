@@ -1,40 +1,52 @@
 class Shadow{
 
-  constructor(sprite, follow) {
-
+  constructor(sprite, follow, followZ = true) {
     this.iso = sprite
 
     game.physics.isoArcade.enable(sprite)
+    sprite.anchor.set(0.5)
 
     sprite.body.allowGravity = false
+    sprite.body.height = 1
 
     if (follow) {
-      sprite.update = () => this.update(sprite, follow)
+      sprite.update = () => this.update(follow, followZ)
+    } else {
+      sprite.update = () => this.update()
     }
-
-    // var x = obj.body.position.x
-    // var y = obj.body.position.y
-    // var z = obj.body.position.z - 10
-
-    // this.iso = game.add.isoSprite(x, y, z, 'shadow-w'+width, 0, groups.objects);
-
-    // game.physics.isoArcade.enable(this.iso);
-
-    // this.iso.anchor.set(0.5);
-    // this.iso.body.collideWorldBounds = true;
-    // this.iso.pivot.y = -4;
-
-    // this.iso.update = this.update.bind(this)
-
-    // this.obj = obj
   }
 
-  update(sprite, follow){
+  isWithin(obj) {
+    return (
+      this.iso.body.position.x < obj.isoX + obj.body.widthX &&
+      (this.iso.body.position.x + this.iso.body.halfWidthX) >= obj.isoX &&
+      this.iso.body.position.y < obj.isoY + obj.body.widthY &&
+      (this.iso.body.position.y + this.iso.body.halfWidthY) >= obj.isoY
+    )
+  }
 
-    // game.physics.isoArcade.collide(this.iso,groups.walls);
-    // game.physics.isoArcade.collide(this.iso,groups.water);
+  update(follow, followZ){
+    if (followZ) {
+      var zz = -300;
 
-    sprite.body.position.x = follow.body.position.x
-    sprite.body.position.y = follow.body.position.y
+      groups.walls.forEach((wall) => {
+        var wallZ = wall.isoZ + 31
+
+        if (this.isWithin(wall) && wallZ > zz) {
+          zz = wallZ
+        }
+      })
+
+      if (follow && zz > follow.body.position.z) {
+        this.iso.body.position.z = follow.body.position.z;
+      } else {
+        this.iso.body.position.z = zz;
+      }
+    }
+
+    if (follow) {
+      this.iso.body.position.x = follow.body.position.x
+      this.iso.body.position.y = follow.body.position.y
+    }
   }
 }
