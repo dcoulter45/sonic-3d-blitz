@@ -16,6 +16,6 @@ function playPlayerSounds() {
   }
 
   if (player.iso.movement === "slam" && player.iso.previousMovement !== "slam") {
-    Sounds.DropDash.play()
+    Sounds.MightyDrill.play()
   }
 }

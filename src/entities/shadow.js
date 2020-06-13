@@ -1,19 +1,23 @@
-class Shadow{
+class Shadow {
 
-  constructor(sprite, follow, followZ = true) {
+  constructor(sprite, follow, followZ = true, exclude = []) {
     this.iso = sprite
+    this.follow = follow
+    this.followZ = followZ
+    this.exclude = exclude
 
     game.physics.isoArcade.enable(sprite)
     sprite.anchor.set(0.5)
 
+    sprite.body.collideWorldBounds = false
     sprite.body.allowGravity = false
     sprite.body.height = 1
 
+    this.updateZ()
+
     if (follow) {
-      sprite.update = () => this.update(follow, followZ)
-    } else {
-      sprite.update = () => this.update()
-    }
+      sprite.update = this.update.bind(this)
+    } 
   }
 
   isWithin(obj) {
@@ -25,28 +29,56 @@ class Shadow{
     )
   }
 
-  update(follow, followZ){
-    if (followZ) {
-      var zz = -300;
-
-      groups.walls.forEach((wall) => {
-        var wallZ = wall.isoZ + 31
-
-        if (this.isWithin(wall) && wallZ > zz) {
-          zz = wallZ
-        }
-      })
-
-      if (follow && zz > follow.body.position.z) {
-        this.iso.body.position.z = follow.body.position.z;
-      } else {
-        this.iso.body.position.z = zz;
-      }
+  update() {
+    if (this.followZ) {
+      this.updateZ()
     }
 
-    if (follow) {
-      this.iso.body.position.x = follow.body.position.x
-      this.iso.body.position.y = follow.body.position.y
+    if (this.follow) {
+      this.updateXY()
+    }
+  }
+
+  updateXY() {
+    if (this.follow.body) {
+      this.iso.body.position.x = this.follow.body.position.x
+      this.iso.body.position.y = this.follow.body.position.y
+    }
+    else {
+      this.iso.body.position.x = this.follow.isoX
+      this.iso.body.position.y = this.follow.isoY
+    }
+  }
+
+  updateZ() {
+    var zz = -300;
+    var followZ = this.follow.body ? this.follow.body.position.z : this.follow.isoZ
+
+    groups.walls.forEach((wall) => {
+      var wallZ = wall.isoZ + 31
+
+      if (
+        wallZ > zz
+        && wallZ < followZ
+        && !this.exclude.includes(wall.key) 
+        && this.isWithin(wall)
+      ) {
+        zz = wallZ
+      }
+    })
+
+    if (this.follow) {
+      if (this.follow.body && zz > this.follow.body.position.z) {
+        this.iso.body.position.z = this.follow.body.position.z
+      }
+      else if (zz > this.follow.isoZ) {
+        this.iso.body.position.z = this.follow.isoZ
+      }
+      else {
+        this.iso.body.position.z = zz;
+      }
+    } else {
+      this.iso.body.position.z = zz;
     }
   }
 }

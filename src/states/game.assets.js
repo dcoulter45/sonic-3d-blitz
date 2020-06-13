@@ -4,6 +4,7 @@ function preloadGameAssets() {
 
   game.load.spritesheet("eggman", "assets/characters/eggman.png",100,70);
 
+
   game.load.image("playerShadow", "assets/entities/playerShadow.png");
   game.load.image("shadow-w18", "assets/entities/shadow-w18.png");
   game.load.image("shadow-w26", "assets/entities/shadow-w26.png");
@@ -30,6 +31,7 @@ function preloadGameAssets() {
   // -----------
   game.load.spritesheet("bat", "assets/entities/badniks/bat.png",50,50);
   game.load.spritesheet("bee", "assets/entities/badniks/bee.png",36,40);
+  game.load.spritesheet("dragonfly", "assets/entities/badniks/dragonfly.png",48,46)
   game.load.spritesheet("gyro", "assets/entities/badniks/gyro.png",36,42);
   game.load.spritesheet("scorpion", "assets/entities/badniks/scorpion.png",48,50)
   game.load.spritesheet("snake", "assets/entities/badniks/snake.png",26,32);
@@ -41,6 +43,7 @@ function preloadGameAssets() {
   game.load.spritesheet("bridge", "assets/entities/objects/bridge.png",94,53);
   game.load.spritesheet("bomb", "assets/entities/objects/bomb.png",16,32)
   game.load.spritesheet("checkpoint", "assets/entities/checkpoint.png",25,70)
+  game.load.spritesheet("fireball", "assets/entities/objects/fireball.png", 64,65)
   game.load.spritesheet("goalPost", "assets/entities/goal-post.png",54,68)
   game.load.spritesheet("raft", "assets/entities/objects/raft.png", 144, 78);
   game.load.spritesheet("ring", "assets/entities/ring.png",16,16);
@@ -62,6 +65,7 @@ function preloadGameAssets() {
   game.load.spritesheet("explosion", "assets/effects/explosion.png",50,50);
   game.load.spritesheet("explosionLarge", "assets/effects/explosion-large.png",105,81);
   game.load.spritesheet("splash", "assets/effects/splash.png",33,65);
+  game.load.spritesheet("shields", "assets/effects/shields.png",48,48)
   game.load.image("snow", "assets/effects/snow.png")
 
   //  Tiles 
@@ -80,18 +84,21 @@ function preloadGameAssets() {
 
   //  Maps
   // -----------
-  game.load.json("test", "assets/maps/test.json")
-
   game.load.json("WildWoodland-Act1", "assets/maps/WildWoodland-Act1.json")
   game.load.json("WildWoodland-Act2", "assets/maps/WildWoodland-Act2.json")
   game.load.json("WildWoodland-Act3", "assets/maps/WildWoodland-Act3.json")
+
+  game.load.json("BeachTest", "assets/maps/BeachTest.json")
+
+  game.load.json("HotHollow-Act1", "assets/maps/HotHollow-Act1.json")
+  game.load.json("HotHollow-Act3", "assets/maps/HotHollow-Act3.json")
 
   game.load.json("HotHollow-Block1", "assets/maps/HotHollow-Block1.json")
   game.load.json("HotHollow-Block2", "assets/maps/HotHollow-Block2.json")
   game.load.json("HotHollow-Block3", "assets/maps/HotHollow-Block3.json")
   game.load.json("HotHollow-Block4", "assets/maps/HotHollow-Block4.json")
 
-  game.load.json("SearingSands-Block1", "assets/maps/SearingSands-Block1.json")
+  game.load.json("SearingSands-Act1", "assets/maps/SearingSands-Act1.json")
 
   game.load.json("PolarParadise-Block1", "assets/maps/PolarParadise-Block1.json")
 }

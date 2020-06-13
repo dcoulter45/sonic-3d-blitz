@@ -480,13 +480,13 @@
                         {
                          "height":40,
                          "id":7,
-                         "name":"Eggman",
+                         "name":"EggmanBomber",
                          "rotation":0,
                          "type":"",
                          "visible":true,
                          "width":40,
                          "x":280,
-                         "y":480
+                         "y":1220
                         }, 
                         {
                          "height":20,
@@ -930,7 +930,7 @@
          "y":0
         }],
  "nextlayerid":38,
- "nextobjectid":29,
+ "nextobjectid":30,
  "orientation":"isometric",
  "properties":[
         {

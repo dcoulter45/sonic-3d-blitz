@@ -1,4 +1,4 @@
-class PlatformWobble {
+PlatformWobble = class PlatformWobble {
 
   tiles = []
   active = false

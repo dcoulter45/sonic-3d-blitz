@@ -1,7 +1,6 @@
 function playerMoves() {
   if (player.iso.movement === "drowning" || player.iso.movement === "burning") {
-    player.iso.body.acceleration = {x:0,y:0,z:0};
-    player.iso.body.velocity = {x:0,y:0,z:0};
+    player.stop()
     player.iso.body.allowGravity = false
   }
 
@@ -106,6 +105,12 @@ function playerMoves() {
       player.btn2Pressed = false;
     }
 
+    if (player.btn1Pressed && player.shield && player.shield.type === "Lightning") {
+      player.iso.body.velocity.z = 200
+      player.iso.movement = "doubleJump"
+      Sounds.LightningJump.play()
+    }
+
     // Homing attack
     if (player.btn1Pressed && !player.onFloor() && player.homingTarget) {
       player.iso.movement = "homing attack";
@@ -115,16 +120,7 @@ function playerMoves() {
 
       game.add
         .tween(player.iso.body.position)
-        .to(player.homingTarget.body.position, 200, Phaser.Easing.Linear.None, true)
-
-      // player.homingTargetPosition = {
-      //   x: player.homingTarget.body.position.x,
-      //   y: player.homingTarget.body.position.y,
-      //   z: player.homingTarget.body.position.z + 10,
-      //   moveX: (player.homingTarget.body.position.x - player.iso.body.position.x) / 20,
-      //   moveY: (player.homingTarget.body.position.y - player.iso.body.position.y) / 20,
-      //   moveZ: ((player.homingTarget.body.position.z+20) - player.iso.body.position.z) / 20,
-      // }
+        .to(player.homingTarget.body.position, 200, Phaser.Easing.Quintic.In, true)
     }
   }
 
@@ -140,23 +136,31 @@ function playerMoves() {
 
   // Drop Dash 
   if (player.iso.previousMovement === "slam" && player.iso.movement === "normal" && player.onFloor()) {
-    player.iso.movement = "roll"
-    
-    if (player.iso.direction === "u") {
-      player.iso.body.velocity.x = MAX_VELOCITY * -1
-    } else if (player.iso.direction === "d") {
-      player.iso.body.velocity.x = MAX_VELOCITY
-    } else if (player.iso.direction === "r") {
-      player.iso.body.velocity.y = MAX_VELOCITY * -1
-    } else if (player.iso.direction === "l") {
-      player.iso.body.velocity.y = MAX_VELOCITY 
-    }
+    player.iso.body.velocity.z = 150
+    player.iso.movement = "jump"
+    new Dust(player.iso.body.position.x + 8, player.iso.body.position.y, player.iso.body.position.z);
+    new Dust(player.iso.body.position.x - 8, player.iso.body.position.y, player.iso.body.position.z);
+    new Dust(player.iso.body.position.x, player.iso.body.position.y + 8, player.iso.body.position.z);
+    new Dust(player.iso.body.position.x, player.iso.body.position.y - 8, player.iso.body.position.z);
 
-    game.time.events.add(600,()=>{
-      if(player.iso.movement == "roll"){
-        player.iso.movement = "normal";
-      }
-    });
+    game.camera.shake(0.005, 200);
+    // player.iso.movement = "roll"
+    
+    // if (player.iso.direction === "u") {
+    //   player.iso.body.velocity.x = MAX_VELOCITY * -1
+    // } else if (player.iso.direction === "d") {
+    //   player.iso.body.velocity.x = MAX_VELOCITY
+    // } else if (player.iso.direction === "r") {
+    //   player.iso.body.velocity.y = MAX_VELOCITY * -1
+    // } else if (player.iso.direction === "l") {
+    //   player.iso.body.velocity.y = MAX_VELOCITY 
+    // }
+
+    // game.time.events.add(600,()=>{
+    //   if(player.iso.movement == "roll"){
+    //     player.iso.movement = "normal";
+    //   }
+    // });
   }
 }
 

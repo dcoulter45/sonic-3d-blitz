@@ -1,6 +1,6 @@
-const PLAYER_CONTROLLED_STATES = ["normal", "jump", "sprung", "roll", "slam"]
-const ATTACK_STATES = ["jump", "roll", "slam", "homing attack"]
-const DEAD_STATES = ["dead", "burning", "drowing", "falling"]
+const PLAYER_CONTROLLED_STATES = ["normal", "jump", "doubleJump", "sprung", "roll", "slam"]
+const ATTACK_STATES = ["jump", "doubleJump", "roll", "slam", "homing attack"]
+const DEAD_STATES = ["dead", "burning", "drowing", "falling", "squashed"]
 const WORLDS_END = -30
 const MAX_VELOCITY = 225
 
@@ -95,7 +95,7 @@ Player = class Player {
 				if (obj2.collide) obj2.collide(obj1)
 			})
 
-			if (this.onFloor() && ["jump", "sprung", "slam", "falling", "normal"].includes(this.iso.movement)) {
+			if (this.onFloor() && ["jump", "sprung", "slam", "falling", "normal", "doubleJump"].includes(this.iso.movement)) {
 				this.iso.movement = "normal"
 			}
 	
@@ -148,11 +148,11 @@ Player = class Player {
 		else if (this.iso.movement === "skidding") {
 			this.iso.action = "skid"
 		}
-		else if(this.iso.movement == "sink"){
+		else if(this.iso.movement === "sink"){
 			this.iso.action = "sink";
 			this.iso.direction = "";
 		}
-		else if(this.iso.movement == "roll"){
+		else if(this.iso.movement === "roll" || this.iso.movement === "doubleJump"){
 			this.iso.action = "jump";
 		}
 		else{
@@ -199,10 +199,12 @@ Player = class Player {
 			if (["jump", "homing attack", "slam", "roll"].includes(this.iso.movement)) {
 				obj.remove();
 
-				if(this.iso.movement == "jump" || this.iso.movement == "homing attack" || this.iso.movement == "slam"){
+				if(this.iso.movement == "jump" || this.iso.movement == "homing attack"){
 					this.iso.body.velocity.z = 250;
 
 					if (this.iso.movement === "homing attack") {
+						this.homingTarget = null
+
 						if (this.iso.direction === "r") this.iso.body.velocity.y = -75
 						else if (this.iso.direction === "l") this.iso.body.velocity.y = 75
 						else if (this.iso.direction === "d") this.iso.body.velocity.x = 75
@@ -291,14 +293,19 @@ Player = class Player {
 	hurt(){
 		if(this.iso.invulnerable === false){
 			// DEAD
-			if(game.rings.count === 0){
+			if(game.rings.count === 0 && !this.shield){
 				this.die()
 			}
 			// HURT
 			else{
 
-				new FakeRings(this.iso.body.position);
-				game.rings.reset()
+				if (!this.shield) {
+					new FakeRings(this.iso.body.position);
+					game.rings.reset()
+				}
+				else {
+					this.shield.destroy()
+				}
 
 				this.iso.movement = "hurt";
 				this.iso.invulnerable = true;
@@ -333,10 +340,11 @@ Player = class Player {
 				});
 
 				game.time.events.add(900, () => {
-
-					this.iso.movement = "normal";
-					this.iso.invulnerable = false;
-					this.iso.hurtDIR = null;
+					if (this.iso.movement === "hurt") {
+						this.iso.movement = "normal";
+						this.iso.invulnerable = false;
+						this.iso.hurtDIR = null;
+					}
 				});
 			}
 		}
@@ -344,6 +352,12 @@ Player = class Player {
 
 	die(causeOfDeath = "hurt") {
 		if (!DEAD_STATES.includes(this.iso.movement)) {
+			var delay = 1000
+			
+			if (this.shield) {
+				this.shield.destroy()
+			}
+			
 			game.camera.follow(null)
 
 			if (causeOfDeath === "hurt") {
@@ -371,20 +385,26 @@ Player = class Player {
 				})
 			}
 
+			if (causeOfDeath === "squashed") {
+				delay = 2000
+				this.iso.movement = "squashed"
+				this.iso.body.moves = false
+			}
+
 			if (game.save.data.lives > 0) {
-				this.resetGame()
+				this.resetGame(delay)
 			}
 			else {
-				game.time.events.add(1000, () => {
+				game.time.events.add(delay, () => {
 					new GameOver()
 				})
 			}
 		}
 	}
 
-	resetGame() {
-		game.time.events.add(1000, () => game.camera.fade(0x000000, 1000))
-		game.time.events.add(2000, () => {
+	resetGame(delay) {
+		game.time.events.add(delay, () => game.camera.fade(0x000000, 1000))
+		game.time.events.add(delay + 1000, () => {
 			if (game.track) game.track.stop()
 			game.lives.removeLife()
 			stateParams.displayTitle = true

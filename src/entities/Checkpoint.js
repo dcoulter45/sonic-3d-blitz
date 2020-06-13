@@ -50,8 +50,10 @@ Checkpoint = class Checkpoint {
     if (obj.key === "player" && !this.active) {
       this.active = true
 
-      Sounds.StarPost.play()
-
+      if (isMovingFasterThan(obj.body.velocity, 0)) {
+        Sounds.StarPost.play()
+      }
+      
       stateParams.respawnPoint = this.respawnPoint
 
       this.posts.forEach((post) => {

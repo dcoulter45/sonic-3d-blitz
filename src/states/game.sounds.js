@@ -1,16 +1,20 @@
 var Sounds = {}
 
 var SoundKeys = [
+  "BlueShield",
   "BossHit",
   "Explosion",
   "Destroy", 
   "Drop",
   "DropDash",
-  "Hurt", 
-  "Jump", 
+  "Hurt",
+  "Jump",
   "Land",
   "LavaGeyser",
+  "LightningJump",
+  "LightningShield",
   "LoseRings",
+  "MightyDrill",
   "Ring", 
   "Roll", 
   "Skidding",

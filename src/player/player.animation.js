@@ -11,6 +11,9 @@ function playAnimation(iso) {
     iso.alpha = 0.75;
     animationName = "dead"
   }
+  else if (iso.action === "squashed") {
+    animationName = iso.action
+  }
   else {
     animationName = iso.action + "-" + iso.direction
   }
@@ -39,6 +42,7 @@ function createAnimations(iso) {
   iso.animations.add("stand-u",[22,23,24,24,24,25,26,27,20,20,20,21],6,true);
   iso.animations.add("stand-r",[32,33,34,34,34,35,36,37,30,30,30,31],6,true);
   iso.animations.add("dead",   [9],6,true);
+  iso.animations.add("squashed",[19],6,true);
   iso.animations.add("walk-dr",[260,261,262,263,264,265,266,267,268,269],12,true);
   iso.animations.add("walk-d", [40,41,42,43,44,45,46,47,48,49],12,true);
   iso.animations.add("walk-dl",[270,271,272,273,274,275,276,277,278,279],12,true);

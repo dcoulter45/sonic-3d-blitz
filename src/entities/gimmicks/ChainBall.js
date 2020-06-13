@@ -1,5 +1,5 @@
 ChainBall = class ChainBall {
-  radius = 44
+  radius = 66
 
   constructor(wx, wy, x, y, z, obj) {
     this.x = x
@@ -24,8 +24,9 @@ ChainBall = class ChainBall {
 
     this.circle(this.ball, this.radius)
 
-    this.createChain(x, y, z, 12)
-    this.createChain(x, y, z, 25)
+    this.createChain(x, y, z, 14)
+    this.createChain(x, y, z, 30)
+    this.createChain(x, y, z, 46)
   }
 
   createChain(x, y, z, radius) {

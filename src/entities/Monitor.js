@@ -17,7 +17,19 @@ Monitor = class Monitor {
     if (obj.type === "Life") {
       var frames = [0, 1, 5, 5]
     }
+
+    if (obj.type === "Shield") {
+      var frames = [0, 1, 4, 4]
+    }
     
+    if (obj.type === "Lightning") {
+      var frames = [0, 1, 3, 3]
+    }
+
+    if (obj.type === "Flame") {
+      var frames = [0, 1, 7, 7]
+    }
+
     this.iso.animations.add("default", frames, 8, true)
     this.iso.animations.play("default")
 
@@ -46,6 +58,15 @@ Monitor = class Monitor {
       if (this.type === "Life") {
         game.lives.addLife()
       }
+
+      if (this.type === "Shield") {
+        player.shield = new Shield()
+      }
+
+      if (this.type === "Lightning" || this.type === "Flame") {
+        player.shield = new Shield(this.type)
+      }
+
     } else {
       game.physics.isoArcade.collide(obj, this.iso)
     }

@@ -1,13 +1,33 @@
-Spikes = class Spikes{
+Spikes = class Spikes extends RenderInView{
 
-  constructor(wx, wy, x, y, z, obj) {
+  render() {
+    var { x, y, z } = this.props
 
-    if (obj.type === "Flat") {
-      this.createFlatSpike(wx, wy, x, y, z, obj)
-    } else {
-      this.createTallSpike(wx, wy, x, y, z, obj)
-    }
+    this.iso = game.add.isoSprite(x, y , z, "tiles", 36, groups.objects)
+
+    game.physics.isoArcade.enable(this.iso);
+    groups.overlap.push(this.iso)
+
+    this.iso.key = "spikes"
+    this.iso.anchor.set(0.5)
+    this.iso.body.allowGravity = false
+    this.iso.harmful = true
+    this.iso.body.height = 16
   }
+
+  hide() {
+    removeFromGroup(groups.overlap, this.iso)
+    this.iso.destroy()
+  }
+
+  // constructor(wx, wy, x, y, z, obj) {
+
+  //   if (obj.type === "Flat") {
+  //     this.createFlatSpike(wx, wy, x, y, z, obj)
+  //   } else {
+  //     this.createTallSpike(wx, wy, x, y, z, obj)
+  //   }
+  // }
 
   createTallSpike(wx, wy, x, y, z, obj) {
     this.base = game.add.isoSprite(x, y, z, "spikesBase", 0, groups.objects);

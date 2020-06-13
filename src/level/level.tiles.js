@@ -55,8 +55,10 @@ function renderTile(x, y, z, tileIndex, chunk) {
   if (tileIndex >= 0) {
     // Water tiles
     if (
-      (tileIndex >= 40 && tileIndex <= 46)
-      || (tileIndex >= 140 && tileIndex <= 146)  
+      (tileIndex >= 41 && tileIndex <= 46)
+      || (tileIndex >= 140 && tileIndex <= 146)
+      || (tileIndex >= 220 && tileIndex < 230)
+      || (tileIndex >= 270 && tileIndex < 280)
     ) {
       var tile = new Water(x, y, z, tileIndex);
 

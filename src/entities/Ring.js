@@ -9,12 +9,7 @@ Ring = class Ring extends RenderInView {
 	render() {
 		var { x, y, z } = this.props
 
-		this.shadow = game.add.isoSprite(x + 2, y + 2, z, 'ring', 0, groups.objects);
-		this.shadow.animations.add('default', [16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31], 20, true);
-		this.shadow.animations.play('default');
-		this.shadow.anchor.set(0.5);
-
-		this.iso = game.add.isoSprite(x + 2, y + 2, z + 10, 'ring', 0, groups.objects);
+		this.iso = game.add.isoSprite(x + 2, y + 2, z + 15, 'ring', 0, groups.objects);
 		game.physics.isoArcade.enable(this.iso);
 
 		this.iso.animations.add('collect', [32,33,34,35], 10, false);
@@ -31,6 +26,13 @@ Ring = class Ring extends RenderInView {
 		groups.overlap.push(this.iso)
 
 		this.iso.collide = this.collide.bind(this)
+
+		this.shadow = game.add.isoSprite(x + 2, y + 2, z, 'ring', 0, groups.objects);
+
+		new Shadow(this.shadow, this.iso, true)
+
+		this.shadow.animations.add('default', [16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31], 20, true);
+		this.shadow.animations.play('default');
 	}
 
 	hide() {

@@ -1,18 +1,32 @@
-LavaPlume = class LavaPlume {
-  active = false
+LavaPlume = class LavaPlume extends RenderInView {
+  burning = false
 
   constructor(wx, wy, x, y, z, obj) {
+    super(wx, wy, x, y, z, obj)
+
     var instantPlume = getProp("instantPlume", obj, false)
 
-    this.iso = game.add.isoSprite(x, y, z + 20, "lavaPlume", 0, groups.objects);
-    
-    game.physics.isoArcade.enable(this.iso);
+    if (instantPlume) {
+      this.render()
 
-    this.iso.body.immovable = true;
-    this.iso.body.allowGravity = false;
+      this.iso.visible = true
+      this.plume()
+    }
+
+    game.time.events.loop(4000, this.bubble, this);
+  }
+
+  render() {
+    var { x, y, z } = this.props
+
+    this.iso = game.add.isoSprite(x, y, z + 20, "lavaPlume", 0, groups.objects);
+
+    enablePhysics(this.iso)
+    groups.overlap.push(this.iso)
 
     this.iso.body.widthX = TILE_WIDTH
     this.iso.body.widthY = TILE_WIDTH
+    this.iso.visible = false
 
     this.anim = {
       bubble: this.iso.animations.add("bubble", [0,1], 4, true),
@@ -24,47 +38,46 @@ LavaPlume = class LavaPlume {
     this.anim.plume.onComplete.add(this.hang, this)
     this.anim.fall.onComplete.add(() => this.iso.visible = false)
 
-    this.iso.anchor.set(0.5);
-
-    groups.overlap.push(this.iso)
-
     this.iso.collide = this.collide.bind(this)
+  }
 
-    if (instantPlume) {
-      this.iso.visible = true
-      this.plume()
-    } else {
-      this.iso.visible = false
-      this.bubble()
-    }
+  hide() {
+    removeFromGroup(groups.overlap, this.iso)
+    this.iso.destroy()
   }
 
   bubble() {
-    this.iso.animations.play("bubble")
-    this.iso.visible = true
+    if (this.visible) {
+      this.iso.animations.play("bubble")
+      this.iso.visible = true
 
-    game.time.events.add(1000, () => this.plume())
+      game.time.events.add(1000, () => this.plume())
+    }
   }
 
   plume() {
-    this.anim.plume.play()
+    if (this.visible) {
+      this.anim.plume.play()
+    }
   }
 
   hang() {
-    this.iso.animations.play("hang")
-    this.active = true
-    game.time.events.add(1000, () => this.fall())
+    if (this.visible) {
+      this.iso.animations.play("hang")
+      this.burning = true
+      game.time.events.add(1000, () => this.fall())
+    }
   }
 
   fall() {
-    this.anim.fall.play()
-    this.active = false
-
-    game.time.events.add(1000, () => this.bubble())
+    if (this.visible) {
+      this.anim.fall.play()
+      this.burning = false
+    }
   }
-
+  
   collide(obj) {
-    if (obj.key === "player" && this.active) {
+    if (obj.key === "player" && this.burning) {
       player.die("burning")
     }
   }

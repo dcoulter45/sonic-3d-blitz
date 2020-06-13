@@ -6,7 +6,7 @@ Crawler = class Crawler extends Badnik {
 		// Set direction
 		this.direction = getProp("direction", obj, "down")
     this.distance = getProp("distance", obj, 2) * TILE_WIDTH
-    this.type = obj.type ? obj.type : "spider"
+    this.type = obj.type ? obj.type.toLowerCase() : "spider"
 
 		// Set movement limits
 
@@ -25,22 +25,23 @@ Crawler = class Crawler extends Badnik {
 
     // Add sprite and animations
 
-		this.iso = game.add.isoSprite(x, y, z, this.type, 0, groups.objects);
+		this.iso = game.add.isoSprite(x, y, z + 25, this.type, 0, groups.objects);
 
 		var frames = this.type === "spider" ? range(0,11) : range(0,7)
 
 		this.iso.animations.add('default',frames,10,true);
 		this.iso.animations.play('default');
 
-		game.physics.isoArcade.enable(this.iso);
+		enablePhysics(this.iso)
 
-		this.iso.anchor.set(0.5);
-		this.iso.body.immovable = true;
-		this.iso.body.allowGravity = false;
-		this.iso.targetable = true;
+		this.iso.anchor.set(0)
 		this.iso.destructible = "hard";
 
-		groups.targets.push(this.iso)
+		if (this.type === "spider") {
+			this.iso.body.widthX = 34
+			this.iso.body.widthY = 34
+		}
+
 		groups.overlap.push(this.iso)
 		
 		this.iso.update = this.update.bind(this);

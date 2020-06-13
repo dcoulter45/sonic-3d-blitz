@@ -1,4 +1,3 @@
-const CHUNK_SIZE = 20
 const TILE_WIDTH = 44
 const TILE_HEIGHT = 30
 

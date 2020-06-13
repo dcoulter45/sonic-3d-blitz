@@ -1,7 +1,7 @@
 var player
 var stateParams = {
-  activeLevel: "WildWoodland-Act3",
-  displayTitle: true,
+  activeLevel: "SearingSands-Act1",
+  displayTitle: false,
   respawnPoint: null,
   duration: null,
 }
