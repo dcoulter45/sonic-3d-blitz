@@ -4,7 +4,7 @@ class SaveData {
 
     if (data === null) {
       this.data = {
-        level: "WildWoodland",
+        level: 0,
         lives: 3,
       }
     } else {
