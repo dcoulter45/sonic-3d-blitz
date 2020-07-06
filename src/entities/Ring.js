@@ -1,5 +1,7 @@
 Ring = class Ring extends RenderInView {
 
+	moving = false
+
 	constructor(wx, wy, x, y, z, obj) {
 		super(wx, wy, x, y, z, obj)
 
@@ -9,7 +11,7 @@ Ring = class Ring extends RenderInView {
 	render() {
 		var { x, y, z } = this.props
 
-		this.iso = game.add.isoSprite(x + 2, y + 2, z + 15, 'ring', 0, groups.objects);
+		this.iso = game.add.isoSprite(x + 2, y + 2, z + 15, 'rings', 0, groups.objects);
 		game.physics.isoArcade.enable(this.iso);
 
 		this.iso.animations.add('collect', [32,33,34,35], 10, false);
@@ -25,9 +27,10 @@ Ring = class Ring extends RenderInView {
 		
 		groups.overlap.push(this.iso)
 
+		this.iso.update = this.update.bind(this)
 		this.iso.collide = this.collide.bind(this)
 
-		this.shadow = game.add.isoSprite(x + 2, y + 2, z, 'ring', 0, groups.objects);
+		this.shadow = game.add.isoSprite(x + 2, y + 2, z, 'rings', 0, groups.objects);
 
 		new Shadow(this.shadow, this.iso, true)
 
@@ -42,6 +45,28 @@ Ring = class Ring extends RenderInView {
 		this.shadow.destroy()	
 	}
 
+	update() {
+		if (player.shield && player.shield.type === "Lightning" && !this.moving) {
+			var { x, y } = this.iso.body.position
+			var distance = game.physics.isoArcade.distanceToXY(player.iso.body, x, y)
+
+			if (distance < 100) {
+				this.moving = true
+			}
+		}
+
+		if (this.moving) {
+			for (var axis in player.iso.body.position) {
+				if (this.iso.body.position[axis] < player.iso.body.position[axis]) {
+					this.iso.body.position[axis] += 1
+				} 
+				else if (this.iso.body.position[axis] > player.iso.body.position[axis]) {
+					this.iso.body.position[axis] -= 1
+				}
+			}
+		}
+	}
+
 	collide(obj) {
 		if (obj.key == 'player') {
 			this.active = false
@@ -54,8 +79,7 @@ Ring = class Ring extends RenderInView {
 			this.shadow.visible = false;
 
 			game.time.events.add(500, () => {
-				this.iso.destroy();
-				this.shadow.destroy();
+				this.hide()
 			});
 		}
 	}

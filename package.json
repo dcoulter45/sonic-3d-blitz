@@ -1,4 +1,6 @@
 {
+  "name": "sonic-3d-blitz",
+  "version": "0.1.0",
   "dependencies": {
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",

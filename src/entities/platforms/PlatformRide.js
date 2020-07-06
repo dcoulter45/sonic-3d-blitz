@@ -46,7 +46,7 @@ PlatformRide = class PlatformRide {
       (this.velocity > 0 && this.iso.body.position[this.axis] >= this.end[this.axis]) 
       || (this.velocity < 0 && this.iso.body.position[this.axis] <= this.end[this.axis])
     ) {
-      this.iso.body.velocity = { x: 0, y: 0 }
+      this.iso.body.velocity = { x: 0, y: 0, z: 0 }
     }
 
     this.tiles.forEach((tile) => {

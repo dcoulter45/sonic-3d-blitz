@@ -1,17 +1,17 @@
 Floor = class Floor {
   constructor(wx, wy, x, y, z, obj) {
-    var floor = game.add.isoSprite(x, y, z - 25, null, 0, groups.walls);
+    this.iso = game.add.isoSprite(x, y, z - 25, null, 0, groups.walls);
 
-    game.physics.isoArcade.enable(floor);
+    game.physics.isoArcade.enable(this.iso);
 
-    floor.key = "floor";
-    floor.anchor.set(0.5);
-    floor.body.widthY = wy;
-    floor.body.widthX = wx;
-    floor.body.height = TILE_HEIGHT;
+    this.iso.key = "floor";
+    this.iso.anchor.set(0.5);
+    this.iso.body.widthY = wy;
+    this.iso.body.widthX = wx;
+    this.iso.body.height = TILE_HEIGHT;
 
-    floor.body.immovable = true;
-    floor.body.allowGravity = false;
-    floor.body.collideWorldBounds = false;
+    this.iso.body.immovable = true;
+    this.iso.body.allowGravity = false;
+    this.iso.body.collideWorldBounds = false;
   }
 }

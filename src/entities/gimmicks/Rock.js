@@ -3,7 +3,7 @@ Rock = class Rock extends RenderInView {
   render() {
     var { x, y, z } = this.props
 
-    this.iso = game.add.isoSprite(x, y, z, "tiles", 110, groups.objects)
+    this.iso = game.add.isoSprite(x + 4, y + 4, z, "tiles", 110, groups.objects)
     this.iso.anchor.set(0.5)
 
     game.physics.isoArcade.enable(this.iso);
@@ -43,6 +43,7 @@ Rock = class Rock extends RenderInView {
   destroy() {
     this.active = false
     this.iso.destroy()
+    Sounds.Break.play()
 
     var totalPebbles = 4
     var { x, y, z } = this.iso.body.position

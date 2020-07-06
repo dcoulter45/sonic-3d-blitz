@@ -29,7 +29,10 @@ SpikeBall = class SpikeBall {
     this.iso.body.immovable = true
     this.iso.harmful = true
 
-    this.iso.update = this.update.bind(this);
+		this.iso.update = this.update.bind(this);
+		
+		this.shadow = game.add.isoSprite(x, y, z, "spikeball", 10, groups.objects)
+		new Shadow(this.shadow, this.iso, true)
   }
 
   update() {

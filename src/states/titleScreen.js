@@ -77,6 +77,12 @@ class TitleState extends Phaser.State {
   start() {
     game.camera.fade("rgba(0,0,0,1)", 1000);
 
+    if (this.button === "newGame") {
+      game.save.data.lives = 3
+      game.save.data.level = 0
+      game.save.store()
+    }
+
     game.time.events.add(1500, () => {
       this.track.stop()
       this.state.start("GameState")

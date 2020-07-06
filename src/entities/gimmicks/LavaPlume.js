@@ -9,6 +9,7 @@ LavaPlume = class LavaPlume extends RenderInView {
     if (instantPlume) {
       this.render()
 
+      this.visible = true
       this.iso.visible = true
       this.plume()
     }
@@ -52,6 +53,8 @@ LavaPlume = class LavaPlume extends RenderInView {
       this.iso.visible = true
 
       game.time.events.add(1000, () => this.plume())
+
+      playDistantSound(this.iso, Sounds.Lava)
     }
   }
 

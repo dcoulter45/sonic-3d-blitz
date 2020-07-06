@@ -8,8 +8,8 @@ class FakeRings{
 		var rings = new Array(total);
 
 		for(var i = 0; i < total; i++) {
-			rings[i] = game.add.isoSprite(position.x, position.y, position.z, 'ring', 0, groups.objects);
-			rings[i].shadow = game.add.isoSprite(position.x, position.y, position.z, 'ring', 0, groups.objects);
+			rings[i] = game.add.isoSprite(position.x, position.y, position.z, 'rings', 0, groups.objects);
+			rings[i].shadow = game.add.isoSprite(position.x, position.y, position.z, 'rings', 0, groups.objects);
 		}
 
 		rings.forEach((ring) => {

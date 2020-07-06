@@ -1,6 +1,6 @@
 Monitor = class Monitor {
   constructor(wx, wy, x, y, z, obj) {
-    this.iso = game.add.isoSprite(x, y, z + 10, "monitors", 0, groups.objects)
+    this.iso = game.add.isoSprite(x, y, z + 9, "monitors", 0, groups.objects)
     this.type = obj.type
     
     enablePhysics(this.iso)
@@ -12,6 +12,7 @@ Monitor = class Monitor {
 
     if (obj.type === "Rings") {
       var frames = [0, 1, 2, 2]
+      level.rings += 10
     }
 
     if (obj.type === "Life") {
@@ -30,6 +31,10 @@ Monitor = class Monitor {
       var frames = [0, 1, 7, 7]
     }
 
+    if (obj.type === "Bubble") {
+      var frames = [0, 1, 8, 8]
+    }
+
     this.iso.animations.add("default", frames, 8, true)
     this.iso.animations.play("default")
 
@@ -37,38 +42,57 @@ Monitor = class Monitor {
   }
 
   collide(obj) {
-    if (obj.key === "player" && ATTACK_STATES.includes(obj.movement)) {
+    if (obj.key === "player") {
+      var velocityCache = { ...obj.body.velocity }
 
-      Sounds.Destroy.play()
-
-      new Explosion(this.iso.body.position.x, this.iso.body.position.y, this.iso.body.position.z)
-
-      this.iso.destroy()
-
-      if (player.iso.movement === "jump" || player.iso.movement === "slam") {
-        player.iso.body.velocity.z = 250
-        player.iso.movement = "jump"
-      }
-
-      if (this.type === "Rings") {
-        game.rings.add(10)
-		  	Sounds.Ring.play()
-      }
-
-      if (this.type === "Life") {
-        game.lives.addLife()
-      }
-
-      if (this.type === "Shield") {
-        player.shield = new Shield()
-      }
-
-      if (this.type === "Lightning" || this.type === "Flame") {
-        player.shield = new Shield(this.type)
-      }
-
-    } else {
       game.physics.isoArcade.collide(obj, this.iso)
+
+      var { down, frontY, frontX, backX, backY } = this.iso.body.touching
+
+      if (
+        (["jump", "doubleJump", "slam"].includes(obj.movement) && down)
+        ||
+        (obj.movement === "roll" && (frontY || frontX || backX || backY))
+      ) {
+        this.destroy()
+
+        if (obj.movement === "roll") {
+          obj.body.velocity = velocityCache   
+        }
+        else {
+          obj.body.velocity.z = 250
+        }
+      }
+    }
+  }
+
+  destroy() {
+    Sounds.Destroy.play()
+
+    new Explosion(this.iso.body.position.x, this.iso.body.position.y, this.iso.body.position.z + 10)
+
+    this.iso.destroy()
+
+    if (player.iso.movement === "jump" || player.iso.movement === "slam") {
+      player.iso.body.velocity.z = 250
+      player.iso.movement = "jump"
+    }
+
+    if (this.type === "Rings") {
+      game.rings.add(10)
+      Sounds.Ring.play()
+    }
+
+    if (this.type === "Life") {
+      game.lives.addLife()
+    }
+
+    if (this.type === "Shield") {
+      player.shield = new Shield()
+    }
+
+    if (this.type === "Lightning" || this.type === "Flame" || this.type === "Bubble") {
+      player.shield = new Shield(this.type)
     }
   }
 }

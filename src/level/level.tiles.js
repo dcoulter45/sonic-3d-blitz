@@ -38,8 +38,8 @@ function renderTiles(layers) {
             var tileIndex = chunk.data[index] - 1
             var xx = (x + chunk.x) * TILE_WIDTH
             var yy = (y + chunk.y) * TILE_WIDTH
-            
-            renderTile(xx, yy, zz, tileIndex, chunk)
+
+            renderTile(xx, yy, zz, tileIndex, chunk, layer)
 
             index ++
           }
@@ -48,17 +48,22 @@ function renderTiles(layers) {
     })
   })
 
+  groups.tiles.sort("depth")
+
   game.time.events.add(Phaser.Timer.SECOND * 3, () => renderTiles(layers));
 }
 
-function renderTile(x, y, z, tileIndex, chunk) {
+function renderTile(x, y, z, tileIndex, chunk, layer) {
   if (tileIndex >= 0) {
     // Water tiles
     if (
-      (tileIndex >= 41 && tileIndex <= 46)
-      || (tileIndex >= 140 && tileIndex <= 146)
-      || (tileIndex >= 220 && tileIndex < 230)
-      || (tileIndex >= 270 && tileIndex < 280)
+      (
+        (tileIndex >= 41 && tileIndex <= 46)
+        || (tileIndex >= 141 && tileIndex <= 146)
+        || (tileIndex >= 220 && tileIndex < 230)
+        || (tileIndex >= 270 && tileIndex < 280)
+      ) 
+      && !layer.name.includes("Background")
     ) {
       var tile = new Water(x, y, z, tileIndex);
 
@@ -66,11 +71,13 @@ function renderTile(x, y, z, tileIndex, chunk) {
     } 
     // Static Tiles
     else {
+      var group = layer.name.includes("Background") ? groups.tiles : groups.objects
+
       var tile = game.add.isoSprite(
         x, y, z, 
         "tiles", 
         tileIndex, 
-        groups.objects
+        group
       )
       tile.anchor.set(0.5)
 

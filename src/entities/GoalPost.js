@@ -3,7 +3,6 @@ GoalPost = class GoalPost {
 
   constructor(wx, wy, x, y, z, obj) {
     this.direction = getProp("direction", obj, "up")
-    this.nextLevel = getProp("nextLevel", obj, null)
 
     this.iso = game.add.isoSprite(x, y, z + 10, "goalPost", 8, groups.objects)
 
@@ -53,13 +52,9 @@ GoalPost = class GoalPost {
       obj.body.acceleration.x = 0
       obj.body.acceleration.y = 0
 
-      stateParams.activeLevel = this.nextLevel
-
       setVelocity(player.iso, this.direction, 100)
 
       game.camera.follow(null)
-
-      
     }
   }
 }

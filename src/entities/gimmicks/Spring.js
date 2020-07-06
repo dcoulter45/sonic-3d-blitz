@@ -16,9 +16,11 @@ Spring = class Spring {
     this.iso.collide = this.collide.bind(this);
   }
 
-  collide(obj){
-    if(obj.key == 'player'){
-  	  this.iso.animations.play('spring');
+  collide(obj) {
+    if (obj.key === "player" && PLAYER_CONTROLLED_STATES.includes(obj.movement)) {
+      this.iso.animations.play("spring");
+      player.iso.movement = "spring"
+      Sounds.Spring.play()
     }
   }
 }

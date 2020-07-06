@@ -23,9 +23,10 @@ WaterBorder = class WaterBorder{
     this.iso.key = "water";
     this.iso.body.widthX = wx;
     this.iso.body.widthY = wy;
-    this.iso.body.height = 31;
+    this.iso.body.height = TILE_HEIGHT;
 
     this.iso.body.immovable = true;
     this.iso.body.allowGravity = false;
+    this.iso.body.collideWorldBounds = false;
   }
 }

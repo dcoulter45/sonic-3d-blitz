@@ -11,26 +11,27 @@ Rafts = class Rafts {
 
   createRaft(x, y, z) {
     var tileId = this.axis === "x" ? 0 : 1
-    var raft = game.add.isoSprite(x, y, z - 48, "raft", tileId, groups.objects)
-
-    raft.anchor.set(0.5)
-
-    game.physics.isoArcade.enable(raft)
-
-    raft.body.allowGravity = false
-    raft.body.immovable = true
+    var raft = game.add.isoSprite(x, y, z - 28, null, 0, groups.walls)
+    
+    enablePhysics(raft)
 
     raft.body.widthX = this.axis === "y" ? 60 : 100
     raft.body.widthY = this.axis === "y" ? 100 : 60
-    raft.body.height = 8
-    raft.pivot.x = this.axis === "y" ? 20 : - 20
+    raft.body.height = 30
     raft.body.velocity[this.axis] = 50
 
-    groups.collide.push(raft)
+    var sprite = game.add.isoSprite(x, y, z - 48, "raft", tileId, groups.objects)
+    sprite.pivot.x = 18
+    sprite.pivot.y = 8
+    sprite.anchor.set(0.5)
 
     raft.update = () => {
+      sprite.isoX = raft.isoX
+      sprite.isoY = raft.isoY
+      
       if (raft.body.position[this.axis] > this.endPoint) {
-        raft.destroy()
+        raft.destroy()  
+        sprite.destroy()
       }
     }
 

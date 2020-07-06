@@ -9,6 +9,10 @@ function renderObjects(layer) {
       var wx = (obj.width / 40) * 44;
       var wy = (obj.height / 40) * 44;
 
+      if (!window[obj.name]) {
+        console.warn("No object named " + obj.name)
+      }
+
       var newObject = new window[obj.name](wx, wy, x, y, z, obj);
 
       if (newObject.renderInView) {

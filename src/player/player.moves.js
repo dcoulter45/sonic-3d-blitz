@@ -136,14 +136,23 @@ function playerMoves() {
 
   // Drop Dash 
   if (player.iso.previousMovement === "slam" && player.iso.movement === "normal" && player.onFloor()) {
-    player.iso.body.velocity.z = 150
-    player.iso.movement = "jump"
-    new Dust(player.iso.body.position.x + 8, player.iso.body.position.y, player.iso.body.position.z);
-    new Dust(player.iso.body.position.x - 8, player.iso.body.position.y, player.iso.body.position.z);
-    new Dust(player.iso.body.position.x, player.iso.body.position.y + 8, player.iso.body.position.z);
-    new Dust(player.iso.body.position.x, player.iso.body.position.y - 8, player.iso.body.position.z);
 
-    game.camera.shake(0.005, 200);
+    if (player.shield && player.shield.type === "Bubble") {
+      // Bubble bounce
+      player.iso.body.velocity.z = 300
+      player.iso.movement = "jump"
+      Sounds.BubbleBounce.play()
+    } else {
+      // Pound effect
+      player.iso.body.velocity.z = 150
+      player.iso.movement = "jump"
+      new Dust(player.iso.body.position.x + 8, player.iso.body.position.y, player.iso.body.position.z);
+      new Dust(player.iso.body.position.x - 8, player.iso.body.position.y, player.iso.body.position.z);
+      new Dust(player.iso.body.position.x, player.iso.body.position.y + 8, player.iso.body.position.z);
+      new Dust(player.iso.body.position.x, player.iso.body.position.y - 8, player.iso.body.position.z);
+
+      game.camera.shake(0.005, 200);
+    }
     // player.iso.movement = "roll"
     
     // if (player.iso.direction === "u") {

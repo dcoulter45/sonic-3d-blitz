@@ -26,8 +26,8 @@ Player = class Player {
 
 		game.physics.isoArcade.enable(this.iso);
 
-		this.iso.body.widthX = 18;
-		this.iso.body.widthY = 18;
+		this.iso.body.widthX = 20;
+		this.iso.body.widthY = 20;
 		this.iso.body.height = 24;
 		this.iso.pivot.y = 8;
 		this.iso.body.collideWorldBounds = false;
@@ -74,19 +74,40 @@ Player = class Player {
 		this.iso.previousAction = this.iso.action
 
 		if (!DEAD_STATES.includes(this.iso.movement)) {
-			game.physics.isoArcade.collide(player.iso, groups.walls, function(obj1, obj2){
-				obj1.collide(obj2);
+			this.touchingFloor = false
+			this.touchingWater = false
+
+			game.physics.isoArcade.collide(player.iso, groups.walls, (obj1, obj2) => {
+				if (obj1.body.touching.up) {
+					if (obj2.key === "water") {
+						this.touchingWater = true
+					} else {
+						this.touchingFloor = true
+					}
+				}
+
+				obj1.collide(obj2)
+
 				if (obj2.collide) obj2.collide(obj1)
 			});
 
-			game.physics.isoArcade.overlap(player.iso, groups.walls, function(obj1, obj2){
+			game.physics.isoArcade.overlap(player.iso, groups.walls, function(obj1, obj2) {
+				obj1.collide(obj2)
+
 				if (obj2.key == 'slope') {
 					player.handleSlope(obj2)
 				}
+
+				if (obj2.overlap) obj2.overlap(obj1)
 			});
 			
-			game.physics.isoArcade.collide(player.iso, groups.collide, function(obj1, obj2) {
+			game.physics.isoArcade.collide(player.iso, groups.collide, (obj1, obj2) => {
+				if (obj1.body.touching.up) {
+					this.touchingFloor = true
+				}
+
 				obj1.collide(obj2)
+				
 				if (obj2.collide) obj2.collide(obj1)
 			})
 
@@ -95,8 +116,12 @@ Player = class Player {
 				if (obj2.collide) obj2.collide(obj1)
 			})
 
-			if (this.onFloor() && ["jump", "sprung", "slam", "falling", "normal", "doubleJump"].includes(this.iso.movement)) {
+			if (this.onFloor() && ["jump", "sprung", "slam", "falling", "doubleJump"].includes(this.iso.movement)) {
 				this.iso.movement = "normal"
+			}
+
+			if (!player.onFloor() && player.touchingWater && this.iso.movement !== "drowning") {
+				this.die("drowning")
 			}
 	
 			if (player.iso.body.position.z < WORLDS_END) {
@@ -183,7 +208,7 @@ Player = class Player {
 	}
 
 	onFloor(){
-		return (this.iso.body.onFloor() || this.iso.body.touching.up || this.onSlope) ? true : false;
+		return (this.iso.body.onFloor() || this.touchingFloor || this.onSlope) ? true : false;
 	}
 
 	// ================
@@ -191,10 +216,11 @@ Player = class Player {
 	// ================
 
 	collide(obj){
-		if(obj.harmful === true){
+
+		if (obj.harmful === true) {
 			this.hurt();
 		}
-		else if(obj.destructible == "hard"){
+		else if (obj.destructible == "hard") {
 
 			if (["jump", "homing attack", "slam", "roll"].includes(this.iso.movement)) {
 				obj.remove();
@@ -214,24 +240,16 @@ Player = class Player {
 					this.iso.movement = "jump";
 				}
 			}
-			else{
+			else {
 				this.hurt();
 			}
 		}
-		else if (obj.key == "spring" && ["normal", "jump", "sprung", "roll"].includes(this.iso.movement)) {
-			this.iso.movement = "spring";
-		}
-		else if (obj.key == "water" && this.iso.movement != "drowning") {
-			this.iso.movement = "drowning";
-			this.die("drowning")
-		}
 		else if (
-			["wall", "prop"].includes(obj.key) 
+			["wall", "prop", "rock", "ice"].includes(obj.key) 
 			&& isMovingFasterThan(this.iso.previousVelocity, 220)
-			&& this.iso.previousVelocity.z == 0
+			&& (this.iso.body.touching.frontX || this.iso.body.touching.frontY || this.iso.body.touching.backX || this.iso.body.touching.backY)
 			&& this.iso.movement !== "bounced"
 		) {
-
 			this.iso.movement = "bounced";
 			Sounds.Land.play()
 
@@ -341,11 +359,14 @@ Player = class Player {
 
 				game.time.events.add(900, () => {
 					if (this.iso.movement === "hurt") {
-						this.iso.movement = "normal";
-						this.iso.invulnerable = false;
-						this.iso.hurtDIR = null;
+						this.iso.movement = "normal"
+						this.iso.hurtDIR = null
 					}
 				});
+
+				game.time.events.add(2000, () => {
+					this.iso.invulnerable = false
+				})
 			}
 		}
 	}
@@ -380,6 +401,8 @@ Player = class Player {
 			}
 
 			if (causeOfDeath === "drowning") {
+				this.iso.movement = "drowning";
+
 				game.time.events.add(800, () => {
 					Sounds.WaterGush.play()
 				})

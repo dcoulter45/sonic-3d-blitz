@@ -48,6 +48,8 @@ RumbleFloor = class RumbleFloor {
       new LavaPlume(null, null, this.x + 22, this.y + 22, this.z, {
         properties: [{name: "instantPlume", value: true}]
       })
+
+      playDistantSound({body: { x: this.x, y: this.y}}, Sounds.Lava)
     })
   }
   

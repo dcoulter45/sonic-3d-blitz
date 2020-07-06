@@ -1,10 +1,35 @@
-
+Sonic 3D Blitz 
+Sonic 3D Flux
 
 WildWoodland
-Act 1
 - Crawler
 - Flyer
 - Rocks
 - Spikes
+- Platforms (moving, wobble)
 
-WildWoodland
+HotHollow
+- Lava
+- SpikeWall
+- RumbleFloor
+- Crusher
+- Platforms (trip)
+
+SearingSands
+- Platforms (ride)
+- ChainBall 
+- Snake
+- Barrels
+
+PolarParadise
+- Snowman
+- SpikeGate
+- Pusher
+
+Beach
+
+Babylon
+- Fan
+- Cloud
+
+Factory

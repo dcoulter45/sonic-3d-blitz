@@ -1,17 +1,18 @@
 class RingCounter {
   count = 0
+  redRing = false
 
   constructor() {
     this.text = game.add.sprite(5, 5, "hudText", 0, groups.ui)
     this.text.fixedToCamera = true
 
-    this.no1 = game.add.sprite(58, 5, "numbers", 0, groups.ui)
+    this.no1 = game.add.sprite(60, 5, "numbers", 0, groups.ui)
     this.no1.fixedToCamera = true
 
-    this.no2 = game.add.sprite(66, 5, "numbers", 0, groups.ui)
+    this.no2 = game.add.sprite(68, 5, "numbers", 0, groups.ui)
     this.no2.fixedToCamera = true
     
-    this.no3 = game.add.sprite(74, 5, "numbers", 0, groups.ui)
+    this.no3 = game.add.sprite(76, 5, "numbers", 0, groups.ui)
     this.no3.fixedToCamera = true
 
     this.updateUI()

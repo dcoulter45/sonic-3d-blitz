@@ -6,6 +6,7 @@ SpikeWall = class SpikeWall {
 
   constructor(wx, wy, x, y, z, obj) {
     this.axis = wx > wy ? "x" : "y"
+    this.maxVelocity = getProp("maxVelocity", obj, 225)
 
     for(var i = 0; i < 4; i++) {
       this.createWall(x, y, z, i)
@@ -46,8 +47,8 @@ SpikeWall = class SpikeWall {
 
     wall.body.height = 90
     wall.body.maxVelocity = {
-      x: 225,
-      y: 225,
+      x: this.maxVelocity,
+      y: this.maxVelocity,
     }
 
     wall.pivot.y = 2

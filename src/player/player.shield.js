@@ -1,5 +1,9 @@
 class Shield {
   constructor(type = "normal") {
+    if (player.shield) {
+      player.shield.destroy()
+    }
+
     var { x, y, z } = player.iso.body.position
 
     this.type = type
@@ -11,7 +15,12 @@ class Shield {
       this.iso.animations.add("default", range(0, 7), 12, true)
     } 
     else if (type === "Flame") {
+      Sounds.FireShield.play()
       this.iso.animations.add("default", range(18, 26), 12, true)
+    }
+    else if (type === "Bubble") {
+      Sounds.BubbleShield.play()
+      this.iso.animations.add("default", range(27, 35), 12, true)
     }
     else {
       Sounds.BlueShield.play()

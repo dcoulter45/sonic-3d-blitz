@@ -14,10 +14,10 @@ class TimeCounter {
 
     this.timer.start()
 
-    this.no1 = game.add.sprite(46, 19, "numbers", 0, groups.ui)
-    this.no2 = game.add.sprite(54, 19, "numbers", 0, groups.ui)
-    this.no3 = game.add.sprite(66, 19, "numbers", 0, groups.ui)
-    this.no4 = game.add.sprite(74, 19, "numbers", 0, groups.ui)
+    this.no1 = game.add.sprite(52, 23, "numbers", 0, groups.ui)
+    this.no2 = game.add.sprite(60, 23, "numbers", 0, groups.ui)
+    this.no3 = game.add.sprite(76, 23, "numbers", 0, groups.ui)
+    this.no4 = game.add.sprite(84, 23, "numbers", 0, groups.ui)
 
     this.no1.alpha = 0
 

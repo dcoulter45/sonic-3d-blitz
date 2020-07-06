@@ -1,3 +1,23 @@
+function moveToXYZ(iso, position, time, callback) {
+  // var speed = this.distanceToXYZ(displayObject.body, x, y ,z) / (maxTime / 1000);
+  var x = position.x || iso.body.x
+  var y = position.y || iso.body.y
+  var z = position.z || iso.body.z
+
+  game.physics.isoArcade.moveToXYZ(iso, x, y, z, 1, time)
+  game.time.events.add(time, () => {
+    iso.body.velocity.x = 0
+    iso.body.velocity.y = 0
+    iso.body.velocity.z = 0
+    
+    iso.isoX = x
+    iso.isoY = y
+    iso.isoZ = z
+
+    if (callback) callback()
+  })
+}
+
 function isMoving(iso) {
   return (
     iso.body.velocity.x > 0 ||

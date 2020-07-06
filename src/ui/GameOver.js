@@ -11,7 +11,7 @@ class GameOver {
     this.gameOver.fixedToCamera = true
 
     game.save.data.lives = 3
-    game.save.data.level = "WildWoodland"
+    game.save.data.level = 0
     game.save.store()
 
     if (game.track) game.track.stop()
