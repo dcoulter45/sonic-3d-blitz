@@ -17,5 +17,7 @@ function js() {
 }
 
 exports.default = function() {
+  js()
+  
   watch(files, js)
 }
