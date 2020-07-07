@@ -373,6 +373,8 @@ Player = class Player {
 
 	die(causeOfDeath = "hurt") {
 		if (!DEAD_STATES.includes(this.iso.movement)) {
+			game.phase = "over"
+			
 			var delay = 1000
 			
 			if (this.shield) {

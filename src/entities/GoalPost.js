@@ -37,6 +37,8 @@ GoalPost = class GoalPost {
 
   collide(obj) {
     if (obj.key === "player" && !this.active) {
+      game.phase = "complete"
+      
       new LevelComplete(this.nextLevel)
 
       this.active = true

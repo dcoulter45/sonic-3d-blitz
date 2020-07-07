@@ -1,4 +1,6 @@
 class GameState extends Phaser.State {
+  phase = "active"
+  
   preload() {
     game.tick = 0
     preloadGameSounds()
@@ -30,13 +32,12 @@ class GameState extends Phaser.State {
     game.tick++
     game.timeCounter.update()
     
-    game.debug.text(game.time.fps || '--', 5, 210, "#a7aebe");
-    game.debug.text(groups.objects.children.length || '--', 5, 195, "#a7aebe");
+    // game.debug.text(game.time.fps || '--', 5, 210, "#a7aebe");
+    // game.debug.text(groups.objects.children.length || '--', 5, 195, "#a7aebe");
     
     game.sound.mute = muteGame
 
     groups.objects.sort('depth');
-    // game.iso.topologicalSort(groups.objects, 2.5)
 
     if (drawWallBoxes) {
       groups.walls.forEach(function (tile) {
@@ -49,9 +50,5 @@ class GameState extends Phaser.State {
         game.debug.body(tile, 'rgba(255, 0, 0, 0.8)', false);
       });
     }
-
-    // collidables.forEach(function(obj) {
-    //   game.debug.body(obj, "rgba(255, 255, 0)", false)
-    // })
   }
 }

@@ -24,8 +24,8 @@ class LevelComplete {
     this.text = game.add.sprite(-100, 36, "levelCompleteText", 0, groups.ui)
     this.text.fixedToCamera = true
 
-    this.act = game.add.sprite(400, 59, "levelCompleteUi", 0, groups.ui)
-    this.act.fixedToCamera = true
+    // this.act = game.add.sprite(400, 59, "levelCompleteUi", 0, groups.ui)
+    // this.act.fixedToCamera = true
 
     this.ringBonus = game.add.sprite(-116, 101, "levelCompleteUi", 4, groups.ui)
     this.ringBonus.fixedToCamera = true
@@ -53,8 +53,8 @@ class LevelComplete {
   }
 
   tweenText() {
-    game.add.tween(this.text.cameraOffset).to({ x: 112 }, 500, "Linear", true)
-    game.add.tween(this.act.cameraOffset).to({ x: 224 }, 500, "Linear", true)
+    game.add.tween(this.text.cameraOffset).to({ x: 145 }, 500, "Linear", true)
+    // game.add.tween(this.act.cameraOffset).to({ x: 224 }, 500, "Linear", true)
 
     game.add.tween(this.ringBonus.cameraOffset).to({ x: 120 }, 500, "Linear", true, 500)
     game.add.tween(this.ringBonusBg.cameraOffset).to({ x: 224 }, 500, "Linear", true, 500)

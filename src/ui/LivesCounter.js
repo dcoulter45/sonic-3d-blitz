@@ -22,7 +22,11 @@ class LivesCounter {
 
       var sound = game.add.audio("ExtraLife")
       sound.play()
-      sound.onStop.add(() => game.track.play())
+      sound.onStop.add(() => {
+        if (game.phase === "active") {
+          game.track.play()
+        }
+      })
     }
 
     this.icon.loadTexture("lives", 1)

@@ -34,12 +34,6 @@ var SoundKeys = [
 ]
 
 var MusicKeys = [
-  "CollisionChaosPresent",
-  "DiamondDustAct2",
-  "GreenGroveAct2",
-  "PalmTreePanicGoodFuture",
-  "VolcanoValleyAct2",
-  "BattleTheme",
   "LevelComplete",
   "ExtraLife",
   "GameOver",
@@ -58,22 +52,26 @@ function preloadGameSounds() {
       `assets/music/${track}.ogg`,
       `assets/music/${track}.m4a`,
     ])
-  })  
+  })
+
+  var levelTrack = levels[game.save.data.level].music
+
+  game.load.audio(levelTrack, [
+    `assets/music/${levelTrack}.ogg`,
+    `assets/music/${levelTrack}.m4a`,
+  ])
 }
 
 function loadGameSounds() {
   SoundKeys.forEach((sound) => {
     Sounds[sound] = game.add.audio(sound)
   })
-
-  // game.sound.setDecodedCallback(decodeArray, () => {
-  //   console.log("audio loaded")
-  // }, this);
 }
 
 function playLevelTrack(level) {
   if (level.music) {
     game.track = game.add.audio(level.music)
+    
     game.track.play(null, 0, 1, true, true)
   }
 }
