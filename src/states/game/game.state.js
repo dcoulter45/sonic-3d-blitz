@@ -4,6 +4,10 @@ class GameState extends Phaser.State {
     preloadGameSounds()
     preloadGameAssets()
     gamePhysics()
+
+    // Map
+    var levelName = levels[game.save.data.level].name + "-Act1"
+    game.load.json(levelName, "assets/maps/" + levelName + ".json")
   }
 
   create() {

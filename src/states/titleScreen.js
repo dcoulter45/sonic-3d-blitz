@@ -26,6 +26,7 @@ class TitleState extends Phaser.State {
     this.track.play()
 
     game.add.sprite(0, 0, "background")
+    
     this.badge = game.add.sprite(63, BADGE_START_Y, "badge")
     this.cursor = game.add.sprite(150, 200, "cursor")
     this.sonic = game.add.sprite(124, 15, "sonicTitle", 23)

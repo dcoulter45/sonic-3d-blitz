@@ -4,17 +4,10 @@ function preloadGameAssets() {
 
   game.load.spritesheet("eggman", "assets/characters/eggman.png",100,70);
 
-
   game.load.image("playerShadow", "assets/entities/playerShadow.png");
-  game.load.image("shadow-w18", "assets/entities/shadow-w18.png");
-  game.load.image("shadow-w26", "assets/entities/shadow-w26.png");
-  game.load.image("shadow-w32", "assets/entities/shadow-w32.png");
-  game.load.image("shadow-w40", "assets/entities/shadow-w40.png");
 
   //  UI
   // -----------
-  game.load.spritesheet("points", "assets/points.png", 10, 12)
-  game.load.image("act1", "assets/title-card/act1.png")
   game.load.spritesheet("levelCompleteSonic", "assets/ui/level-complete-sonic.png",88,44)
   game.load.image("levelCompleteText", "assets/ui/level-complete-text.png")
   game.load.spritesheet("levelCompleteUi", "assets/ui/level-complete-ui.png",94,18)
@@ -90,17 +83,4 @@ function preloadGameAssets() {
   game.load.image("crystal", "assets/tiles/crystal.png")
   game.load.image("tree", "assets/tiles/tree.png")
 
-  //  Maps
-  // -----------
-  game.load.json("SunriseShore-Act1", "assets/maps/SunriseShore-Act1.json")
-
-  game.load.json("SearingSands-Act1", "assets/maps/SearingSands-Act1.json")
-
-  game.load.json("PolarParadise-Act1", "assets/maps/PolarParadise-Act1.json")
-
-  game.load.json("WildWoodland-Act1", "assets/maps/WildWoodland-Act1.json")
-
-  game.load.json("HotHollow-Act1", "assets/maps/HotHollow-Act1.json")
-
-  game.load.json("DeathEgg-Act1", "assets/maps/DeathEgg-Act1.json")
 }
