@@ -1,4 +1,11 @@
-function preloadGameAssets() {
+function loadTitleCardAssets() {
+  game.load.image("titleCardBg", "assets/title-card/title-card-bg.png")
+  game.load.spritesheet("titleCardBorder", "assets/title-card/title-card-border.png", 106, 240)
+  game.load.spritesheet("titleCardLevels", "assets/title-card/title-card-levels.png", 260, 64)
+}
+
+function loadGameAssets() {
+  var levelName = levels[game.save.data.level].name + "-Act1"
 
   game.load.spritesheet("sonic", "assets/characters/sonic.png",48,42);
 
@@ -11,9 +18,6 @@ function preloadGameAssets() {
   game.load.spritesheet("levelCompleteSonic", "assets/ui/level-complete-sonic.png",88,44)
   game.load.image("levelCompleteText", "assets/ui/level-complete-text.png")
   game.load.spritesheet("levelCompleteUi", "assets/ui/level-complete-ui.png",94,18)
-  game.load.image("titleCardBg", "assets/title-card/title-card-bg.png")
-  game.load.spritesheet("titleCardBorder", "assets/title-card/title-card-border.png", 106, 240)
-  game.load.spritesheet("titleCardLevels", "assets/title-card/title-card-levels.png", 260, 64)
   game.load.image("blueSky", "assets/backgrounds/blue-sky.png")
   game.load.image("sandSky", "assets/backgrounds/sand-sky.png")
   game.load.image("space", "assets/backgrounds/space.png")
@@ -77,10 +81,11 @@ function preloadGameAssets() {
   game.load.image("palmTree", "assets/tiles/palm-tree.png");
   game.load.image("pineTree", "assets/tiles/pine-tree.png")
   game.load.spritesheet("tiles", "assets/tiles/tiles.png",80,70);
-  game.load.spritesheet("walls", "assets/tiles/walls.png",80,220);
-  game.load.spritesheet("waterfall", "assets/tiles/waterfall.png",41,199);
   game.load.spritesheet("lavaBubble", "assets/tiles/lava-bubble.png",30,33);
   game.load.image("crystal", "assets/tiles/crystal.png")
   game.load.image("tree", "assets/tiles/tree.png")
 
+  //  Map
+  // -------
+  game.load.json(levelName, "assets/maps/" + levelName + ".json")
 }

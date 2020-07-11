@@ -39,7 +39,7 @@ var MusicKeys = [
   "GameOver",
 ]
 
-function preloadGameSounds() {
+function loadGameSounds() {
   SoundKeys.forEach((sound) => {
     game.load.audio(sound, [
       `assets/sounds/${sound}.ogg`,

@@ -34,9 +34,6 @@ class TitleCard {
     this.levelTitle = game.add.sprite(150, 247, "titleCardLevels", index, groups.ui)
     this.levelTitle.fixedToCamera = true
 
-    // this.act = game.add.sprite(400, 120, "act1", 0, groups.ui)
-    // this.act.fixedToCamera = true
-
     var startFrame = index * 8
     var frames = range(startFrame, startFrame + 7)
 
@@ -45,16 +42,14 @@ class TitleCard {
 
     this.showCard()
 
-    game.time.events.add(2000, this.hideCard, this)
+    // game.time.events.add(2000, this.hideCard, this)
   }
 
   showCard() {
-    player.iso.disableControls = true
     game.add.tween(this.rect).to({ alpha: 1 }, 500, "Linear", true)
     game.add.tween(this.border.cameraOffset).to({ y: 0 }, 500, "Linear", true)
     game.add.tween(this.bg.cameraOffset).to({ y: 168 }, 500, "Linear", true)
     game.add.tween(this.levelTitle.cameraOffset).to({ y: 175 }, 500, "Linear", true)
-    // game.add.tween(this.act.cameraOffset).to({ x: 340 }, 500, "Linear", true)
   }
 
   hideCard() {
@@ -64,7 +59,6 @@ class TitleCard {
     game.add.tween(this.border.cameraOffset).to({ y: -240 }, 500, "Linear", true)
     game.add.tween(this.bg.cameraOffset).to({ y: 240 }, 500, "Linear", true)
     game.add.tween(this.levelTitle.cameraOffset).to({ y: 247 }, 500, "Linear", true)
-    // game.add.tween(this.act.cameraOffset).to({ x: 400 }, 500, "Linear", true)
 
     game.time.events.add(500, () => {
       player.iso.disableControls = false
@@ -73,7 +67,6 @@ class TitleCard {
       this.border.destroy()
       this.bg.destroy()
       this.levelTitle.destroy()
-      // this.act.destroy()
     })
   }
 }
