@@ -428,6 +428,8 @@ Player = class Player {
 	}
 
 	resetGame(delay) {
+		game.timeCounter.stop()
+		
 		game.time.events.add(delay, () => game.camera.fade(0x000000, 1000))
 		game.time.events.add(delay + 1000, () => {
 			if (game.track) game.track.stop()

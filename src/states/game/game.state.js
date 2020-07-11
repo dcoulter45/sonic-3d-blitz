@@ -15,11 +15,12 @@ class GameState extends Phaser.State {
     loadGameSounds()
     loadGameAssets()
 
-    game.load.onLoadComplete.add(this.loadComplete, this);
+    game.load.onLoadComplete.addOnce(this.loadComplete, this);
     game.load.start()
   }
 
   loadComplete() {
+    console.log("load complete")
     loadLevel()
 
     setGameSounds()
