@@ -23,9 +23,10 @@ function preloadGameAssets() {
   game.load.spritesheet("titleCardLevels", "assets/title-card/title-card-levels.png", 260, 64)
   game.load.image("blueSky", "assets/backgrounds/blue-sky.png")
   game.load.image("sandSky", "assets/backgrounds/sand-sky.png")
+  game.load.image("space", "assets/backgrounds/space.png")
   game.load.image("gameOver", "assets/ui/game-over.png")
   game.load.spritesheet("lives", "assets/ui/lives.png", 56, 20)
-  game.load.spritesheet("livesNumbers", "assets/ui/lives-numbers.png", 7, 7)
+  game.load.spritesheet("livesNumbers", "assets/ui/lives-numbers.png", 8, 8)
   game.load.image("hudText", "assets/ui/hud-text.png")
   game.load.spritesheet("numbers", "assets/ui/numbers.png", 9, 14)
   game.load.spritesheet("font1", "assets/ui/font1.png", 18, 26)
@@ -100,4 +101,6 @@ function preloadGameAssets() {
   game.load.json("WildWoodland-Act1", "assets/maps/WildWoodland-Act1.json")
 
   game.load.json("HotHollow-Act1", "assets/maps/HotHollow-Act1.json")
+
+  game.load.json("DeathEgg-Act1", "assets/maps/DeathEgg-Act1.json")
 }

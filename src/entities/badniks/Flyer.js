@@ -23,6 +23,13 @@ Flyer = class Flyer extends RenderInView {
 			this.iso.animations.play("default")
 		}
 
+		if (obj.type === "Gyro") {
+			this.iso = game.add.isoSprite(x, y, z + 30, "gyro", 0, groups.objects)
+
+			this.iso.animations.add("default",[0,1,2],10,true)
+			this.iso.animations.play("default")
+		}
+
 		game.physics.isoArcade.enable(this.iso)
 		// this.shadow = new Shadow(this.iso, 26)
 

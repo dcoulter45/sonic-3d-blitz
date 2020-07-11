@@ -1,6 +1,4 @@
 class GameState extends Phaser.State {
-  phase = "active"
-  
   preload() {
     game.tick = 0
     preloadGameSounds()
@@ -9,6 +7,8 @@ class GameState extends Phaser.State {
   }
 
   create() {
+    game.phase = "active"
+    
     loadGameSounds()
     createGameGroups()
     loadLevel()

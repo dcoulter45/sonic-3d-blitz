@@ -1,7 +1,7 @@
 SpikeGate = class SpikeGate extends RenderInView {
 
-  topZ = 130
-  bottomZ = 70
+  topZ = 85
+  bottomZ = 35
 
   bars = []
   posts = []
@@ -9,8 +9,8 @@ SpikeGate = class SpikeGate extends RenderInView {
   constructor(wx, wy, x, y, z, obj) {
     super(wx, wy, x, y, z, obj)
 
-    this.topZ + z
-    this.bottomZ + z
+    this.topZ += z
+    this.bottomZ += z
     this.axis = wx > wy ? "y" : "x"
 
     var delay = getProp("delay", obj, 0)

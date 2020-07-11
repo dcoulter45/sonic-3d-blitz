@@ -11,6 +11,12 @@ class OverworldState extends Phaser.State {
       { x: 611, y: 189 },
       { x: 701, y: 60 },
     ]
+
+    game.physics.startSystem(Phaser.Physics.ARCADE)
+    game.world.setBounds(0, 0, 781, 392)
+    
+    // fixes camera bounds being null after starting game state
+    game.camera.bounds = new Phaser.Rectangle(0, 0, 781, 392)
   }
 
   create() {
@@ -23,10 +29,7 @@ class OverworldState extends Phaser.State {
 
     this.cursor = game.add.sprite(x, y, "sonicCursor")
 
-    game.physics.startSystem(Phaser.Physics.P2JS)
-    game.world.setBounds(0, 0, 781, 392)
     game.camera.follow(this.cursor)
-
     game.add.tween(this.cursor).to(levels[nextLevel].marker, 2000, "Linear", true)
     
     game.time.events.add(2500, () => {

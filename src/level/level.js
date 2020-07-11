@@ -20,7 +20,7 @@ function loadLevel() {
     new Snow()
   }
   
-  new Background(level)
+  new Background(levels[levelIndex].name)
 
   level.layers.forEach((layer) => delegateLayer(layer, tileLayers))
   

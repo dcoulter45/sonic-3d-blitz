@@ -5,10 +5,10 @@ class LivesCounter {
     this.icon = game.add.sprite(5, 215, "lives", 0, groups.ui)
     this.icon.fixedToCamera = true
 
-    this.number1 = game.add.sprite(45, 225, "livesNumbers", 0, groups.ui)
+    this.number1 = game.add.sprite(40, 225, "livesNumbers", 0, groups.ui)
     this.number1.fixedToCamera = true
 
-    this.number2 = game.add.sprite(52, 225, "livesNumbers", 0, groups.ui)
+    this.number2 = game.add.sprite(48, 225, "livesNumbers", 0, groups.ui)
     this.number2.fixedToCamera = true
 
     this.updateUi()

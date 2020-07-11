@@ -46,7 +46,7 @@ var levels = [
   },
   {
     name: "DeathEgg",
-    music: "",
+    music: "PanicPuppetAct2",
     marker: { x: 701, y: 60 },
   }
 ]

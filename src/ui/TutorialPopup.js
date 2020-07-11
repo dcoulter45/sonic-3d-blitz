@@ -89,7 +89,7 @@ class TutorialPopup {
   }
 
   tutPart3() {
-    var text = new Font(20, 5, "Press A to Jump")
+    var text = new Font(110, 5, "Press A to Jump")
     var cursorA = game.input.keyboard.addKey(Phaser.Keyboard.A);
 
     this.keys.a.animations.play("press")
@@ -108,7 +108,7 @@ class TutorialPopup {
   }
 
   tutPart4() {
-    var text = new Font(20, 5, "Press S to Roll")
+    var text = new Font(110, 5, "Press S to Roll")
     var cursorS = game.input.keyboard.addKey(Phaser.Keyboard.S);
 
     this.keys.s.animations.play("press")

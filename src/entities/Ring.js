@@ -1,6 +1,8 @@
 Ring = class Ring extends RenderInView {
 
 	moving = false
+	maxVelocity = 300
+	velocity = 0
 
 	constructor(wx, wy, x, y, z, obj) {
 		super(wx, wy, x, y, z, obj)
@@ -24,6 +26,8 @@ Ring = class Ring extends RenderInView {
 
 		this.iso.body.widthX = 18;
 		this.iso.body.widthY = 18;
+		this.iso.body.maxVelocity.x = this.maxVelocity
+		this.iso.body.maxVelocity.y = this.maxVelocity
 		
 		groups.overlap.push(this.iso)
 
@@ -58,10 +62,14 @@ Ring = class Ring extends RenderInView {
 		if (this.moving) {
 			for (var axis in player.iso.body.position) {
 				if (this.iso.body.position[axis] < player.iso.body.position[axis]) {
-					this.iso.body.position[axis] += 1
+					if (this.velocity < this.maxVelocity) this.velocity += 5
+
+					this.iso.body.velocity[axis] = this.velocity
 				} 
 				else if (this.iso.body.position[axis] > player.iso.body.position[axis]) {
-					this.iso.body.position[axis] -= 1
+					if (this.velocity < this.maxVelocity) this.velocity += 5
+
+					this.iso.body.velocity[axis] = this.velocity * -1
 				}
 			}
 		}
