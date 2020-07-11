@@ -8,20 +8,21 @@ class GameState extends Phaser.State {
   }
 
   create() {
+    createGameGroups()
+
     game.titleCard = new TitleCard()
 
-    game.load.onLoadComplete.add(this.loadComplete, this);
-
-    createGameGroups()
-    
     loadGameSounds()
     loadGameAssets()
 
+    game.load.onLoadComplete.add(this.loadComplete, this);
     game.load.start()
   }
 
   loadComplete() {
     loadLevel()
+
+    setGameSounds()
         
     game.rings = new RingCounter()
     game.lives = new LivesCounter()

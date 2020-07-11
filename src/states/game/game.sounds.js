@@ -62,7 +62,7 @@ function loadGameSounds() {
   ])
 }
 
-function loadGameSounds() {
+function setGameSounds() {
   SoundKeys.forEach((sound) => {
     Sounds[sound] = game.add.audio(sound)
   })
