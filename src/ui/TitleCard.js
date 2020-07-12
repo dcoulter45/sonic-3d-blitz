@@ -9,6 +9,8 @@ var mapNameKeys = {
 
 class TitleCard {
   constructor() {
+    this.time = game.time.now
+
     this.black = game.add.graphics(0, 0, groups.ui)
     this.black.beginFill(0x000000);
     this.black.drawRect(0, 0, 400, 240)
@@ -53,6 +55,18 @@ class TitleCard {
   }
 
   hideCard() {
+    var timeElapsed = 2000 - (game.time.now - this.time)
+    // Don't hide card if game loads faster than 2 seconds
+    if (timeElapsed > 2000) {
+      this.runHideTweens()
+    } else {
+      game.time.events.add(timeElapsed, () => {
+        this.runHideTweens()
+      })
+    }
+  }
+
+  runHideTweens() {
     this.black.alpha = 0
 
     game.add.tween(this.rect).to({ alpha: 0 }, 500, "Linear", true)
