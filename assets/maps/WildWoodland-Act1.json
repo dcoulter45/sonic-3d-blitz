@@ -1836,7 +1836,7 @@
                          "x":0,
                          "y":-64
                         }],
-                 "height":192,
+                 "height":288,
                  "id":2,
                  "name":"Tile Layer 2",
                  "opacity":1,
@@ -4068,8 +4068,8 @@
                          "type":"",
                          "visible":true,
                          "width":40,
-                         "x":140,
-                         "y":1540
+                         "x":120,
+                         "y":1560
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -5259,7 +5259,7 @@
          "name":"Objects",
          "opacity":1,
          "type":"group",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -5967,7 +5967,7 @@
          "name":"Collision",
          "opacity":1,
          "type":"group",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -5996,7 +5996,7 @@
          "y":0
         }],
  "nextlayerid":38,
- "nextobjectid":351,
+ "nextobjectid":352,
  "orientation":"isometric",
  "renderorder":"right-down",
  "tiledversion":"1.3.4",

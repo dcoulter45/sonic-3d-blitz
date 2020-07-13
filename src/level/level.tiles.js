@@ -71,13 +71,13 @@ function renderTile(x, y, z, tileIndex, chunk, layer) {
     } 
     // Static Tiles
     else {
-      var group = layer.name.includes("Background") ? groups.tiles : groups.objects
+      // var group = layer.name.includes("Background") ? groups.tiles : groups.objects
 
       var tile = game.add.isoSprite(
         x, y, z, 
         "tiles", 
         tileIndex, 
-        group
+        groups.tiles
       )
       tile.anchor.set(0.5)
 

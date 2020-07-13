@@ -2,7 +2,7 @@ Water = class Water{
   constructor(x,y,z,tileId){
     
     if (tileId > 40) {
-      this.iso = game.add.isoSprite(x, y, z, 'tiles', tileId, groups.objects);
+      this.iso = game.add.isoSprite(x, y, z, 'tiles', tileId, groups.tiles);
       this.iso.animations.add('default', [0+tileId,10+tileId,20+tileId,30+tileId,20+tileId,10+tileId], 3, true);
       this.iso.animations.play('default');
     } else {

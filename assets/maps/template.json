@@ -497,15 +497,15 @@
  "tileheight":40,
  "tilesets":[
         {
-         "columns":10,
+         "columns":6,
          "firstgid":1,
-         "image":"..\/tiles\/tiles.png",
-         "imageheight":1800,
-         "imagewidth":800,
+         "image":"..\/tiles\/tilesset.png",
+         "imageheight":3200,
+         "imagewidth":480,
          "margin":0,
-         "name":"tiles",
+         "name":"tilesset",
          "spacing":0,
-         "tilecount":250,
+         "tilecount":270,
          "tileheight":70,
          "tilewidth":80
         }],
