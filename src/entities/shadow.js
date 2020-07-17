@@ -55,7 +55,7 @@ class Shadow {
     var followZ = this.follow.body ? this.follow.body.position.z : this.follow.isoZ
 
     groups.walls.forEach((wall) => {
-      var wallZ = wall.isoZ + 31
+      var wallZ = wall.isoZ + wall.body.height
 
       if (
         wallZ > zz

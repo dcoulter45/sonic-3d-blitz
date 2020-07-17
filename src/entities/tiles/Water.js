@@ -1,13 +1,20 @@
 Water = class Water{
-  constructor(x,y,z,tileId){
+  constructor(x, y, z, tileId, group) {
     
-    if (tileId > 40) {
-      this.iso = game.add.isoSprite(x, y, z, 'tiles', tileId, groups.tiles);
-      this.iso.animations.add('default', [0+tileId,10+tileId,20+tileId,30+tileId,20+tileId,10+tileId], 3, true);
-      this.iso.animations.play('default');
-    } else {
-      this.iso = game.add.isoSprite(x, y, z, 'tiles', tileId, groups.tiles);
-    }
+    this.iso = game.add.isoSprite(x, y, z, 'tiles', tileId, group);
+    this.iso.animations.add('default', [
+      0 + tileId,
+      6 + tileId,
+      12 + tileId,
+      18 + tileId,
+      24 + tileId,
+      18 + tileId,
+      12 + tileId,
+      6 + tileId
+    ], 3, true);
+    
+    this.iso.animations.play('default');
+
     this.iso.anchor.set(0.5);
   }
 }

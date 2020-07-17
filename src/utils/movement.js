@@ -41,13 +41,13 @@ function isMovingFasterThan(velocity, speed) {
 }
 
 function setVelocity(iso, direction, velocity) {
-  if (direction == "left" || direction === "y") {
+  if (direction == "left" || direction === "l" || direction === "y") {
     iso.body.velocity.y = velocity;
-  } else if (direction == "right") {
+  } else if (direction == "right" || direction === "r") {
     iso.body.velocity.y = velocity * -1;
-  } else if(direction == "down" || direction === "x"){
+  } else if(direction == "down" || direction === "d" || direction === "x"){
     iso.body.velocity.x = velocity;
-  } else if(direction == "up"){
+  } else if(direction == "up" || direction === "u"){
     iso.body.velocity.x = velocity * -1;
   } else if (direction === "z") {
     iso.body.velocity.z = velocity

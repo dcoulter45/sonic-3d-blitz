@@ -54,6 +54,7 @@ function loadGameAssets() {
   game.load.spritesheet("ice", "assets/entities/objects/ice.png",80,85)
   game.load.spritesheet("iceFragment", "assets/entities/objects/ice-fragment.png",14,12)
   game.load.spritesheet("spikes", "assets/entities/objects/spikes.png",8,76);
+  game.load.spritesheet("spikesFlat", "assets/entities/objects/spikes-flat.png",55,47);
   game.load.image("spikesBase", "assets/entities/objects/spikes-base.png");
   game.load.spritesheet("spikeGate", "assets/entities/objects/spike-gate.png", 40, 75);
   game.load.spritesheet("spikeGateShadow", "assets/entities/objects/spike-gate-shadow.png", 170, 85);
@@ -67,6 +68,7 @@ function loadGameAssets() {
   // -----------
   game.load.image("crosshair", "assets/effects/crosshair.png");
   game.load.spritesheet("dust", "assets/effects/dust.png",16,16);
+  game.load.spritesheet("flameDash", "assets/effects/flame-dash.png",60,56)
   game.load.spritesheet("explosion", "assets/effects/explosion.png",50,50);
   game.load.spritesheet("explosionLarge", "assets/effects/explosion-large.png",105,81);
   game.load.spritesheet("splash", "assets/effects/splash.png",33,65);
@@ -80,7 +82,7 @@ function loadGameAssets() {
   game.load.spritesheet("torch", "assets/tiles/torch.png",18,42);
   game.load.image("palmTree", "assets/tiles/palm-tree.png");
   game.load.image("pineTree", "assets/tiles/pine-tree.png")
-  game.load.spritesheet("tiles", "assets/tiles/tiles.png",80,70);
+  game.load.spritesheet("tiles", "assets/tiles/tileset.png",80,70);
   game.load.spritesheet("lavaBubble", "assets/tiles/lava-bubble.png",30,33);
   game.load.image("crystal", "assets/tiles/crystal.png")
   game.load.image("tree", "assets/tiles/tree.png")

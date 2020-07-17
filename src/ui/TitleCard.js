@@ -5,6 +5,7 @@ var mapNameKeys = {
   PolarParadise: 3,
   SunriseShore: 4,
   DeathEgg: 5,
+  PumpkinPanic: 6,
 }
 
 class TitleCard {

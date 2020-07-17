@@ -68,7 +68,7 @@ Spear = class Spear extends RenderInView {
       this.spike.animations.play("ready")
     }
 
-    game.time.events.add(1000, () => {
+    game.time.events.add(500, () => {
       this.goUp()
     })
   }
@@ -81,7 +81,7 @@ Spear = class Spear extends RenderInView {
       this.iso.harmful = true
     }
 
-    game.time.events.add(2000, () => {
+    game.time.events.add(1500, () => {
       this.goDown()
     })
   }

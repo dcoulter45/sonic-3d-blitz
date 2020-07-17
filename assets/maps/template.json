@@ -499,13 +499,13 @@
         {
          "columns":6,
          "firstgid":1,
-         "image":"..\/tiles\/tilesset.png",
-         "imageheight":3200,
+         "image":"..\/tiles\/tileset.png",
+         "imageheight":3600,
          "imagewidth":480,
          "margin":0,
-         "name":"tilesset",
+         "name":"tileset",
          "spacing":0,
-         "tilecount":270,
+         "tilecount":306,
          "tileheight":70,
          "tilewidth":80
         }],

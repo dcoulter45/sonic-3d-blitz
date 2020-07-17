@@ -33,6 +33,12 @@ var levels = [
     timeBonus: 180,
   },
   {
+    name: "PumpkinPanic",
+    music: "HangCastle",
+    marker: { x: 0, y: 0 },
+    timeBonus: 180,
+  },
+  {
     name: "WildWoodland",
     music: "GreenGroveAct2",
     marker: { x: 504, y: 250 },

@@ -1,5 +1,3 @@
-const TILE_WIDTH = 44
-const TILE_HEIGHT = 30
 
 function loadLevel() {
   var levelIndex = parseInt(game.save.data.level) || 0
@@ -35,12 +33,7 @@ function delegateLayer(layer, tileLayers) {
     layer.layers.forEach((layer) => delegateLayer(layer, tileLayers))
   }
   if (layer.type === "tilelayer") {
-    // renderTiles(layer)
-    // if (layer.name.includes("Background")) {
-    //   renderBackgroundTiles(layer)
-    // } else {
       tileLayers.push(layer)
-    //}
   }
 
   if (layer.type === "objectgroup") {

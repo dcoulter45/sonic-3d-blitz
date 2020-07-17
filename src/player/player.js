@@ -1,6 +1,7 @@
 const PLAYER_CONTROLLED_STATES = ["normal", "jump", "doubleJump", "sprung", "roll", "slam"]
-const ATTACK_STATES = ["jump", "doubleJump", "roll", "slam", "homing attack"]
+const ATTACK_STATES = ["jump", "doubleJump", "roll", "slam", "homing attack", "flameDash"]
 const DEAD_STATES = ["dead", "burning", "drowing", "falling", "squashed"]
+const JUMP_STATES = ["jump", "sprung", "slam", "falling", "doubleJump", "flameDash"]
 const WORLDS_END = -30
 const MAX_VELOCITY = 225
 
@@ -116,7 +117,7 @@ Player = class Player {
 				if (obj2.collide) obj2.collide(obj1)
 			})
 
-			if (this.onFloor() && ["jump", "sprung", "slam", "falling", "doubleJump"].includes(this.iso.movement)) {
+			if (this.onFloor() && JUMP_STATES.includes(this.iso.movement)) {
 				this.iso.movement = "normal"
 			}
 

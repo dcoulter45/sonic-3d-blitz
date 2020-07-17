@@ -1,7 +1,7 @@
 Ice = class Ice extends RenderInView {
 
   iceBlocks = []
-  height = 45
+  height = 44
   baseZ = 0
 
   constructor(wx, wy, x, y, z, obj) {
@@ -29,6 +29,7 @@ Ice = class Ice extends RenderInView {
     iceBlock.key = "ice"
     iceBlock.body.widthX = TILE_WIDTH
     iceBlock.body.widthY = TILE_WIDTH
+    iceBlock.body.height = this.height
 
     iceBlock.collide = (obj) => this.collide(iceBlock, obj)
     this.iceBlocks.push(iceBlock)

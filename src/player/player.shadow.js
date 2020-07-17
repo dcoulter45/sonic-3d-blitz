@@ -44,8 +44,8 @@ class PlayerShadow {
             zz = z;
           }
         }
-        else if (obj.isoZ + 31 > zz) {
-          zz = obj.isoZ + 31;
+        else if (obj.isoZ + obj.body.height > zz) {
+          zz = obj.isoZ + obj.body.height
         }
       }
     })

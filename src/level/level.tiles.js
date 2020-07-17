@@ -1,3 +1,5 @@
+const TILE_WIDTH = 44
+const TILE_HEIGHT = 30
 const RENDER_DISTANCE = 40 * TILE_WIDTH
 var activeChunks = []
 
@@ -19,7 +21,7 @@ function renderTiles(layers) {
 
   // Search layers for chunks to render
   layers.forEach((layer) => {
-    var zz = layer.offsety ? layer.offsety*-1 : 0
+    var zz = layer.offsety ? layer.offsety * -1 : 0
 
     layer.chunks.forEach((chunk) => {
       var chunkX = chunk.x * TILE_WIDTH
@@ -55,58 +57,25 @@ function renderTiles(layers) {
 
 function renderTile(x, y, z, tileIndex, chunk, layer) {
   if (tileIndex >= 0) {
+    var group = layer.name.includes("Background") ? groups.tiles : groups.objects
+
     // Water tiles
-    if (
-      (
-        (tileIndex >= 41 && tileIndex <= 46)
-        || (tileIndex >= 141 && tileIndex <= 146)
-        || (tileIndex >= 220 && tileIndex < 230)
-        || (tileIndex >= 270 && tileIndex < 280)
-      ) 
-      && !layer.name.includes("Background")
-    ) {
-      var tile = new Water(x, y, z, tileIndex);
+    if (tileIndex >= 162) {
+      var tile = new Water(x, y, z, tileIndex, group);
 
       chunk.tiles.push(tile.iso)
     } 
     // Static Tiles
     else {
-      // var group = layer.name.includes("Background") ? groups.tiles : groups.objects
-
       var tile = game.add.isoSprite(
         x, y, z, 
         "tiles", 
         tileIndex, 
-        groups.tiles
+        group
       )
       tile.anchor.set(0.5)
 
       chunk.tiles.push(tile)
     }
   }
-}
-
-
-function renderBackgroundTiles(layer) {
-  var zz = layer.offsety ? layer.offsety*-1 : 0
-
-  layer.chunks.forEach((chunk) => {
-    var index = 0
-
-    for (var y = 0; y < chunk.height; y++) {
-      for(var x = 0; x < chunk.width; x++) {
-        var tileIndex = chunk.data[index] - 1
-
-        if (tileIndex >= 0) { 
-          var xx = (x + chunk.x) * TILE_WIDTH
-          var yy = (y + chunk.y) * TILE_WIDTH
-          
-          var tile = game.add.isoSprite(xx, yy, zz, "tiles", tileIndex, groups.tiles)
-          tile.anchor.set(0.5) 
-        }
-        
-        index++
-      }
-    }
-  })
 }

@@ -111,6 +111,23 @@ function playerMoves() {
       Sounds.LightningJump.play()
     }
 
+    if (player.btn1Pressed && player.shield && player.shield.type === "Flame") {
+      player.iso.movement = "flameDash"
+      player.iso.body.maxVelocity.x = 320;
+      player.iso.body.maxVelocity.y = 320;
+
+      setVelocity(player.iso, player.iso.direction, 320)
+
+      new FlameDash()
+
+      Sounds.FireDash.play()
+
+      game.time.events.add(500, () => {
+        player.iso.body.maxVelocity.x = MAX_VELOCITY;
+        player.iso.body.maxVelocity.y = MAX_VELOCITY;
+      })
+    }
+
     // Homing attack
     if (player.btn1Pressed && !player.onFloor() && player.homingTarget) {
       player.iso.movement = "homing attack";

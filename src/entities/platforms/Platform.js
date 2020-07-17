@@ -15,11 +15,11 @@ function createTiles(tileId, wx, wy, offsetX, offsetY, z, options = { shadow: tr
         tile.anchor.set(0.5)
         tiles.push(tile)
 
-        if (options.shadow) {
-          tile.shadow = game.add.isoSprite(x, y, z, "tiles", 49, groups.objects)
-          tile.shadow.pivot.set(0.5)
-          new Shadow(tile.shadow, tile, true, ["platform"])
-        }
+        // if (options.shadow) {
+        //   tile.shadow = game.add.isoSprite(x, y, z, "tiles", 21, groups.objects)
+        //   tile.shadow.pivot.set(0.5)
+        //   new Shadow(tile.shadow, tile, true, ["platform"])
+        // }
       }
     }
     

@@ -1,7 +1,7 @@
-Crawler = class Crawler extends Badnik {
+Crawler = class Crawler extends RenderInView {
 
 	constructor(wx, wy, x, y, z, obj) {
-		super()
+		super(wx, wy, x, y, z, obj)
 		
 		// Set direction
 		this.direction = getProp("direction", obj, "down")
@@ -11,50 +11,50 @@ Crawler = class Crawler extends Badnik {
     this.type = obj.type ? obj.type.toLowerCase() : "spider"
 
 		// Set movement limits
-
 		if(this.direction == "left" || this.direction == "down"){
-			this.startX = x+10;
+			this.startX = x;
 			this.startY = y;
-			this.endX = this.startX + this.distance;
-			this.endY = this.startY + this.distance;
+			this.endX = this.startX + this.distance + 10;
+			this.endY = this.startY + this.distance + 10;
 		}
 		else{
-			this.endX = x+10;
+			this.endX = x;
 			this.endY = y;
-			this.startX = this.endX - this.distance;
-			this.startY = this.endY - this.distance;
+			this.startX = this.endX - this.distance - 10;
+			this.startY = this.endY - this.distance - 10;
 		}
+	}
 
-    // Add sprite and animations
+	render() {
+		var { x, y, z } = this.props
 
-		this.iso = game.add.isoSprite(x, y, z + 14 + this.offsetZ, this.type, 0, groups.objects);
+		this.iso = game.add.isoSprite(x, y, z + 10 + this.offsetZ, this.type, 0, groups.objects);
 
 		var frames = this.type === "spider" ? range(0,11) : range(0,7)
 
-		this.iso.animations.add('default',frames,10,true);
+		this.iso.animations.add('default', frames, 10, true);
 		this.iso.animations.play('default');
 
 		enablePhysics(this.iso)
+		groups.overlap.push(this.iso)
 
+		this.iso.body.allowGravity = true
+		this.iso.body.immovable = false
 		this.iso.anchor.set(0.5)
 		this.iso.destructible = "hard";
 
 		if (this.type === "spider") {
 			this.iso.body.widthX = 34
 			this.iso.body.widthY = 34
-			this.iso.body.height = 10
-			this.iso.pivot.y = -14
+			this.iso.body.height = 20
 		}
-
-		groups.overlap.push(this.iso)
 		
 		this.iso.update = this.update.bind(this);
 		this.iso.remove = this.remove.bind(this);
 	}
 
 	update() {
-
-		game.physics.isoArcade.collide(this.iso,groups.walls);
+		game.physics.isoArcade.collide(this.iso, groups.walls);
 
 		// After reaching a certain, swap direction
 		if(this.direction == "left" && this.iso.body.position.y > this.endY){
@@ -73,4 +73,19 @@ Crawler = class Crawler extends Badnik {
 		// Set velocity
 		setVelocity(this.iso, this.direction, 50)
 	}
+
+	hide() {
+		removeFromGroup(groups.overlap, this.iso)
+		this.iso.destroy()
+	}
+
+	remove() {
+		this.active = false 
+
+    new Explosion(this.iso.body.position.x,this.iso.body.position.y,this.iso.body.position.z);
+    
+    this.iso.destroy()
+   
+    Sounds.Destroy.play()
+  }
 }

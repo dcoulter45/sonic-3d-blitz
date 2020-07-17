@@ -39,12 +39,29 @@ PlatformMoving = class PlatformMoving extends RenderInView {
     this.iso.update = this.update.bind(this)
 
     this.tiles = createTiles(this.tileId, wx, wy, x, y, z)
+
+    var shadowTexture = isoRectangeSprite(wx, wy)
+    var sprite = game.add.isoSprite(x, y, z - 30, shadowTexture, 0, groups.objects)
+    new Shadow(sprite, this.iso, true, ["platform"])
+
+    sprite.anchor.set(0.5)
+    sprite.alpha = 0.3
+
+    if (wx > wy) {
+      if (wx === TILE_WIDTH * 3) sprite.pivot.x = -20
+      if (wx === TILE_WIDTH * 4) sprite.pivot.x = -40
+    } else {
+      if (wy === TILE_WIDTH * 3) sprite.pivot.x = 20
+      if (wy === TILE_WIDTH * 4) sprite.pivot.x = 40
+    }
+
+    sprite.body.widthX = wx
+    sprite.body.widthY = wy
   }
 
   hide() {
     this.tiles.forEach((tile) => {
       tile.destroy()
-      tile.shadow.destroy()
     })
     this.iso.destroy()
   }

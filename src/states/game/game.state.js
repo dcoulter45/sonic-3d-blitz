@@ -10,7 +10,7 @@ class GameState extends Phaser.State {
   create() {
     createGameGroups()
 
-    game.titleCard = new TitleCard()
+    // game.titleCard = new TitleCard()
 
     loadGameSounds()
     loadGameAssets()
@@ -20,7 +20,6 @@ class GameState extends Phaser.State {
   }
 
   loadComplete() {
-    console.log("load complete")
     loadLevel()
 
     setGameSounds()
@@ -29,11 +28,11 @@ class GameState extends Phaser.State {
     game.lives = new LivesCounter()
     game.timeCounter = new TimeCounter()
 
-    game.titleCard.hideCard()
+    // game.titleCard.hideCard()
 
-    if (levels[game.save.data.level].name.includes("SunriseShore") && stateParams.respawnPoint === null) {
-      new TutorialPopup()
-    }
+    // if (levels[game.save.data.level].name.includes("SunriseShore") && stateParams.respawnPoint === null) {
+    //   new TutorialPopup()
+    // }
   }
 
   update() {
@@ -41,8 +40,8 @@ class GameState extends Phaser.State {
     
     if (game.timeCounter) game.timeCounter.update()
     
-    game.debug.text(game.time.fps || '--', 5, 210, "#a7aebe");
-    game.debug.text(groups.objects.children.length || '--', 5, 195, "#a7aebe");
+    // game.debug.text(game.time.fps || '--', 5, 210, "#a7aebe");
+    // game.debug.text(groups.objects.children.length || '--', 5, 195, "#a7aebe");
     
     game.sound.mute = muteGame
 
