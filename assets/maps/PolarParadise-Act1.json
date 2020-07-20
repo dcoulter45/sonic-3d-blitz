@@ -3826,17 +3826,17 @@
                          "x":288,
                          "y":-144
                         }],
-                 "height":144,
+                 "height":64,
                  "id":4,
                  "name":"Tile Layer 4",
                  "offsetx":0,
                  "offsety":-60,
                  "opacity":1,
                  "startx":272,
-                 "starty":-272,
+                 "starty":-192,
                  "type":"tilelayer",
                  "visible":true,
-                 "width":80,
+                 "width":32,
                  "x":0,
                  "y":0
                 }, 
@@ -12216,7 +12216,7 @@
                          "type":"Spider",
                          "visible":true,
                          "width":40,
-                         "x":6040,
+                         "x":6060,
                          "y":-240
                         }, 
                         {

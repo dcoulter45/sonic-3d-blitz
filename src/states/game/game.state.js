@@ -10,7 +10,7 @@ class GameState extends Phaser.State {
   create() {
     createGameGroups()
 
-    // game.titleCard = new TitleCard()
+    game.titleCard = new TitleCard()
 
     loadGameSounds()
     loadGameAssets()
@@ -28,11 +28,11 @@ class GameState extends Phaser.State {
     game.lives = new LivesCounter()
     game.timeCounter = new TimeCounter()
 
-    // game.titleCard.hideCard()
+    game.titleCard.hideCard()
 
-    // if (levels[game.save.data.level].name.includes("SunriseShore") && stateParams.respawnPoint === null) {
-    //   new TutorialPopup()
-    // }
+    if (levels[game.save.data.level].name.includes("SunriseShore") && stateParams.respawnPoint === null) {
+      new TutorialPopup()
+    }
   }
 
   update() {

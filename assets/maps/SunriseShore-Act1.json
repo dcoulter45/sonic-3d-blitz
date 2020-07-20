@@ -4000,6 +4000,23 @@
                          "width":80,
                          "x":10120,
                          "y":-4520
+                        }, 
+                        {
+                         "height":40,
+                         "id":289,
+                         "name":"GoalPost",
+                         "properties":[
+                                {
+                                 "name":"direction",
+                                 "type":"string",
+                                 "value":"right"
+                                }],
+                         "rotation":0,
+                         "type":"",
+                         "visible":true,
+                         "width":160,
+                         "x":10120,
+                         "y":-4880
                         }],
                  "offsetx":0,
                  "offsety":-60,
@@ -4292,6 +4309,17 @@
                          "width":160,
                          "x":10120,
                          "y":-880
+                        }, 
+                        {
+                         "height":4480,
+                         "id":292,
+                         "name":"Wall",
+                         "rotation":0,
+                         "type":"",
+                         "visible":true,
+                         "width":80,
+                         "x":10040,
+                         "y":-5240
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -4483,6 +4511,17 @@
                          "width":160,
                          "x":10120,
                          "y":-5160
+                        }, 
+                        {
+                         "height":80,
+                         "id":291,
+                         "name":"Wall",
+                         "rotation":0,
+                         "type":"",
+                         "visible":true,
+                         "width":160,
+                         "x":10120,
+                         "y":-5240
                         }],
                  "offsetx":0,
                  "offsety":-60,
@@ -4566,7 +4605,7 @@
          "y":0
         }],
  "nextlayerid":38,
- "nextobjectid":289,
+ "nextobjectid":293,
  "orientation":"isometric",
  "renderorder":"right-down",
  "tiledversion":"1.3.4",

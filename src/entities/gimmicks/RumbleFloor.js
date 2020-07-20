@@ -4,7 +4,7 @@ RumbleFloor = class RumbleFloor {
   triggerDelay = 1000
 
   constructor(wx, wy, x, y, z, obj) {
-    this.tileId = getProp("tileId", obj, 5)
+    this.tileId = getProp("tileId", obj, 48)
 
     this.x = x
     this.y = y

@@ -27,15 +27,15 @@ var levels = [
     timeBonus: 180,
   },
   {
-    name: "PolarParadise",
-    music: "DiamondDustAct2",
-    marker: { x: 352, y: 153 },
+    name: "PumpkinPanic",
+    music: "HangCastle",
+    marker: { x: 339, y: 211 },
     timeBonus: 180,
   },
   {
-    name: "PumpkinPanic",
-    music: "HangCastle",
-    marker: { x: 0, y: 0 },
+    name: "PolarParadise",
+    music: "DiamondDustAct2",
+    marker: { x: 408, y: 135 },
     timeBonus: 180,
   },
   {

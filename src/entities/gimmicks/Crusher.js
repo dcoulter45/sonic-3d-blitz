@@ -74,7 +74,7 @@ Crusher = class Crusher extends RenderInView {
     for (var x = offsetX; x < xx; x += TILE_WIDTH) {
       for (var y = offsetY; y < yy; y += TILE_WIDTH ) {
         for (var z = offsetZ; z < zz; z += TILE_HEIGHT) {
-          var tile = game.add.isoSprite(x, y, z, "tiles", 194, groups.objects)
+          var tile = game.add.isoSprite(x, y, z, "tiles", 55, groups.objects)
 
           tile.offsetZZ = offsetZ - z
           tile.anchor.set(0.5)

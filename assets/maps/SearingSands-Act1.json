@@ -3939,17 +3939,6 @@
                          "y":8840
                         }, 
                         {
-                         "height":40,
-                         "id":217,
-                         "name":"Monitor",
-                         "rotation":0,
-                         "type":"Lightning",
-                         "visible":true,
-                         "width":40,
-                         "x":-3160,
-                         "y":5420
-                        }, 
-                        {
                          "height":80,
                          "id":253,
                          "name":"PlatformMoving",

@@ -60,7 +60,7 @@ function renderTile(x, y, z, tileIndex, chunk, layer) {
     var group = layer.name.includes("Background") ? groups.tiles : groups.objects
 
     // Water tiles
-    if (tileIndex >= 162) {
+    if (tileIndex >= 162 && tileIndex < 282) {
       var tile = new Water(x, y, z, tileIndex, group);
 
       chunk.tiles.push(tile.iso)
