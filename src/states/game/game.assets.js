@@ -8,9 +8,8 @@ function loadGameAssets() {
   var levelName = levels[game.save.data.level].name + "-Act1"
 
   game.load.spritesheet("sonic", "assets/characters/sonic.png",48,42);
-
   game.load.spritesheet("eggman", "assets/characters/eggman.png",100,70);
-
+  game.load.spritesheet("eggmanAngry", "assets/characters/eggman-angry.png",64,71)
   game.load.image("playerShadow", "assets/entities/playerShadow.png");
 
   //  UI
@@ -46,7 +45,6 @@ function loadGameAssets() {
   game.load.spritesheet("bridge", "assets/entities/objects/bridge.png",94,53);
   game.load.spritesheet("bomb", "assets/entities/objects/bomb.png",16,32)
   game.load.spritesheet("checkpoint", "assets/entities/checkpoint.png",25,70)
-  game.load.spritesheet("fireball", "assets/entities/objects/fireball.png", 64,65)
   game.load.spritesheet("goalPost", "assets/entities/goal-post.png",54,68)
   game.load.spritesheet("raft", "assets/entities/objects/raft.png", 152, 83)
   game.load.spritesheet("rings", "assets/entities/rings.png",16,16)
@@ -78,7 +76,6 @@ function loadGameAssets() {
   //  Tiles 
   // ---------
   game.load.spritesheet("cactus", "assets/tiles/cactus.png",54,76)
-  game.load.spritesheet("rocks", "assets/tiles/rocks.png",66,77);
   game.load.spritesheet("torch", "assets/tiles/torch.png",18,42);
   game.load.image("palmTree", "assets/tiles/palm-tree.png");
   game.load.image("pineTree", "assets/tiles/pine-tree.png")
@@ -90,4 +87,8 @@ function loadGameAssets() {
   //  Map
   // -------
   game.load.json(levelName, "assets/maps/" + levelName + ".json")
+
+  if (levelName === "DeathEgg-Act1") {
+    game.load.json("DeathEgg-Boss", "assets/maps/DeathEgg-Boss.json")
+  }
 }

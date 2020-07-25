@@ -1,5 +1,5 @@
 class Bomb {
-  constructor(x, y, z) {
+  constructor(x, y, z, vx = 0, vy = 0) {
 
     this.iso = game.add.isoSprite(x, y, z, "bomb", 0, groups.objects)
 
@@ -14,6 +14,9 @@ class Bomb {
     this.iso.body.widthX = 18
     this.iso.body.widthY = 18
 
+    this.iso.body.velocity.x = vx
+    this.iso.body.velocity.y = vy
+
     this.iso.update = this.update.bind(this)
 
     this.shadow = game.add.isoSprite(x + 8, y + 8, z, "bomb", 3, groups.objects)
@@ -21,7 +24,7 @@ class Bomb {
 
     this.shadow.pivot.y = -2
 
-    game.time.events.add(2000, this.explode, this)
+    game.time.events.add(800, this.explode, this)
   }
 
   update() {
@@ -41,13 +44,14 @@ class Bomb {
     this.iso.destroy()
     this.shadow.destroy()
 
-    var blastRadius = game.add.isoSprite(x - 35, y - 35, z, null, 0, groups.objects)
+    var blastRadius = game.add.isoSprite(x - 13, y - 13, z, null, 0, groups.objects)
 
     enablePhysics(blastRadius)
     groups.overlap.push(blastRadius)
 
-    blastRadius.body.widthX = 88
-    blastRadius.body.widthY = 88
+    blastRadius.body.widthX = 44
+    blastRadius.body.widthY = 44
+    blastRadius.body.height = 44
     blastRadius.harmful = true
 
     game.time.events.add(500, () => {

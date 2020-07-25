@@ -33,9 +33,11 @@ DrawerFloor = class DrawerFloor extends RenderInView {
 
     for (var i = 1; i <= this.height; i++) {
       var zz = z + (i * TILE_HEIGHT)
+      var xx = this.axis === "x" ? x - wx : x
+      var yy = this.axis === "y" ? y - wy : y
       var tiles = createTiles(this.tileId, wx, wy, x - wx, y, zz)
       var spikes = []
-      var wall = game.add.isoSprite(x - wx, y, zz - 25, null, 0, groups.walls)
+      var wall = game.add.isoSprite(xx, yy, zz - 25, null, 0, groups.walls)
       
       enablePhysics(wall)
       
@@ -47,21 +49,21 @@ DrawerFloor = class DrawerFloor extends RenderInView {
         tile.mask = this.mask
       })
 
-      if (this.axis === "x") {
-        var count = wx / TILE_WIDTH
-        
-        for (var ii = 0; ii < count; ii++) {
-          var yy = y + (TILE_WIDTH * ii) + 6
-          var spike = game.add.isoSprite(x, yy, zz - 25, "spikesFlat", 5, groups.objects)
+      var count = wx / TILE_WIDTH
+      
+      for (var ii = 0; ii < count; ii++) {
+        var yyy = this.axis === "x" ?  y + (TILE_WIDTH * ii) + 6 : y
+        var xxx = this.axis === "y" ?  x + (TILE_WIDTH * ii) + 6 : x
+        var tileId = this.axis === "x" ? 5 : 4
+        var spike = game.add.isoSprite(xxx, yyy, zz - 25, "spikesFlat", tileId, groups.objects)
 
-          enablePhysics(spike)
-          groups.overlap.push(spike)
+        enablePhysics(spike)
+        groups.overlap.push(spike)
 
-          spike.harmful = true
-          spike.pivot.y = 8
-          spike.pivot.x = 10
-          spikes.push(spike)
-        }
+        spike.harmful = true
+        spike.pivot.y = 8
+        spike.pivot.x = this.axis === "x" ? 10 : -8
+        spikes.push(spike)
       }
 
       this.levels.push({

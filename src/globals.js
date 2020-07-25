@@ -54,5 +54,6 @@ var levels = [
     name: "DeathEgg",
     music: "PanicPuppetAct2",
     marker: { x: 701, y: 60 },
+    timeBonus: 180,
   }
 ]

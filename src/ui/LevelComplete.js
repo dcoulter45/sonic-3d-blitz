@@ -140,7 +140,11 @@ class LevelComplete {
       game.camera.fade("#000000", 1000)
   
       game.time.events.add(1000, () => {
-        game.state.start("OverworldState")
+        if (game.save.data.level === 6) {
+          game.state.start("EndingState")
+        } else {
+          game.state.start("OverworldState")
+        }
       })
     })
   }

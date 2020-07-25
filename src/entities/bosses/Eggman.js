@@ -1,6 +1,6 @@
 
 function Eggman(x, y, z) {
-  var iso = game.add.isoSprite(x, y, z + 75, "eggman", 5, groups.objects)
+  var iso = game.add.isoSprite(x, y, z + 55, "eggman", 5, groups.objects)
 
   enablePhysics(iso)
   groups.collide.push(iso)

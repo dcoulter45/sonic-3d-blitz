@@ -28,13 +28,13 @@ class TitleCard {
     var levelName = levels[game.save.data.level].name
     var index = mapNameKeys[levelName]
 
-    this.bg = game.add.sprite(0, 240, "titleCardBg", 0, groups.ui)
+    this.bg = game.add.sprite(0, 240, "titleCardBg", 0, groups.titleCard)
     this.bg.fixedToCamera = true
 
-    this.border = game.add.sprite(0, -240, "titleCardBorder", index, groups.ui)
+    this.border = game.add.sprite(0, -240, "titleCardBorder", index, groups.titleCard)
     this.border.fixedToCamera = true
 
-    this.levelTitle = game.add.sprite(150, 247, "titleCardLevels", index, groups.ui)
+    this.levelTitle = game.add.sprite(150, 247, "titleCardLevels", index, groups.titleCard)
     this.levelTitle.fixedToCamera = true
 
     var startFrame = index * 8

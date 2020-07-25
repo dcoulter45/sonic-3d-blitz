@@ -8,10 +8,8 @@ function loadLevel() {
 
   playLevelTrack(levels[levelIndex])
   
-  var tileLayers = []
-  var levelWidth = level.width * TILE_WIDTH * 10
-  var levelHeight = level.height * TILE_WIDTH * 10
-  // game.world.setBounds(0, 0, levelWidth, levelHeight)
+  level.tileLayers = []
+
   game.camera.bounds = null
 
   if (levelName.includes("Polar")) {
@@ -20,20 +18,21 @@ function loadLevel() {
   
   new Background(levels[levelIndex].name)
 
-  level.layers.forEach((layer) => delegateLayer(layer, tileLayers))
+  level.layers.forEach((layer) => delegateLayer(layer))
   
   // groups.tiles.cacheAsBitmap = true
 
   renderObjectsInView()
-  renderTiles(tileLayers)
+  renderTiles()
 }
 
-function delegateLayer(layer, tileLayers) {
+function delegateLayer(layer) {
   if (layer.type === "group") {
-    layer.layers.forEach((layer) => delegateLayer(layer, tileLayers))
+    layer.layers.forEach((layer) => delegateLayer(layer))
   }
+
   if (layer.type === "tilelayer") {
-      tileLayers.push(layer)
+    level.tileLayers.push(layer)
   }
 
   if (layer.type === "objectgroup") {

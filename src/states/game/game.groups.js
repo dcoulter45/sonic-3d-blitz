@@ -4,6 +4,7 @@ function createGameGroups() {
   groups.objects = game.add.group()
   groups.walls = game.add.group()
   groups.ui = game.add.group()
+  groups.titleCard = game.add.group()
 
   groups.targets = []
   groups.collide = []
