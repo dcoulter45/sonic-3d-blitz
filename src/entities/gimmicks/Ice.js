@@ -10,7 +10,7 @@ Ice = class Ice extends RenderInView {
     this.baseZ = z + 9
     this.stacks = getProp("stacks", obj, 1)
   }
-  
+
   render() {
     var { wx, wy, x, y, z, obj } = this.props
 
@@ -20,7 +20,7 @@ Ice = class Ice extends RenderInView {
   }
 
   createIceBlock(i, x, y, z) {
-    var zz = (i * this.height) + this.baseZ 
+    var zz = (i * this.height) + this.baseZ
     var iceBlock = game.add.isoSprite(x, y, zz, "ice", 0, groups.objects)
 
     enablePhysics(iceBlock)
@@ -49,7 +49,7 @@ Ice = class Ice extends RenderInView {
       game.physics.isoArcade.collide(obj, iceBlock)
 
       var { up, down, frontY, frontX, backX, backY } = iceBlock.body.touching
-      
+
       if (up && player.onFloor()) {
         player.die("squashed")
       }
@@ -89,7 +89,7 @@ Ice = class Ice extends RenderInView {
       if (iceBlock.body.z > z) {
         game.time.events.add(400, () => {
           var zz = iceBlock.body.z - this.height + 2.5
-          
+
           moveToXYZ(iceBlock, { z: zz }, 400)
         })
       }
@@ -98,10 +98,10 @@ Ice = class Ice extends RenderInView {
 
   createFragments(iceBlock) {
     var { x, y, z } = iceBlock.body.position
-    
+
     z = z - 10
 
-    for(var i = 0; i < 6; i++) {
+    for (var i = 0; i < 6; i++) {
 
       var velocity = {
         x: randomInteger(-50, 50),
@@ -123,7 +123,7 @@ Ice = class Ice extends RenderInView {
       fragment.body.height = 15
       fragment.body.velocity = velocity
 
-      fragment.update = function() {
+      fragment.update = function () {
         if (this.body.position.z <= z) {
           this.destroy()
         }

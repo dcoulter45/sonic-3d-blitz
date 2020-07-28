@@ -19,7 +19,7 @@ MovingWall = class MovingWall extends RenderInView {
       this.move()
     }
   }
-  
+
   render() {
     var { wx, wy, x, y, z } = this.props
 
@@ -39,17 +39,17 @@ MovingWall = class MovingWall extends RenderInView {
     this.iso.body.height = TILE_HEIGHT * this.height
     this.iso.update = this.update.bind(this)
 
-    this.createMask()
+    // this.createMask()
 
-    for (var i = 1; i <= this.height; i ++) {
-      var tiles = createTiles(this.tileId, wx, wy, x, y, z + (TILE_HEIGHT * i + 2), { 
-        shadow: false, 
+    for (var i = 1; i <= this.height; i++) {
+      var tiles = createTiles(this.tileId, wx, wy, x, y, z + (TILE_HEIGHT * i + 2), {
+        shadow: false,
         hollow: i < this.height
       })
-      
+
       tiles.forEach((tile) => {
         this.tiles.push(tile)
-        tile.mask = this.mask
+        // tile.mask = this.mask
       })
     }
   }
@@ -74,7 +74,7 @@ MovingWall = class MovingWall extends RenderInView {
         moveToXYZ(this.iso, {
           [this.axis]: this.props[this.axis]
         }, 1000)
-      } 
+      }
       else {
         moveToXYZ(this.iso, {
           [this.axis]: this.props[this.axis] - this.props["w" + this.axis]
@@ -97,24 +97,24 @@ MovingWall = class MovingWall extends RenderInView {
 
     var point1 = game.iso.project({ x, y, z: z + (TILE_HEIGHT * this.height) })
     var point2 = game.iso.project({ x, y: y + wy, z: z + (TILE_HEIGHT * this.height) })
-    var point3 = game.iso.project({ x, y: y + wy, z: z - 2})
-    var point4 = game.iso.project({ x: x + wx, y: y + wy, z: z - 2})
-    var point5 = game.iso.project({ x: x + wx, y, z: z - 2})
+    var point3 = game.iso.project({ x, y: y + wy, z: z - 2 })
+    var point4 = game.iso.project({ x: x + wx, y: y + wy, z: z - 2 })
+    var point5 = game.iso.project({ x: x + wx, y, z: z - 2 })
     var point6 = game.iso.project({ x: x + wx, y, z: z + (TILE_HEIGHT * this.height) })
 
     var polygon = new Phaser.Polygon([
-        point1.x, point1.y,
-        point2.x, point2.y,
-        point3.x, point3.y,
-        point4.x, point4.y,
-        point5.x, point5.y,
-        point6.x, point6.y,
+      point1.x, point1.y,
+      point2.x, point2.y,
+      point3.x, point3.y,
+      point4.x, point4.y,
+      point5.x, point5.y,
+      point6.x, point6.y,
     ]);
 
     mask.beginFill(0xffffff);
     mask.drawPolygon(polygon.points);
     mask.endFill();
-    
+
     this.mask = mask
   }
 }

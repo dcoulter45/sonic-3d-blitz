@@ -14,14 +14,14 @@ Player = class Player {
 		var initialDirection = getProp("direction", obj, "down")
 
 		if (stateParams.respawnPoint) {
-			var { x, y, z } = stateParams.respawnPoint	
+			var { x, y, z } = stateParams.respawnPoint
 		}
-		
+
 		this.iso = game.add.isoSprite(x, y, z, "sonic", 0, groups.objects);
 
 		this.iso.key = "player";
 		this.iso.anchor.set(0.5);
-		this.crosshair = new Crosshair(0,0,0);
+		this.crosshair = new Crosshair(0, 0, 0);
 		this.shadow = new PlayerShadow(x, y, z)
 		new PlayerCamera(x, y, z)
 
@@ -63,7 +63,7 @@ Player = class Player {
 		}
 	}
 
-	update(){
+	update() {
 
 		this.iso.previousVelocity = {
 			x: this.iso.body.velocity.x,
@@ -92,27 +92,42 @@ Player = class Player {
 				if (obj2.collide) obj2.collide(obj1)
 			});
 
-			game.physics.isoArcade.overlap(player.iso, groups.walls, function(obj1, obj2) {
-				obj1.collide(obj2)
-
-				if (obj2.key == 'slope') {
+			game.physics.isoArcade.overlap(player.iso, groups.walls, function (obj1, obj2) {
+				if (obj2.key === "slope") {
 					player.handleSlope(obj2)
+				} else {
+					game.physics.isoArcade.collide(obj1, obj2)
 				}
 
+				if (obj1.body.touching.up) {
+					if (obj2.key === "water") {
+						this.touchingWater = true
+					} else {
+						this.touchingFloor = true
+					}
+				}
+
+				obj1.collide(obj2)
+
+				if (obj2.collide) obj2.collide(obj1)
 				if (obj2.overlap) obj2.overlap(obj1)
 			});
-			
-			game.physics.isoArcade.collide(player.iso, groups.collide, (obj1, obj2) => {
-				if (obj1.body.touching.up) {
-					this.touchingFloor = true
-				}
 
-				obj1.collide(obj2)
-				
-				if (obj2.collide) obj2.collide(obj1)
-			})
+			// game.physics.isoArcade.collide(player.iso, groups.collide, (obj1, obj2) => {
+			// 	if (obj1.body.touching.up) {
+			// 		if (obj2.key === "water") {
+			// 			this.touchingWater = true
+			// 		} else {
+			// 			this.touchingFloor = true
+			// 		}
+			// 	}
 
-			game.physics.isoArcade.overlap(player.iso, groups.overlap, function(obj1, obj2) {
+			// 	obj1.collide(obj2)
+
+			// 	if (obj2.collide) obj2.collide(obj1)
+			// })
+
+			game.physics.isoArcade.overlap(player.iso, groups.overlap, function (obj1, obj2) {
 				obj1.collide(obj2)
 				if (obj2.collide) obj2.collide(obj1)
 			})
@@ -124,7 +139,7 @@ Player = class Player {
 			if (!player.onFloor() && player.touchingWater && this.iso.movement !== "drowning") {
 				this.die("drowning")
 			}
-	
+
 			if (player.iso.body.position.z < WORLDS_END) {
 				this.die("falling")
 			}
@@ -174,26 +189,26 @@ Player = class Player {
 		else if (this.iso.movement === "skidding") {
 			this.iso.action = "skid"
 		}
-		else if(this.iso.movement === "sink"){
+		else if (this.iso.movement === "sink") {
 			this.iso.action = "sink";
 			this.iso.direction = "";
 		}
-		else if(this.iso.movement === "roll" || this.iso.movement === "doubleJump"){
+		else if (this.iso.movement === "roll" || this.iso.movement === "doubleJump") {
 			this.iso.action = "jump";
 		}
-		else{
+		else {
 			this.iso.action = this.iso.movement;
 		}
 
 		if (this.iso.action === "skid") {
-			if(game.tick % 4 == 0){
-				new Dust(this.iso.body.position.x,this.iso.body.position.y,this.iso.body.position.z);
+			if (game.tick % 4 == 0) {
+				new Dust(this.iso.body.position.x, this.iso.body.position.y, this.iso.body.position.z);
 			}
 		}
 
-		if(player.iso.movement == "homing attack" || player.iso.movement == "slam"){
-			if(game.tick % 2 == 0){
-				new HomingTrail(player.iso.body.position.x,player.iso.body.position.y,player.iso.body.position.z,player.iso.direction);
+		if (player.iso.movement == "homing attack" || player.iso.movement == "slam") {
+			if (game.tick % 2 == 0) {
+				new HomingTrail(player.iso.body.position.x, player.iso.body.position.y, player.iso.body.position.z, player.iso.direction);
 			}
 		}
 
@@ -202,13 +217,13 @@ Player = class Player {
 		playAnimation(this.iso)
 
 		detectHomingTarget()
-		
+
 		this.shadow.update()
 
 		this.onSlope = false;
 	}
 
-	onFloor(){
+	onFloor() {
 		return (this.iso.body.onFloor() || this.touchingFloor || this.onSlope) ? true : false;
 	}
 
@@ -216,7 +231,7 @@ Player = class Player {
 	//  COLLISIONS
 	// ================
 
-	collide(obj){
+	collide(obj) {
 
 		if (obj.harmful === true) {
 			this.hurt();
@@ -226,7 +241,7 @@ Player = class Player {
 			if (["jump", "homing attack", "slam", "roll"].includes(this.iso.movement)) {
 				obj.remove();
 
-				if(this.iso.movement == "jump" || this.iso.movement == "homing attack"){
+				if (this.iso.movement == "jump" || this.iso.movement == "homing attack") {
 					this.iso.body.velocity.z = 250;
 
 					if (this.iso.movement === "homing attack") {
@@ -246,7 +261,7 @@ Player = class Player {
 			}
 		}
 		else if (
-			["wall", "prop", "rock", "ice"].includes(obj.key) 
+			["wall", "prop", "rock", "ice"].includes(obj.key)
 			&& isMovingFasterThan(this.iso.previousVelocity, 220)
 			&& (this.iso.body.touching.frontX || this.iso.body.touching.frontY || this.iso.body.touching.backX || this.iso.body.touching.backY)
 			&& this.iso.movement !== "bounced"
@@ -258,19 +273,19 @@ Player = class Player {
 			this.iso.body.acceleration.y = 0;
 			this.iso.body.velocity.z = 100;
 
-			if(this.iso.previousVelocity.x >= 220){
+			if (this.iso.previousVelocity.x >= 220) {
 				this.iso.body.velocity.x = -80;
 				this.iso.body.velocity.y = this.iso.body.velocity.y * -0.5;
 			}
-			if(this.iso.previousVelocity.x <= -220){
+			if (this.iso.previousVelocity.x <= -220) {
 				this.iso.body.velocity.x = 80;
 				this.iso.body.velocity.y = this.iso.body.velocity.y * -0.5;
 			}
-			if(this.iso.previousVelocity.y >= 220){
+			if (this.iso.previousVelocity.y >= 220) {
 				this.iso.body.velocity.x = this.iso.body.velocity.x * -0.5;
 				this.iso.body.velocity.y = -80;
 			}
-			if(this.iso.previousVelocity.y <= -220){
+			if (this.iso.previousVelocity.y <= -220) {
 				this.iso.body.velocity.x = this.iso.body.velocity.x * -0.5;
 				this.iso.body.velocity.y = 80;
 			}
@@ -287,7 +302,7 @@ Player = class Player {
 	//  SLOPE
 	// ================
 
-	handleSlope(slope){
+	handleSlope(slope) {
 		if (this.iso.body.velocity.z <= 0) {
 
 			var zz = getSlopePos(this.iso, slope)
@@ -309,14 +324,14 @@ Player = class Player {
 	//  HURT
 	// ================
 
-	hurt(){
-		if(this.iso.invulnerable === false){
+	hurt() {
+		if (this.iso.invulnerable === false) {
 			// DEAD
-			if(game.rings.count === 0 && !this.shield){
+			if (game.rings.count === 0 && !this.shield) {
 				this.die()
 			}
 			// HURT
-			else{
+			else {
 
 				if (!this.shield) {
 					new FakeRings(this.iso.body.position);
@@ -335,21 +350,21 @@ Player = class Player {
 
 				this.iso.hurtDIR = this.iso.direction.substring(0, 1);
 
-				if(this.iso.hurtDIR == "d"){
-					this.iso.body.velocity.x = Math.min(-120,this.iso.body.velocity.x * -0.75);
+				if (this.iso.hurtDIR == "d") {
+					this.iso.body.velocity.x = Math.min(-120, this.iso.body.velocity.x * -0.75);
 					this.iso.body.velocity.y = this.iso.body.velocity.y * -0.75;
 				}
-				else if(this.iso.hurtDIR == "u"){
-					this.iso.body.velocity.x = Math.max(120,this.iso.body.velocity.x * -0.75);
+				else if (this.iso.hurtDIR == "u") {
+					this.iso.body.velocity.x = Math.max(120, this.iso.body.velocity.x * -0.75);
 					this.iso.body.velocity.y = this.iso.body.velocity.y * -0.75;
 				}
-				else if(this.iso.hurtDIR == "l"){
+				else if (this.iso.hurtDIR == "l") {
 					this.iso.body.velocity.x = this.iso.body.velocity.x * -0.75;
-					this.iso.body.velocity.y = Math.min(-120,this.iso.body.velocity.y * -0.75);
+					this.iso.body.velocity.y = Math.min(-120, this.iso.body.velocity.y * -0.75);
 				}
-				else if(this.iso.hurtDIR == "r"){
+				else if (this.iso.hurtDIR == "r") {
 					this.iso.body.velocity.x = this.iso.body.velocity.x * -0.75;
-					this.iso.body.velocity.y = Math.max(120,this.iso.body.velocity.y * -0.75);
+					this.iso.body.velocity.y = Math.max(120, this.iso.body.velocity.y * -0.75);
 				}
 
 				game.time.events.add(450, () => {
@@ -375,13 +390,13 @@ Player = class Player {
 	die(causeOfDeath = "hurt") {
 		if (!DEAD_STATES.includes(this.iso.movement)) {
 			game.phase = "over"
-			
+
 			var delay = 1000
-			
+
 			if (this.shield) {
 				this.shield.destroy()
 			}
-			
+
 			game.camera.follow(null)
 
 			if (causeOfDeath === "hurt") {
@@ -430,7 +445,7 @@ Player = class Player {
 
 	resetGame(delay) {
 		game.timeCounter.stop()
-		
+
 		game.time.events.add(delay, () => game.camera.fade(0x000000, 1000))
 		game.time.events.add(delay + 1000, () => {
 			if (game.track) game.track.stop()
