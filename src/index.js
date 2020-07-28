@@ -6,11 +6,11 @@ class Game extends Phaser.Game {
 
 		this.save = new SaveData()
 
-		this.state.add("GameState", GameState, false)
 		this.state.add("TitleState", TitleState, false)
+		this.state.add("GameState", GameState, false)
 		this.state.add("OverworldState", OverworldState, false)
 		this.state.add("EndingState", EndingState, false)
 
-		this.state.start("EndingState")
+		this.state.start("TitleState")
 	}
 }
