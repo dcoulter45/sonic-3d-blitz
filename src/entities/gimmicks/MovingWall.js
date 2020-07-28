@@ -12,6 +12,7 @@ MovingWall = class MovingWall extends RenderInView {
     this.delay = getProp("delay", obj, 0)
     this.tileId = getProp("tileId", obj, 42)
     this.height = getProp("height", obj, 3)
+    this.useMask = getProp("mask", obj, true)
 
     if (this.delay > 0) {
       game.time.events.add(this.delay, this.move, this)
@@ -39,7 +40,9 @@ MovingWall = class MovingWall extends RenderInView {
     this.iso.body.height = TILE_HEIGHT * this.height
     this.iso.update = this.update.bind(this)
 
-    // this.createMask()
+    if (this.useMask) {
+      this.createMask()
+    }
 
     for (var i = 1; i <= this.height; i++) {
       var tiles = createTiles(this.tileId, wx, wy, x, y, z + (TILE_HEIGHT * i + 2), {
@@ -49,7 +52,10 @@ MovingWall = class MovingWall extends RenderInView {
 
       tiles.forEach((tile) => {
         this.tiles.push(tile)
-        // tile.mask = this.mask
+
+        if (this.useMask) {
+          tile.mask = this.mask
+        }
       })
     }
   }
