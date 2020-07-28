@@ -16,20 +16,20 @@ Spear = class Spear extends RenderInView {
   render() {
     var { x, y, z } = this.props
 
-    this.base = game.add.isoSprite(x, y, z, "spikesBase", 0, groups.objects);
-    this.spike = game.add.isoSprite(x, y , z + 5, "spikes", 4, groups.objects);
+    this.base = game.add.isoSprite(x, y, z, "spikesBase", 0, groups.tiles);
+    this.spike = game.add.isoSprite(x, y, z + 5, "spikes", 4, groups.objects);
     this.iso = game.add.isoSprite(x, y, z + 5, null);
 
     this.base.anchor.set(0.5)
 
     this.spike.anchor.set(0.5)
-    this.spike.animations.add("down", [3,2,1,0], 20, false);
+    this.spike.animations.add("down", [3, 2, 1, 0], 20, false);
     this.spike.animations.add("ready", [1], 20, false);
-    this.spike.animations.add("up", [2,3,4], 20, false);
+    this.spike.animations.add("up", [2, 3, 4], 20, false);
     this.spike.pivot.y = 34
 
     game.physics.isoArcade.enable(this.iso);
-    
+
     this.iso.anchor.set(0.5);
     this.iso.body.allowGravity = false;
     this.iso.body.widthX = 16
@@ -48,7 +48,7 @@ Spear = class Spear extends RenderInView {
     this.iso.destroy()
   }
 
-  goDown(){
+  goDown() {
     this.state = "down"
 
     if (this.visible) {
@@ -61,7 +61,7 @@ Spear = class Spear extends RenderInView {
     })
   }
 
-  goReady(){
+  goReady() {
     this.state = "ready"
 
     if (this.visible) {
@@ -73,7 +73,7 @@ Spear = class Spear extends RenderInView {
     })
   }
 
-  goUp(){
+  goUp() {
     this.state = "up"
 
     if (this.visible) {

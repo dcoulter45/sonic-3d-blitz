@@ -1,5 +1,5 @@
 function renderObjects(layer) {
-  var z = layer.offsety ? layer.offsety*-1 : 0
+  var z = layer.offsety ? layer.offsety * -1 : 0
 
   layer.objects.forEach((obj) => {
     if (obj.name) {
@@ -38,5 +38,5 @@ function renderObjectsInView() {
     }
   })
 
-  game.time.events.add(Phaser.Timer.SECOND * 5, () => renderObjectsInView());
+  game.time.events.add(Phaser.Timer.SECOND * 1, () => renderObjectsInView());
 }
