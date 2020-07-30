@@ -21,7 +21,7 @@
   </head>
 
   <body>
-    <div id="debug">
+    <div id="debug" style="display: none;">
       <input type="checkbox" id="mute" name="mute">
       <label for="mute">Mute</label>
       
@@ -34,6 +34,13 @@
 
       <input type="checkbox" id="walls" name="walls">
       <label for="walls">Draw Wall Boxes</label>
+    </div>
+
+    <div id="browser-warning">
+      <p>
+        Warning: This game may not run smoothly on some browsers. <br>
+        Chrome is recommened for the best performance.
+      </p>
     </div>
     
     <script src="lib/phaser.min.js"></script>

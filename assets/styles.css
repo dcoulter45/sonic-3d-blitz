@@ -31,3 +31,14 @@ canvas{
   color: white;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+#browser-warning {
+  display: none;
+}
+
+#browser-warning p{
+  color: red;
+  margin: 500px auto;
+  width: 800px;
+  font-family: Helvetica, sans-serif;
+}
