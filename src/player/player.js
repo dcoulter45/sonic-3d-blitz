@@ -92,13 +92,15 @@ Player = class Player {
 				if (obj2.collide) obj2.collide(obj1)
 			});
 
-			game.physics.isoArcade.overlap(player.iso, groups.walls, function (obj1, obj2) {
+			game.physics.isoArcade.overlap(player.iso, groups.walls, (obj1, obj2) => {
 				if (obj2.key === "slope") {
 					player.handleSlope(obj2)
-				} else {
-					game.physics.isoArcade.collide(obj1, obj2)
 				}
 
+				if (obj2.overlap) obj2.overlap(obj1)
+			});
+
+			game.physics.isoArcade.collide(player.iso, groups.collide, (obj1, obj2) => {
 				if (obj1.body.touching.up) {
 					if (obj2.key === "water") {
 						this.touchingWater = true
@@ -110,22 +112,7 @@ Player = class Player {
 				obj1.collide(obj2)
 
 				if (obj2.collide) obj2.collide(obj1)
-				if (obj2.overlap) obj2.overlap(obj1)
-			});
-
-			// game.physics.isoArcade.collide(player.iso, groups.collide, (obj1, obj2) => {
-			// 	if (obj1.body.touching.up) {
-			// 		if (obj2.key === "water") {
-			// 			this.touchingWater = true
-			// 		} else {
-			// 			this.touchingFloor = true
-			// 		}
-			// 	}
-
-			// 	obj1.collide(obj2)
-
-			// 	if (obj2.collide) obj2.collide(obj1)
-			// })
+			})
 
 			game.physics.isoArcade.overlap(player.iso, groups.overlap, function (obj1, obj2) {
 				obj1.collide(obj2)

@@ -16,7 +16,7 @@ Spear = class Spear extends RenderInView {
   render() {
     var { x, y, z } = this.props
 
-    this.base = game.add.isoSprite(x, y, z, "spikesBase", 0, groups.tiles);
+    this.base = game.add.isoSprite(x, y, z, "spikesBase", 0, groups.objects);
     this.spike = game.add.isoSprite(x, y, z + 5, "spikes", 4, groups.objects);
     this.iso = game.add.isoSprite(x, y, z + 5, null);
 

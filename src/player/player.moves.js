@@ -75,6 +75,7 @@ function playerMoves() {
   }
 
   if (player.iso.movement === "normal" || player.iso.movement === "roll") {
+    // console.log(player.btn1Pressed, player.onFloor())
     // Jump
     if (player.btn1Pressed && player.onFloor()) {
       player.iso.movement = "jump";
