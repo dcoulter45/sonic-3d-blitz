@@ -9,6 +9,6 @@ class Game extends Phaser.Game {
     this.state.add("OverworldState", OverworldState, false);
     this.state.add("EndingState", EndingState, false);
 
-    this.state.start("TitleState");
+    this.state.start("GameState");
   }
 }
