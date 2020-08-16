@@ -43,7 +43,7 @@ class GameState extends Phaser.State {
 
     if (game.timeCounter) game.timeCounter.update();
 
-    game.debug.text(game.time.fps || "--", 5, 210, "#a7aebe");
+    // game.debug.text(game.time.fps || "--", 5, 210, "#a7aebe");
     // game.debug.text(groups.objects.children.length || "--", 5, 195, "#a7aebe");
 
     game.sound.mute = muteGame;
