@@ -4228,7 +4228,7 @@
                                 {
                                  "name":"velocity",
                                  "type":"int",
-                                 "value":75
+                                 "value":50
                                 }],
                          "rotation":0,
                          "type":"",
@@ -4574,14 +4574,14 @@
                         }, 
                         {
                          "height":40,
-                         "id":371,
+                         "id":372,
                          "name":"Player",
                          "rotation":0,
                          "type":"",
                          "visible":true,
                          "width":40,
-                         "x":220,
-                         "y":220
+                         "x":-4280,
+                         "y":9300
                         }],
                  "offsetx":0,
                  "offsety":-30,
@@ -6629,7 +6629,7 @@
          "y":0
         }],
  "nextlayerid":37,
- "nextobjectid":372,
+ "nextobjectid":373,
  "orientation":"isometric",
  "renderorder":"right-down",
  "tiledversion":"1.3.4",

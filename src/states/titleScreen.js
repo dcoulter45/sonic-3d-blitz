@@ -22,6 +22,8 @@ class TitleState extends Phaser.State {
   }
 
   create() {
+    game.canvas.id = "game-window";
+    
     this.track = game.add.audio("titleScreen")
     this.track.play()
 

@@ -36,16 +36,21 @@
       <label for="walls">Draw Wall Boxes</label>
     </div>
 
-    <div id="browser-warning">
-      <p>
-        Warning: This game may not run smoothly on some browsers. <br>
-        Chrome is recommened for the best performance.
-      </p>
+    <div id="options-container">
+      <p id="fullscreen">Fullscreen</p>
+
+      <div id="browser-warning">
+        <p>
+          Warning: This game may not run smoothly on some browsers. <br>
+          Chrome is recommened for the best performance.
+        </p>
+      </div>
     </div>
+
     
     <script src="lib/phaser.min.js"></script>
     <script src="lib/phaser-plugin-isometric.js"></script>
-    <script src="dist/game.js"></script>
+    <script src="dist/game.js?v=1"></script>
     <script>
       var game = new Game()
     </script>

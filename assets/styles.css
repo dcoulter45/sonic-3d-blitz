@@ -32,13 +32,26 @@ canvas{
   font-family: Arial, Helvetica, sans-serif;
 }
 
+#options-container{
+  position: relative;
+  margin: 500px auto;
+  width: 800px;
+}
+
 #browser-warning {
   display: none;
 }
 
 #browser-warning p{
   color: red;
-  margin: 500px auto;
-  width: 800px;
   font-family: Helvetica, sans-serif;
+}
+
+#fullscreen{
+  color: white;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
