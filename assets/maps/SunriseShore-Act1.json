@@ -4071,7 +4071,7 @@
          "name":"Objects",
          "opacity":1,
          "type":"group",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -4320,6 +4320,28 @@
                          "width":80,
                          "x":10040,
                          "y":-5240
+                        }, 
+                        {
+                         "height":80,
+                         "id":293,
+                         "name":"Wall",
+                         "rotation":0,
+                         "type":"",
+                         "visible":true,
+                         "width":120,
+                         "x":6160,
+                         "y":520
+                        }, 
+                        {
+                         "height":180,
+                         "id":294,
+                         "name":"Wall",
+                         "rotation":0,
+                         "type":"",
+                         "visible":true,
+                         "width":1920,
+                         "x":6280,
+                         "y":340
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -4576,7 +4598,7 @@
          "name":"Collision",
          "opacity":1,
          "type":"group",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -4605,7 +4627,7 @@
          "y":0
         }],
  "nextlayerid":38,
- "nextobjectid":293,
+ "nextobjectid":295,
  "orientation":"isometric",
  "renderorder":"right-down",
  "tiledversion":"1.3.4",
