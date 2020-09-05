@@ -4574,14 +4574,14 @@
                         }, 
                         {
                          "height":40,
-                         "id":372,
+                         "id":373,
                          "name":"Player",
                          "rotation":0,
                          "type":"",
                          "visible":true,
                          "width":40,
-                         "x":-4280,
-                         "y":9300
+                         "x":220,
+                         "y":240
                         }],
                  "offsetx":0,
                  "offsety":-30,
@@ -6629,7 +6629,7 @@
          "y":0
         }],
  "nextlayerid":37,
- "nextobjectid":373,
+ "nextobjectid":374,
  "orientation":"isometric",
  "renderorder":"right-down",
  "tiledversion":"1.3.4",
