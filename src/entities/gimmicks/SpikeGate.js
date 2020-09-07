@@ -17,7 +17,7 @@ SpikeGate = class SpikeGate extends RenderInView {
 
     game.time.events.add(delay, () => {
       this.resetBars()
-    })
+    }, this)
   }
 
   render() {
@@ -149,7 +149,7 @@ SpikeGate = class SpikeGate extends RenderInView {
 
     game.time.events.add(1500, () => {
       this.lowerBars()
-    })
+    }, this)
   }
 
   lowerBars() {
@@ -162,6 +162,6 @@ SpikeGate = class SpikeGate extends RenderInView {
 
     game.time.events.add(1000, () => {
       this.resetBars()
-    })
+    }, this)
   }
 }

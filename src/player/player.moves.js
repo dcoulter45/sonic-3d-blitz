@@ -48,7 +48,7 @@ function playerMoves() {
         if (player.iso.cursor1 === "up") player.iso.body.velocity.x = -100
         if (player.iso.cursor1 === "down") player.iso.body.velocity.x = 100
       }
-    })
+    }, this)
   }
 
   if (player.iso.movement === "skidding") {
@@ -94,7 +94,7 @@ function playerMoves() {
         if(player.iso.movement == "roll"){
           player.iso.movement = "normal";
         }
-      });
+      }, this)
     }
   }
 
@@ -126,7 +126,7 @@ function playerMoves() {
       game.time.events.add(500, () => {
         player.iso.body.maxVelocity.x = MAX_VELOCITY;
         player.iso.body.maxVelocity.y = MAX_VELOCITY;
-      })
+      }, this)
     }
 
     // Homing attack
@@ -149,7 +149,7 @@ function playerMoves() {
 
     game.time.events.add(600, () => {
       if(player.iso.movement == "sprung") player.iso.movement = "jump"
-    })
+    }, this)
   }
 
   // Drop Dash 
@@ -213,5 +213,5 @@ function playerDismountLadder() {
     player.iso.movement = "normal"
     player.iso.activeLadder = null
     player.iso.body.allowGravity = true
-  })
+  }, this)
 }

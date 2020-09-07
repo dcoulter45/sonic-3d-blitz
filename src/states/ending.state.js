@@ -29,15 +29,15 @@ class EndingState extends Phaser.State {
     game.time.events.add(3000, () => {
       game.camera.shake(0.005, 400);
       game.camera.fade(0xffffff, 400)
-    })
+    }, this)
 
     game.time.events.add(3800, () => {
       game.camera.flash(0xffffff, 400)
       this.thanks.visible = true
-    })
+    }, this)
 
     game.time.events.add(6000, () => {
       game.state.start("TitleState")
-    })
+    }, this)
   }
 }

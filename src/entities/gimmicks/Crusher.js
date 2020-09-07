@@ -10,7 +10,7 @@ Crusher = class Crusher extends RenderInView {
     
     game.time.events.add(this.delay, () => {
       game.time.events.loop(3000, this.rise, this);
-    })
+    }, this)
   }
 
   render() {

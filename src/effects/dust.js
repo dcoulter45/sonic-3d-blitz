@@ -9,6 +9,6 @@ class Dust {
 
     game.time.events.add(250, () => {
       this.iso.destroy();
-    });
+    }, this)
   }
 }

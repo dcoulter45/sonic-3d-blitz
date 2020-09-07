@@ -48,7 +48,7 @@ class TutorialPopup {
         game.time.events.add(1000, () => {
           text.destroy()
           this.tutPart2()
-        })
+        }, this)
       }
     })
   }
@@ -70,7 +70,7 @@ class TutorialPopup {
           this.keys.right.animations.stop()
           this.keys.left.animations.stop()
           this.tutPart3()
-        })
+        }, this)
       }
     }
 
@@ -102,7 +102,7 @@ class TutorialPopup {
           this.tutPart4()
           this.keys.a.animations.stop()
           text.destroy()
-        })
+        }, this)
       }
     })
   }
@@ -123,7 +123,7 @@ class TutorialPopup {
           this.keys.s.animations.stop()
 
           this.destroy()
-        })
+        }, this)
       }
     })
   }

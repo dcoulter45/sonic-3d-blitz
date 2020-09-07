@@ -50,7 +50,7 @@ RumbleFloor = class RumbleFloor {
       })
 
       playDistantSound({body: { x: this.x, y: this.y}}, Sounds.Lava)
-    })
+    }, this)
   }
   
   wiggle(tile) {
@@ -63,9 +63,9 @@ RumbleFloor = class RumbleFloor {
       tile.wiggleTween = game.add.tween(tile).to({ isoZ: tile.isoZ + wiggleRoom}, 1000, function (k) {
         return wiggle(k, 1, 2);
       }, true, 0, -1);
-    })
+    }, this)
   
-    game.time.events.add(this.triggerDelay, () => this.errupt(tile))
+    game.time.events.add(this.triggerDelay, () => this.errupt(tile), this)
   }
 
   errupt(tile) {

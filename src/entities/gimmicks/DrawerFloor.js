@@ -145,12 +145,12 @@ DrawerFloor = class DrawerFloor extends RenderInView {
 
         game.time.events.add(delay, () => {
           this.moveLevel(level)
-        })
+        }, this)
       })
 
       game.time.events.add(5000, () => {
         this.reset()
-      })
+      }, this)
     }
   }
 
@@ -163,7 +163,7 @@ DrawerFloor = class DrawerFloor extends RenderInView {
 
     game.time.events.add(2000, () => {
       this.moving = false
-    })
+    }, this)
   }
 
   moveLevel(level) {

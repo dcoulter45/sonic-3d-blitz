@@ -42,7 +42,7 @@ function renderTiles() {
 
   groups.tiles.sort("depth");
 
-  game.time.events.add(Phaser.Timer.SECOND * 1, () => renderTiles());
+  game.time.events.add(Phaser.Timer.SECOND * 1, () => renderTiles(), this)
 }
 
 function delegateChunk(chunk, layerName, zz) {

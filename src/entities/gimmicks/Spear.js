@@ -9,7 +9,7 @@ Spear = class Spear extends RenderInView {
     if (!this.static) {
       game.time.events.add(this.delay, () => {
         this.goDown()
-      })
+      }, this)
     }
   }
 
@@ -58,7 +58,7 @@ Spear = class Spear extends RenderInView {
 
     game.time.events.add(2000, () => {
       this.goReady()
-    })
+    }, this)
   }
 
   goReady() {
@@ -70,7 +70,7 @@ Spear = class Spear extends RenderInView {
 
     game.time.events.add(500, () => {
       this.goUp()
-    })
+    }, this)
   }
 
   goUp() {
@@ -83,6 +83,6 @@ Spear = class Spear extends RenderInView {
 
     game.time.events.add(1500, () => {
       this.goDown()
-    })
+    }, this)
   }
 }

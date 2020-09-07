@@ -71,7 +71,7 @@ Snake = class Snake {
                   game.add.tween(section.body.position).to({z: this.end.z}, 1500, arc, true)
   
       tween.onComplete.add(() => this.resetSection(section))
-    })
+    }, this)
   }
 
   resetSection(section) {

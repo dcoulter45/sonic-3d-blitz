@@ -11,7 +11,6 @@ class GameOver {
     this.gameOver.fixedToCamera = true
 
     game.save.data.lives = 3
-    game.save.data.level = 0
     game.save.store()
 
     if (game.track) game.track.stop()
@@ -40,7 +39,8 @@ class GameOver {
   }
 
   resetGame() {
-    this.music.stop()
-    game.state.start("TitleState")
+    location.reload()
+    // this.music.stop()
+    // game.state.start("TitleState")
   }
 }

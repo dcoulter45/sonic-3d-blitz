@@ -88,7 +88,7 @@ Ring = class Ring extends RenderInView {
 
 			game.time.events.add(500, () => {
 				this.hide()
-			});
+			}, this)
 		}
 	}
 }

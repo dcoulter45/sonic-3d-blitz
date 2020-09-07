@@ -59,7 +59,7 @@ Player = class Player {
 			game.time.events.add(1200, () => {
 				this.iso.body.velocity = { x: 0, y: 0, z: 0 }
 				this.iso.disableControls = false
-			})
+			}, this)
 		}
 	}
 
@@ -281,7 +281,7 @@ Player = class Player {
 				this.iso.movement = "normal";
 				this.iso.body.velocity.x = 0;
 				this.iso.body.velocity.y = 0;
-			});
+			}, this)
 		}
 	}
 
@@ -358,18 +358,18 @@ Player = class Player {
 
 					this.iso.body.velocity.x = 0;
 					this.iso.body.velocity.y = 0;
-				});
+				}, this)
 
 				game.time.events.add(900, () => {
 					if (this.iso.movement === "hurt") {
 						this.iso.movement = "normal"
 						this.iso.hurtDIR = null
 					}
-				});
+				}, this)
 
 				game.time.events.add(2000, () => {
 					this.iso.invulnerable = false
-				})
+				}, this)
 			}
 		}
 	}
@@ -398,7 +398,7 @@ Player = class Player {
 				this.iso.body.acceleration = { x: 0, y: 0, z: 0 }
 				this.iso.body.velocity = { x: 0, y: 0, z: 0 }
 
-				game.time.events.add(800, () => this.iso.body.allowGravity = true)
+				game.time.events.add(800, () => this.iso.body.allowGravity = true, this)
 			}
 
 			if (causeOfDeath === "burning") {
@@ -425,13 +425,13 @@ Player = class Player {
 			else {
 				game.time.events.add(delay, () => {
 					new GameOver()
-				})
+				}, this)
 			}
 		}
 	}
 
 	resetGame(delay) {
-		game.timeCounter.stop()
+		if(game.timeCounter) game.timeCounter.stop()
 
 		game.time.events.add(delay, () => game.camera.fade(0x000000, 1000))
 		game.time.events.add(delay + 1000, () => {
@@ -439,6 +439,6 @@ Player = class Player {
 			game.lives.removeLife()
 			stateParams.displayTitle = true
 			game.state.restart()
-		})
+		}, this)
 	}
 }

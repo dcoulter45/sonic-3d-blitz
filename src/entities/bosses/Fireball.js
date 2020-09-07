@@ -18,7 +18,7 @@ Fireball = class Fireball {
 
     game.time.events.add(1000, () => {
       this.iso.body.allowGravity = true
-    })
+    }, this)
 
     this.iso.update = this.update.bind(this)
   }

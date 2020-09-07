@@ -5,8 +5,8 @@ class TimeCounter {
   stopped = false
 
   constructor() {
-    this.timer = game.time.create(false)
-    this.timer.loop(oneHour);
+    this.timer = game.time.create(true)
+    this.timer.loop(oneHour, () => {}, this);
 
     if (stateParams.duration !== null) {
       this.timer.add(stateParams.duration)

@@ -38,5 +38,5 @@ function renderObjectsInView() {
     }
   })
 
-  game.time.events.add(Phaser.Timer.SECOND * 1, () => renderObjectsInView());
+  game.time.events.add(Phaser.Timer.SECOND * 1, () => renderObjectsInView(), this);
 }

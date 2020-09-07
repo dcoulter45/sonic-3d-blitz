@@ -30,7 +30,7 @@ class LivesCounter {
     }
 
     this.icon.loadTexture("lives", 1)
-    game.time.events.add(2000, () => this.icon.loadTexture("lives", 0))
+    game.time.events.add(2000, () => this.icon.loadTexture("lives", 0), this)
 
     this.updateUi()
   }

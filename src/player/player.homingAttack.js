@@ -12,7 +12,7 @@ class HomingTrail {
 
     game.time.events.add(300,()=>{
       this.iso.destroy();
-    });
+    }, this)
   }
 }
 

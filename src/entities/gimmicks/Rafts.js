@@ -6,7 +6,7 @@ Rafts = class Rafts {
 
     game.time.events.add(this.delay, () => {
       this.createRaft(x, y, z)
-    })
+    }, this)
   }
 
   createRaft(x, y, z) {
@@ -37,6 +37,6 @@ Rafts = class Rafts {
 
     game.time.events.add(3000, () => {
       this.createRaft(x, y, z)
-    })
+    }, this)
   }
 }

@@ -36,6 +36,6 @@ EggmanLava = class EggmanLava {
 
     this.tween.onComplete.add(() => {
       game.time.events.add(1000, () => this.move())
-    })
+    }, this)
   }
 }

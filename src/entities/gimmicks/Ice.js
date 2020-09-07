@@ -91,7 +91,7 @@ Ice = class Ice extends RenderInView {
           var zz = iceBlock.body.z - this.height + 2.5
 
           moveToXYZ(iceBlock, { z: zz }, 400)
-        })
+        }, this)
       }
     })
   }

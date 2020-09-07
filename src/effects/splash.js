@@ -14,6 +14,6 @@ class Splash{
     this.iso.animations.add("default", frames, 12, false);
     this.iso.animations.play("default");
 
-    game.time.events.add(500, () => this.iso.destroy()) 
+    game.time.events.add(500, () => this.iso.destroy(), this) 
   }
 }

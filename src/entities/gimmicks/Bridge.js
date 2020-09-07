@@ -75,11 +75,11 @@ Bridge = class Bridge {
           
           game.time.events.add(200, () => {
             this.body.allowGravity = true
-          })
+          }, this)
 
           game.time.events.add(600, () => {
             this.destroy()
-          })
+          }, this)
         }
       }
     }

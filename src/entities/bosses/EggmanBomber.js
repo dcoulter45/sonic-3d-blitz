@@ -44,7 +44,7 @@ EggmanBomber = class EggmanBomber {
         .to({ x: TILE_WIDTH * 7, y: TILE_WIDTH * 12 }, 3000, "Linear", true)
 
       entranceTween.onComplete.add(this.move, this)
-    })
+    }, this)
   }
 
   move() {
@@ -108,7 +108,7 @@ EggmanBomber = class EggmanBomber {
           this.tween.resume()
           this.invulnerable = false
           this.iso.animations.play("move-" + this.direction)
-        })
+        }, this)
       }
       else {
         this.explode()
@@ -121,7 +121,7 @@ EggmanBomber = class EggmanBomber {
           game.add
             .tween(this.iso.body.position)
             .to({ x: TILE_WIDTH * 24, y: TILE_WIDTH * 10 }, 5000, "Linear", true)
-        })
+        }, this)
       }
     }
   }

@@ -50,7 +50,7 @@ RedRing = class RedRing extends RenderInView {
 
 			game.time.events.add(500, () => {
 				this.hide()
-			});
+			}, this)
 		}
 	}
 }

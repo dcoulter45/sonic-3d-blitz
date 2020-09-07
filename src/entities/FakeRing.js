@@ -32,12 +32,12 @@ class FakeRings{
 
 			game.time.events.add(2000, () => {
 				ring.flashing = true;
-			})
+			}, this)
 
 			game.time.events.add(3000, () => {
 				ring.destroy();
 				ring.shadow.destroy();
-			});
+			}, this)
 
 			ring.update = () => {
 				game.physics.isoArcade.collide(ring, groups.walls, (obj1, wall) => {

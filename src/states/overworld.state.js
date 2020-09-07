@@ -34,7 +34,7 @@ class OverworldState extends Phaser.State {
     
     game.time.events.add(2500, () => {
       this.loadLevel(nextLevel)
-    })
+    }, this)
   }
 
   loadLevel(nextLevel) {
@@ -50,6 +50,6 @@ class OverworldState extends Phaser.State {
 
     game.time.events.add(1000, () => {
       game.state.start("GameState")
-    })
+    }, this)
   }
 }

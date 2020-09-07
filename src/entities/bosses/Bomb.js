@@ -57,6 +57,6 @@ class Bomb {
     game.time.events.add(500, () => {
       blastRadius.destroy()
       removeFromGroup(groups.overlap, blastRadius)
-    })
+    }, this)
   }
 }

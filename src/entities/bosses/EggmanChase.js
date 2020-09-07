@@ -29,7 +29,7 @@ EggmanChase = class EggmanChase {
 
         game.time.events.add(1000, () => {
           this.dropBomb()
-        })
+        }, this)
       }
     }
 
@@ -63,7 +63,7 @@ EggmanChase = class EggmanChase {
 
     game.time.events.add(2000, () => {
       this.dropBomb()
-    })
+    }, this)
   }
 
   collide(obj) {
@@ -81,12 +81,12 @@ EggmanChase = class EggmanChase {
         this.iso.body.velocity.x = 300
         game.time.events.add(1000, () => {
           if (this.state === "hurt") this.state = "moving"
-        })
+        }, this)
 
         game.time.events.add(500, () => {
           this.invulnerable = false
           this.iso.animations.play("move-d")
-        })
+        }, this)
       }
       else {
         this.explode()
@@ -98,7 +98,7 @@ EggmanChase = class EggmanChase {
           new LevelComplete()
 
           this.defeated = true
-        })
+        }, this)
       }
     }
   }

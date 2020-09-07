@@ -89,6 +89,6 @@ class TitleState extends Phaser.State {
     game.time.events.add(1500, () => {
       this.track.stop()
       this.state.start("GameState")
-    })
+    }, this)
   }
 }

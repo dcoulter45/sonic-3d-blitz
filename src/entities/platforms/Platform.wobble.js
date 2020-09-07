@@ -55,7 +55,7 @@ PlatformWobble = class PlatformWobble {
           game.add.tween(tile).to({ isoZ: -30 }, 500, Phaser.Easing.Linear.None, true);
           game.time.events.add(500, () => tile.destroy())
         })
-      })
+      }, this)
     }
   }
 }

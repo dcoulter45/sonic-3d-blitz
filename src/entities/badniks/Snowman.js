@@ -27,8 +27,8 @@ Snowman = class Snowman extends RenderInView {
 
       if (distance < 240) {
         this.createBullet()
-        game.time.events.add(200, () => this.createBullet())
-        game.time.events.add(400, () => this.createBullet())
+        game.time.events.add(200, () => this.createBullet(), this)
+        game.time.events.add(400, () => this.createBullet(), this)
 
         game.time.events.add(2500, this.fireBullets, this)
       } 
@@ -52,7 +52,7 @@ Snowman = class Snowman extends RenderInView {
     game.time.events.add(3000, () => {
       removeFromGroup(groups.overlap, bullet)
       bullet.destroy()
-    })
+    }, this)
   }
 
   update() {

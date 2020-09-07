@@ -9,7 +9,7 @@ Spikes = class Spikes extends RenderInView{
     if (!this.static) {
       game.time.events.add(this.delay, () => {
         this.goDown()
-      })
+      }, this)
     }
   }
 
@@ -50,7 +50,7 @@ Spikes = class Spikes extends RenderInView{
 
     game.time.events.add(2000, () => {
       this.goReady()
-    })
+    }, this)
   }
 
   goReady(){
@@ -62,7 +62,7 @@ Spikes = class Spikes extends RenderInView{
 
     game.time.events.add(1000, () => {
       this.goUp()
-    })
+    }, this)
   }
 
   goUp(){
@@ -75,6 +75,6 @@ Spikes = class Spikes extends RenderInView{
 
     game.time.events.add(1000, () => {
       this.goDown()
-    })
+    }, this)
   }
 }

@@ -82,7 +82,7 @@ PlatformMoving = class PlatformMoving extends RenderInView {
       }
     }
 
-    game.time.events.add(2000, () => this.move())
+    game.time.events.add(2000, () => this.move(), this)
   }
 
   update() {

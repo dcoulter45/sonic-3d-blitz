@@ -15,7 +15,7 @@ function moveToXYZ(iso, position, time, callback) {
     iso.isoZ = z
 
     if (callback) callback()
-  })
+  }, this)
 }
 
 function isMoving(iso) {

@@ -32,7 +32,7 @@ Lava = class Lava{
 
     game.time.events.add(delay, () => {
       this.createBubble(wx, wy, x, y, z)
-    })
+    }, this)
   }
 
   collide(obj) {

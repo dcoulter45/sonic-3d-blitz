@@ -63,7 +63,7 @@ class TitleCard {
     } else {
       game.time.events.add(timeElapsed, () => {
         this.runHideTweens()
-      })
+      }, this)
     }
   }
 
@@ -82,6 +82,6 @@ class TitleCard {
       this.border.destroy()
       this.bg.destroy()
       this.levelTitle.destroy()
-    })
+    }, this)
   }
 }

@@ -72,7 +72,7 @@ class LevelComplete {
       this.countRingBonus()
 
       // if (game.rings.redRing) this.addRedRing()
-    })
+    }, this)
   }
 
   addRedRing() {
@@ -145,7 +145,7 @@ class LevelComplete {
         } else {
           game.state.start("OverworldState")
         }
-      })
+      }, this)
     })
   }
 }
